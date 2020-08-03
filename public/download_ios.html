@@ -1,0 +1,120 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<meta charset="utf-8">
+
+    <meta content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=0" name="viewport"/>
+    
+    <title>彼岸下载</title>
+	<!-- <link rel="stylesheet" href="css/download.css" /> -->
+     <!-- <script src="//cdnjs.cloudflare.com/ajax/libs/less.js/2.5.3/less.min.js"></script> -->
+</head>
+<style>
+	html,body{
+		margin:0;
+		padding:0;
+		height:100%
+	}
+	.installation {
+  background: #fff;
+  height: 100%;
+  width: 100%;
+}
+.installation .content {
+  text-align: center;
+  padding-top: 45px;
+  background: #fff;
+  height: calc(100vh - 46px);
+  overflow-y: auto;
+  -webkit-overflow-scrolling: touch;
+}
+.installation .content h3 {
+  font-size: 24px;
+  color: #323232;
+  margin: 0;
+  padding: 0;
+}
+.installation .content a {
+  margin: 25px 0 60px 0;
+  font-size: 14px;
+  text-decoration-line: none;
+  color: #fff;
+  background: #2e6bf8;
+  display: inline-block;
+  border-radius: 21px;
+  width: 140px;
+  height: 42px;
+  line-height: 42px;
+  font-weight: 500;
+  text-decoration: none;
+  box-shadow: 1px 1px 10px #2e6bf8;
+}
+.installation .content img {
+  width: 80%;
+  margin: 15px 0;
+}
+.installation .content .tips {
+  display: flex;
+  justify-content: center;
+  position: relative;
+  height: 16px;
+  margin-bottom: 36px;
+}
+.installation .content .tips span {
+  color: #969696;
+  font-size: 14px;
+  background: #fff;
+  display: inline-block;
+  position: absolute;
+  top: -9px;
+}
+.installation .content .tips .tips_line {
+  height: 1px;
+  width: 100%;
+  background: #F0F0F0;
+  position: absolute;
+}
+.installation .content p {
+  font-size: 14px;
+  color: #323232;
+  text-align: center;
+  padding: 0 20px;
+}
+.installation .content p b {
+  color: #5E87D8;
+}
+</style>
+<body>
+        
+    <div class='installation'>
+        <div class="content">
+            <h3>下载企业发布版本</h3>
+            <a onclick="downloadapp()">点击下载</a>
+            <div class="tips">
+                <div class="tips_line"></div>
+                <span>iOS安装教程</span>
+            </div>
+            <p>1、第一次打开 彼岸 时会弹出如下框。</p>
+            <img src="./img/download/1.png" alt="">
+            <p>2、在手机的 「<b>设置</b>」-「<b>通用</b>」-「<b>设备管理</b>」中，找到 彼岸 的证书。</p>
+            <img src="./img/download/2.png" alt="">
+            <p>3、点击「<b>信任</b>」这个证书就可以开始使用 彼岸 了。</p>
+            <img src="./img/download/4.png" alt=""> 
+        </div>
+    </div>
+
+    <script>
+       function downloadapp(){
+        let u = navigator.userAgent;
+            let isAndroid = u.indexOf('Android') > -1 || u.indexOf('Adr') > -1; //android终端
+            let isiOS = !!u.match(/\(i[^;]+;( U;)? CPU.+Mac OS X/); //ios终端
+            if(isAndroid){
+                window.location.href = 'https://pkg.travel-around.world/adr/equinox.apk'
+            }else{
+                window.location.href = 'itms-services://?action=download-manifest&url=https://www.travel-around.world/download/manifest.plist'
+            }   
+        }
+   
+    </script>
+</body>
+</html>

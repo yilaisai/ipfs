@@ -1,0 +1,72 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<meta charset="utf-8">
+
+	<meta content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=0" name="viewport"/>
+	<title>彼岸下载</title>
+</head>
+<style>
+	html,body{
+		margin:0;
+		padding:0;
+		height:100%
+	}
+.bgbox{
+    height:100%;
+    width:100%;
+    background:#fff;
+}
+.download{
+	display: none;
+	height:100%;
+	background:rgba(3,3,3,0.5);
+	padding-left:50px;
+}
+.text-box{
+	height: 110px;
+	margin-right: 25px;
+	padding-right: 30px;
+	background: url('./img/download/downloadbg.png') no-repeat;
+	background-size: 100% 100%;
+	
+}
+.text-box p{
+	color:#5E5E5E;
+	font-size:18px;
+	padding:45px 10px 0 20px;
+	margin-top:0
+}
+</style>
+<body>
+		<div class="bgbox">
+
+			<div class="download" id="download">
+				<div class="text-box">
+					<p>请点击右上角，在<img src='./img/download/brower.png'>浏览器中打开。</p>
+				</div>
+			</div>
+		</div>
+	<script type="text/javascript">
+		var ua = navigator.userAgent.toLowerCase()
+		var u = navigator.userAgent;
+		var isAndroid = u.indexOf('Android') > -1 || u.indexOf('Adr') > -1; //android终端
+		var isiOS = !!u.match(/\(i[^;]+;( U;)? CPU.+Mac OS X/); //ios终端
+		if(isAndroid) {
+			if(ua.match('micromessenger')) {
+				document.getElementById("download").style.display = "block"
+			}else {
+				window.location.href = "https://pkg.travel-around.world/adr/equinox.apk"
+			}
+		} else if(isiOS) {
+			if(ua.match(' qq')) {
+				document.getElementById("download").style.display = "block"
+			}else {
+				window.location.href = "download_ios.html"
+			}
+		} else {
+			alert("非Android、iOS")
+		}
+	</script>
+</body>
+</html>

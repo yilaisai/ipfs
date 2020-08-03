@@ -1,0 +1,108 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1.0">
+	<meta http-equiv="X-UA-Compatible" content="ie=edge">
+	<title>彼岸</title>
+	<style>
+		* {
+			padding: 0;
+			margin: 0;
+		}
+		.container {
+			position: fixed;
+			background: url(./img/share/shareimg2.png) no-repeat center;
+			background-size: cover;
+			width: 100%;
+			height: 100%;
+		}
+		.container .img-wrap {
+			position: absolute;
+			left: 15%;
+			top: 50%;
+			transform: translateY(-50%);
+		}
+		.container .img-wrap img {
+			width: 200px;
+			margin-top: 20px;
+		}
+		.container .img-wrap h2 {
+			text-align: left;
+			font-weight: 600;
+			color: #fff;
+			font-size: 40px;
+		}
+		.container .img-wrap p {
+			color: #fff;
+			font-size: 24px;
+		}
+		.container .img-wrap a {
+			position: relative;
+			display: block;
+			background-color: #00D983;
+			line-height: 50px;
+			width: 200px;
+			text-align: center;
+			color: #fff;
+			text-decoration: none;
+			font-size: 18px;
+			border-radius: 4px;
+			margin-top: 20px;
+			font-weight: 600;
+		}
+		.container .img-wrap a img {
+			position: absolute;
+			display: block;
+			top: 40px;
+			left: 50%;
+			transform: translateX(-50%);
+		}
+		.container .img-wrap a:hover img{
+			display: block;
+		}
+		.btn-wrap {
+			display: none;
+		}
+		@media screen and (max-width: 750px) {
+			.container .img-wrap {
+				display: none;
+			}
+			.btn-wrap {
+				display: block;
+				width: 100%;
+				position: absolute;
+				bottom: 0;
+				left: 0;
+				padding: 10px;
+				box-sizing: border-box;
+			}
+			.btn-wrap a {
+				display: block;
+				background-color: #00D983;
+				line-height: 50px;
+				width: 100%;
+				text-align: center;
+				color: #fff;
+				text-decoration: none;
+				font-size: 18px;
+				border-radius: 4px;
+			}
+		}
+	</style>
+</head>
+<body>
+	<div class="container">
+		<div class="img-wrap">
+			<h2>彼岸，就在眼前!</h2>
+			<p>你愿意<br />和我一起踏上梦想的航道吗？</p>
+			<a href="javascript:;">扫码下载彼岸</a>
+			<img src="./img/qrcode.png" alt="">
+		</div>
+
+		<div class="btn-wrap">
+			<a href="https://web.travel-around.world/download.html">下载彼岸</a>
+		</div>
+	</div>
+</body>
+</html>
