@@ -1,7 +1,7 @@
 <template>
 	<div class="app_update-page">
 		<img src="../../../public/img/coffee.svg" alt="">
-		<van-progress :percentage="percentage" color="#00D983" />
+		<van-progress :percentage="percentage" color="#42C1CA" />
 		<p>{{tipsText}}</p>
 		<p>{{kToM(downloadedSize)}}M/{{kToM(totalSize)}}M</p>
 	</div>

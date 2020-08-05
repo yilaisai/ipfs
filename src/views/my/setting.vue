@@ -12,11 +12,11 @@
 				<van-cell title="手机号" :value="userInfo.phone + '（已绑定）'" />
 				<van-cell title="登录密码" is-link value="修改" to="/updateLoginPwd" />
 				<van-cell title="资金密码" is-link :value="userInfo.isSetFund == 0 ? '未设置' : '修改'" to="/updateFundsPwd" />
-				<van-cell title="开启音效" is-link>
+				<!-- <van-cell title="开启音效" is-link>
 					<template #right-icon>
 						<van-switch v-model="checked" active-color="#00D984" size="24px" />
 					</template>
-				</van-cell>
+				</van-cell> -->
 				<van-cell title="版本号" v-if="version" :value="version" />
 			</van-cell-group>
 			<button class="logout" @click="logout">退出登录</button>

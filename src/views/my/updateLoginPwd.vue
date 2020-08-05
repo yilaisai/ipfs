@@ -74,8 +74,8 @@ export default {
 		.input-wrap {
 			margin-top: .4rem;
 			.van-cell {
-				background-color: #FCFDFF;
-				border-radius: 25px;
+				background-color: #F6F9FC;
+				border-radius:.12rem;
 				margin: .1rem 0;
 				border: 1px solid #F6F6F6;
 				line-height: 30px;
@@ -98,7 +98,6 @@ export default {
 		}
 		button {
 			margin-top: .8rem;
-			border-radius: .45rem;
 		}
 	}
 }

@@ -1,12 +1,13 @@
 <template>
 	<div class="order_list-page">
-		<HeaderBar title="我的账单">
-			<a href="javascript:;" class="filter" @click="isShowFilter = !isShowFilter"></a>
+		<HeaderBar title="存力激活记录">
+			<!-- <a href="javascript:;" class="filter" @click="isShowFilter = !isShowFilter"></a> -->
 		</HeaderBar>
 		<div class="thead">
-			<span>类型</span>
-			<span>时间</span>
-			<span>数量</span>
+			<span>存力</span>
+			<span>合约名称</span>
+			<span>合约详情</span>
+			<span>状态</span>
 		</div>
 		<van-list
 			v-model="loading"
@@ -17,15 +18,19 @@
 			ref="vanList">
 			<ul class="list">
 				<li v-for="(item,key) in list" :key="key" @click="$router.push({path: '/billDetails', query: {data: item}})">
-					<span>{{item.typeStr}}</span>
-					<span>{{item.createTime}}</span>
-					<span :class="{'red' : item.subOrAdd == 0}">{{item.subOrAdd == 0 ? '-' : '+'}}{{item.optType == 7 ? $BigNumber(item.amount).minus(item.fee) : item.amount}}</span>
+					<div>
+						<span>+1000 T</span>
+						<span>F3+</span>
+						<span>000001</span>
+						<span>已激活</span>
+					</div>
+					<p>时间 : 2020-08-03 14:29:43</p>
 				</li>
 			</ul>
 		</van-list>
 
 		<!-- 筛选 -->
-		<div class="filter-control" v-show="isShowFilter">
+		<!-- <div class="filter-control" v-show="isShowFilter">
 			<div class="content">
 				<ul>
 					<li :class="{'active': active === ''}" @click="active = ''">全部</li>
@@ -37,7 +42,7 @@
 				</ul>
 				<van-button type="primary" size="large" @click="search">确定</van-button>
 			</div>
-		</div>
+		</div> -->
 	</div>
 </template>
 
@@ -130,9 +135,12 @@ export default {
 		span {
 			flex: 1;
 			&:nth-child(2) {
-				text-align: center;
+				text-align: left;
 			}
 			&:nth-child(3) {
+				text-align: center;
+			}
+			&:nth-child(4) {
 				text-align: right;
 			}
 		}
@@ -143,25 +151,32 @@ export default {
 		.list {
 			padding: 0 .2rem;
 			li {
-				display: flex;
-				align-items: center;
 				padding: .24rem 0;
 				border-bottom: 1px solid #EEEEEE;
+				font-size: .24rem;
+				div {
+					display: flex;
+					align-items: center;
+				}
+				p {
+					color: #969696;
+					margin-top: .1rem;
+				}
 				span {
 					flex: 1;
 					&:nth-child(1) {
-						font-size: .3rem;
 						font-weight: 600;
+						color: #42C1CA;
+						font-size: .36rem;
 					}
 					&:nth-child(2) {
-						text-align: center;
-						font-size: .26rem;
-						color: #999999;
+						text-align: left;
 					}
 					&:nth-child(3) {
+						text-align: center;
+					}
+					&:nth-child(4) {
 						text-align: right;
-						font-size: .34rem;
-						color: #00D984;
 						&.red {
 							color: #F42E14;
 						}

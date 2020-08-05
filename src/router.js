@@ -26,19 +26,19 @@ const router =  new Router({
 				{
 					path: '/home',
 					name: 'home',
-					meta: { isLogin: true, isRoot: true },
+					meta: { isLogin: true, statusBar: '#4FD3DC', isRoot: true },
 					component: () => import('@/views/home/home')
 				},
 				{
 					path: '/war',
 					name: 'war',
-					meta: { isLogin: true, statusBar: '#00D984', isRoot: true },
+					meta: { isLogin: true, statusBar: '#ffffff', isRoot: true },
 					component: () => import('@/views/war/war')
 				},
 				{
 					path: '/my',
 					name: 'my',
-					meta: { isLogin: true, statusBar: '#00D984', isRoot: true },
+					meta: { isLogin: true, statusBar: '#4FD3DC', isRoot: true },
 					component: () => import('@/views/my/my')
 				}
 			]
@@ -70,26 +70,6 @@ const router =  new Router({
 			component: () => import("./views/my/assets")
 		},
 		{
-			path: "/recharge",
-			name: "recharge",
-			component: () => import("./views/home/recharge")
-		},
-		{
-			path: "/rechargeRecord",
-			name: "rechargeRecord",
-			component: () => import("./views/home/recharge/record")
-		},
-		{
-			path: "/withdraw",
-			name: "withdraw",
-			component: () => import("./views/home/withdraw")
-		},
-		{
-			path: "/withdrawRecord",
-			name: "withdrawRecord",
-			component: () => import("./views/home/withdraw/record")
-		},
-		{
 			path: "/invite",//邀请
 			name: "invite",
 			component: () => import("./views/home/invite")
@@ -110,7 +90,7 @@ const router =  new Router({
 			component: () => import("./views/home/downloadInviteImg")
 		},
 		{
-			path: "/userInfo",
+			path: "/userInfo",  //用户信息
 			name: "userInfo",
 			component: () => import("./views/my/userInfo")
 		},
@@ -175,24 +155,26 @@ const router =  new Router({
 			component: () => import("./views/account/editAvatar")
 		},
 		{
-			path: "/teammateEarnings",  //船员累计给我赚钱
-			name: "teammateEarnings",
-			component: () => import("./views/war/teammateEarnings")
-		},
-		{
-			path: "/teamEarnings",  //舰队收益
-			name: "teamEarnings",
-			component: () => import("./views/war/teamEarnings")
-		},
-		{
-			path: "/teamEarningsExtract",  //舰队收益提取
-			name: "teamEarningsExtract",
-			component: () => import("./views/war/teamEarningsExtract")
-		},
-		{
 			path: "/rankings",  //排行榜
 			name: "rankings",
 			component: () => import("./views/home/rankings")
+		},
+		{
+			path: "/hashrate",  //算力
+			name: "hashrate",
+			meta: { statusBar: '#42C1CA' },
+			component: () => import("./views/wallet/hashrate/index")
+		},
+		{
+			path: "/transferSelect",  //算力转移选择产品
+			name: "transferSelect",
+			component: () => import("./views/wallet/hashrate/transferSelect")
+		},
+		{
+			path: "/hashrateTransfer",  //算力转移选择产品
+			name: "hashrateTransfer",
+			meta: { statusBar: '#42C1CA' },
+			component: () => import("./views/wallet/hashrate/transfer")
 		},
 		{
 			path: "/wallet",  //钱包
@@ -206,6 +188,11 @@ const router =  new Router({
 			component: () => import("./views/wallet/orderList")
 		},
 		{
+			path: "/transferRecord",  //存力转移记录
+			name: "transferRecord",
+			component: () => import("./views/wallet/transferRecord")
+		},
+		{
 			path: "/orderDetails",  //交易订单详情
 			name: "orderDetails",
 			component: () => import("./views/wallet/orderDetails")
@@ -214,27 +201,6 @@ const router =  new Router({
 			path: "/billDetails",  //充提币订单详情
 			name: "billDetails",
 			component: () => import("./views/wallet/billDetails")
-		},
-		{
-			path: "/ticket",  //购买奖池入场券
-			name: "ticket",
-			component: () => import("./views/home/lottery/ticket")
-		},
-		{
-			path: "/activateAccount",  //激活账户
-			name: "activateAccount",
-			component: () => import("./views/my/activateAccount")
-		},
-		{
-			path: "/buyShip",  //购买船只
-			name: "buyShip",
-			meta: { statusBar: '#00D984', keepAlive: true },
-			component: () => import("./views/home/ship/buyShip")
-		},
-		{
-			path: "/shipInfo",  //船舶信息
-			name: "shipInfo",
-			component: () => import("./views/home/ship/shipInfo")
 		},
 		{
 			path: "/resultTipsPage",  //结果提示页面
@@ -246,16 +212,6 @@ const router =  new Router({
 			name: "appUpdate",
 			meta: { isRoot: true },
 			component: () => import("./views/index/appUpdate")
-		},
-		{
-			path: "/lottery",  //大转盘抽奖
-			name: "lottery",
-			component: () => import("./views/home/lottery")
-		},
-		{
-			path: "/lotteryRule",  //大转盘抽奖规则
-			name: "lotteryRule",
-			component: () => import("./views/home/lottery/rule")
 		},
 		{
 			path: "/billList",  //我的账单
@@ -273,7 +229,22 @@ const router =  new Router({
 			name: "taskRule",
 			meta: { statusBar: '#86CE60' },
 			component: () => import("./views/task/taskRule")
-		}
+		},
+		{
+			path: "/goodsDetails",  //商品详情
+			name: "goodsDetails",
+			component: () => import("./views/war/goodsDetails")
+		},
+		{
+			path: "/confirmOrder",  //商品详情
+			name: "confirmOrder",
+			component: () => import("./views/home/placeOrder/confirmOrder")
+		},
+		{
+			path: "/checkstand",  //收银台
+			name: "checkstand",
+			component: () => import("./views/home/placeOrder/checkstand")
+		},
 	]
 });
 

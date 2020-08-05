@@ -109,12 +109,12 @@ export default {
 		.input-item {
 			margin-bottom: .4rem;
 			.flex-wrap {
-				background-color: #FCFDFF;
+				background-color: #F6F9FC;
 				border-radius: .08rem;
 				display: flex;
 				align-items: center;
 				height: 1rem;
-				border-radius: .5rem;
+				border-radius:.12rem;
 				overflow: hidden;
 				border: 1px solid #F6F6F6;
 				.prefix {
@@ -153,7 +153,7 @@ export default {
 			}
 		}
 		.enter {
-			border-radius: .45rem;
+			
 		}
 	}
 }

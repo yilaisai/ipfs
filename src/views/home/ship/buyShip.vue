@@ -140,7 +140,7 @@ export default {
 				.van-button {
 					margin-top: .45rem;
 					height: 1rem;
-					border-radius: .5rem;
+					border-radius:.12rem;
 					box-shadow: 0px .19rem .32rem 0px rgba(0,217,132,0.4);
 				}
 			}

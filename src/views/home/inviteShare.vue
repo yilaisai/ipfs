@@ -6,21 +6,34 @@
 				<div class="swiper-wrapper">
 					<div class="swiper-slide" ref="shareImg0">
 						<img class="bg" src="../../../public/img/share/shareimg1.png" alt="">
+						<div class="rank">
+							<div>
+								<p>第二名</p>
+								<h4>286,348 <sub>T</sub></h4>
+								<p>集群存力</p>
+							</div>
+							<div>
+								<p>第一名</p>
+								<h4>968,889 <sub>T</sub></h4>
+								<p>集群存力</p>
+							</div>
+							<div>
+								<p>第三名</p>
+								<h4>198,893 <sub>T</sub></h4>
+								<p>集群存力</p>
+							</div>
+						</div>
 						<div class="content">
 							<div class="flex-wrap">
-								<img class="avatar" :src="userInfo.iconUrl" alt="">
-								<!-- <img class="avatar" src="../../../public/img/user_logo.png" alt=""> -->
 								<div class="nickname">
-									<h3>HI~我是{{userInfo.nickName}}</h3>
-									<p>跟我走吧</p>
-									<p>我带你去浪漫的土耳其~</p>
+									<h3><img class="avatar" :src="userInfo.iconUrl" alt=""> 一起挖矿  机会多多</h3>
+									<p>邀请码 <a href="javascript:;">DMDIELS</a></p>
 								</div>
 								<vue-qr class="qrcode" :text="registerPagePath + userInfo.inviteCode" :margin="0"></vue-qr>
 							</div>
-							<div class="invite_code">我的邀请码：{{userInfo.inviteCode}}</div>
 						</div>
 					</div>
-					<div class="swiper-slide" ref="shareImg1">
+					<!-- <div class="swiper-slide" ref="shareImg1">
 						<img class="bg" src="../../../public/img/share/shareimg2.png" alt="">
 						<div class="content">
 							<div class="flex-wrap">
@@ -34,7 +47,7 @@
 							</div>
 							<div class="invite_code">我的邀请码：{{userInfo.inviteCode}}</div>
 						</div>
-					</div>
+					</div> -->
 				</div>
 			</div>
 		</div>
@@ -174,7 +187,7 @@ export default {
 		next((vm) => {
 			if(!window.plus) {
 				vm.$dialog.confirm({
-					message: '分享邀请船员功能需要下载APP进行操作？',
+					message: '分享邀请好友功能需要下载APP进行操作？',
 						confirmButtonText:'立即下载'
 					}).then(() => {
 						window.open('https://www.travel-around.world')
@@ -214,7 +227,7 @@ export default {
 					}
 					.content {
 						position: absolute;
-						bottom: .18rem;
+						bottom: .08rem;
 						left: 3%;
 						width: 94%;
 						height: 1.7rem;
@@ -226,25 +239,42 @@ export default {
 							height: 100%;
 							left: 0;
 							bottom: 0;
-							background:rgba(255,255,255,.9);
 							border-radius: 0px .18rem .18rem .18rem;
 							padding: 0 .18rem;
 							.avatar {
-								width: .8rem;
-								height: .8rem;
+								width: .6rem;
+								height: .6rem;
 								border-radius: 50%;
 							}
 							.nickname {
 								flex: 1;
-								margin: 0 .1rem;
-								font-size: .24rem;
+								margin: 0 .4rem 0 0;
+								font-size: .16rem;
+								h3 {
+									display: flex;
+									align-items: center;
+									img {
+										margin-right: .1rem;
+									}
+								}
 								p {
 									font-size: .22rem;
+									background-color: #F2F6FA;
+									color: #000;
+									font-size: .24rem;
+									font-weight: bold;
+									padding: .15rem;
+									margin-top: .1rem;
+									text-align: center;
+									a {
+										color: #000;
+										margin-left: .2rem;
+									}
 								}
 							}
 							.qrcode {
-								width: .9rem;
-								height: .9rem;
+								width: 1.2rem;
+								height: 1.2rem;
 							}
 						}
 						.invite_code {
@@ -258,6 +288,44 @@ export default {
 							padding: 0 .18rem;
 							line-height: 0.65rem;
 							font-size: .22rem;
+						}
+					}
+					.rank {
+						position: absolute;
+						display: flex;
+						align-items: flex-end;
+						bottom: 1.8rem;
+						left: 0;
+						padding: 0 .2rem;
+						width: 100%;
+						div {
+							display: inline-block;
+							text-align: center;
+							p {
+								color: #007663;
+								font-size: .18rem;
+							}
+							h4 {
+								color: #fff;
+								font-size: .2rem;
+								margin: .1rem 0;
+								sub {
+									font-size: .12rem;
+									vertical-align: baseline;
+								}
+							}
+							&:nth-child(1) {
+								width: 30%;
+								padding-bottom: .3rem;
+							}
+							&:nth-child(2) {
+								width: 40%;
+								padding-bottom: .7rem;
+							}
+							&:nth-child(3) {
+								width: 30%;
+								padding-bottom: .2rem;
+							}
 						}
 					}
 				}

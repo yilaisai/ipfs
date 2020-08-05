@@ -1,51 +1,32 @@
 <template>
 	<div class="home-page">
 		<div class="main">
-
-			<!-- 奖池 -->
-			<div class="pond">
-				<img src="../../../public/img/home/lottery_menu.png" alt="">
-				<p>奖池金币已经累计<span>{{userInfo.rewardPool}}USDT</span></p>
+			<div class="banner">
+				<img class="logo" src="../../assets/img/logo.png" alt="">
+				<BannerSwiper />
+				<!-- 滚动公告 -->
+				<van-notice-bar
+					v-if="noticeText"
+					:text="noticeText"
+					color="#333"
+					scrollable 
+					@click.native="$router.push('/noticeDetails?id=' + noticeId)">
+					<img slot="left-icon" src="../../../public/img/home/broadcast_icon.png" alt="">
+				</van-notice-bar>
 			</div>
-			<!-- 滚动公告 -->
-			<van-notice-bar
-				v-if="noticeText"
-				:text="noticeText"
-				color="#333"
-				scrollable 
-				@click.native="$router.push('/noticeDetails?id=' + noticeId)">
-				<img slot="left-icon" src="../../../public/img/home/broadcast_icon.png" alt="">
-			</van-notice-bar>
-
-			<div class="site-bg" :class="bgName"></div>
-
-			<div class="ship-wrap" v-if="userInfo.roleId > 0">
-				<img class="tips" v-if="userInfo.realInviteNum >= activeShipInfo.inviteNum" src="../../../public/img/home/tips.png" @click.stop="$router.push('/buyShip')" alt="">
-				<img class="ship" @click="$router.push('/shipInfo')" :src="'./img/ship/ship'+ userInfo.roleId +'.png'" alt="">
-			</div>
-			<!-- 底部操作区 -->
-			<div class="btm-menu">
-				<ul>
-					<li @click="$router.push('/lottery')">
-						<img src="../../../public/img/home/lottery_menu.png" alt="">
-						<span>幸运抽奖</span>
-					</li>
-					<li @click="$router.push('/rankings')">
-						<img src="../../../public/img/home/rankings_menu.png" alt="">
-						<span>收益排行</span>
-					</li>
-					<li @click="clickHandler">
-						<img src="../../../public/img/home/invite_menu.png" alt="">
-						<span>邀请船员</span>
-					</li>
-				</ul>
-				<div class="earnings">
-					<div class="btn">
-						<label>累计收益</label>
-						<span><img src="../../../public/img/home/gold.png" alt="">{{$BigNumber(userInfo.inviteReward).plus(userInfo.teamInviteReward)}}</span>
-					</div>
-				</div>
-			</div>
+			<ul class="list">
+				<li v-for="(item,index) in 2" :key="index">
+					<h2>F3+ Filecoin 云算力</h2>
+					<p>
+						<span>总存力：10,000T</span>
+						<span>剩余存力：1,000T</span>
+						<span>合约期限：16个月</span>
+					</p>
+					<s>原价：1990 RMB/T</s>
+					<h3>现价：1750 RMB/T</h3>
+					<van-button type="primary" size="large" @click="pay">立即购买</van-button>
+				</li>
+			</ul>
 		</div>
 	</div>
 </template>
@@ -53,6 +34,7 @@
 <script>
 import { mapState } from 'vuex'
 import { getUserTeamSumGun, userActive, getNoticeList, boatInfo } from '@/api/request'
+import BannerSwiper from '@/components/common/bannerSwiper'
 export default {
 	data() { 
 		return {
@@ -61,16 +43,13 @@ export default {
 			list: [],
 			loading: false, //是否在加载中
 			finished: false, //是否加载完所有数据
-			noticeText: '',
+			noticeText: '星际云开放场外交易，即日起新老用户完成首笔交易即…',
 			noticeId: '',
 			totalReadNotice: 0,
 			totalNotice: 0,
-			shipInfo: [],
-			activeTimeHours: 0
 		}
 	},
 	created() {
-		this.activeTimeHours = new Date().getHours()
 	},
 	mounted() {
 		getNoticeList({
@@ -88,25 +67,8 @@ export default {
 	},
 	activated() {
 		this.$store.dispatch('getUserInfo')
-		this.activeTimeHours = new Date().getHours()
 	},
 	methods: {
-		withdraw(){
-			if(this.userInfo.isSetFund){
-				this.$router.push('/withdraw')
-			}else{
-				
-				this.$dialog.confirm({
-					message: '该操作需要先设置资金密码！',
-						confirmButtonText:'去设置'
-					}).then(() => {
-						this.$router.push('/updateFundsPwd')
-					}).catch(() => {
-					// on cancel
-				});
-			}
-			
-		},
 		clickHandler() {
 			if(this.userInfo.isActive == 0) {
 				this.$dialog.confirm({
@@ -131,20 +93,15 @@ export default {
 				}
 			}
 		},
+		pay() {
+			this.$router.push('/confirmOrder')
+		}
 	},
 	computed: {
-		...mapState(['userInfo']),
-		activeShipInfo() {
-			return this.shipInfo[this.userInfo.roleId] || {inviteNum: 100}
-		},
-		bgName() {
-			if(this.activeTimeHours >= 0 && this.activeTimeHours < 6) return 'bg5'
-			if(this.activeTimeHours >= 6 && this.activeTimeHours < 8) return 'bg1'
-			if(this.activeTimeHours >= 8 && this.activeTimeHours < 12) return 'bg2'
-			if(this.activeTimeHours >= 12 && this.activeTimeHours < 17) return 'bg3'
-			if(this.activeTimeHours >= 17 && this.activeTimeHours < 20) return 'bg4'
-			if(this.activeTimeHours >= 20 && this.activeTimeHours <= 24) return 'bg5'
-		}
+		...mapState(['userInfo'])
+	},
+	components: {
+		BannerSwiper
 	}
 }
 </script>
@@ -153,162 +110,89 @@ export default {
 .home-page{
 	.main {
 		position: relative;
-		height: 100%;
-		width: 100%;
 		overflow: hidden;
-		.site-bg {
-			position: absolute;
-			top: 0;
-			left: 0;
-			width: 100%;
-			height: calc(100% - 1rem);
-			background: #5ad7dd url(../../../public/img/home/bg1.png) no-repeat top center;
-			background-size: cover;
-			&.bg1 {
-				background: #5ad7dd url(../../../public/img/home/bg1.png) no-repeat top center;
-				background-size: cover;
-			}
-			&.bg2 {
-				background: #5ad7dd url(../../../public/img/home/bg2.png) no-repeat top center;
-				background-size: cover;
-			}
-			&.bg3 {
-				background: #5ad7dd url(../../../public/img/home/bg3.png) no-repeat top center;
-				background-size: cover;
-			}
-			&.bg4 {
-				background: #5ad7dd url(../../../public/img/home/bg4.png) no-repeat top center;
-				background-size: cover;
-			}
-			&.bg5 {
-				background: #5ad7dd url(../../../public/img/home/bg5.png) no-repeat top center;
-				background-size: cover;
-			}
-		}
-		.ship-wrap {
-			position: absolute;
-			bottom: 2.5rem;
-			left: 50%;
-			transform: translateX(-50%);
-			.ship {
-				position: relative;
-				width: 3.8rem;
-				pointer-events: initial;
-				animation: float 5s infinite alternate;
-			}
-			.tips {
-				position: absolute;
-				z-index: 12;
-				width: 3rem;
-				pointer-events: initial;
-			}
-		}
-		.pond {
-			position: relative;
-			z-index: 12;
-			width: 65%;
-			margin: .2rem auto 0;
-			line-height: .6rem;
-			background: linear-gradient(270deg, rgba(255, 255, 255, 0) 0%, rgba(255, 255, 255, 0.7) 28%, #ecebe8 53%, rgba(244, 244, 244, 0.7) 77%, rgba(255, 255, 255, 0) 100%);
-			img {
-				position: absolute;
-				left: 0;
-				top: -.1rem;
-				width: .8rem;
-			}
-			p {
-				font-size: .26rem;
-				padding-left: .9rem;
-				span {
-					color: #F33D1A;
-				}
+		.banner {
+			background: #fff url(../../assets/img/bg/bg4.png) no-repeat top center;
+			background-size: 100% 2.77rem;
+			overflow: hidden;
+			.logo {
+				display: block;
+				height: .6rem;
+				margin: .2rem auto;
 			}
 		}
 		.van-notice-bar {
 			position: relative;
 			z-index: 12;
-			width: 65%;
-			background: linear-gradient(270deg, rgba(255, 255, 255, 0) 0%, rgba(255, 255, 255, 0.7) 28%, #ecebe8 53%, rgba(244, 244, 244, 0.7) 77%, rgba(255, 255, 255, 0) 100%);
-			margin: .13rem auto 0;
+			width: 88%;
+			background: #fff;
+			margin: .2rem auto;
 			height: .6rem;
+			padding: 0;
 			img {
-				width: .4rem;
-				height: .4rem;
-				margin-right: .2rem;
+				width: .3rem;
+				height: .3rem;
+				margin-right: .1rem;
 			}
 		}
-	}
-	.btm-menu {
-		position: absolute;
-		bottom: 0;
-		left: 0;
-		width: 100%;
-		height: 2rem;
-		ul {
-			position: absolute;
-			right: 0;
-			top: 0;
-			z-index: 12;
+		.list {
 			display: flex;
+			justify-content: space-between;
+			padding: 0 .3rem;
 			li {
-				text-align: center;
-				margin-right: .05rem;
-				img {
-					display: block;
-					width: 1.3rem;
-					height: 1.3rem;
-				}
-				span {
+				position: relative;
+				width: 3.35rem;
+				background: #fff url(../../assets/img/bg/bg6.png) no-repeat top right;
+				background-size: 1rem 1rem;
+				margin-top: .3rem;
+				box-shadow: 4px 12px 30px -12px rgba(220,220,220,0.8);
+				padding: .4rem;
+				p {
+					background:rgba(241,244,247,1);
+					border-radius:8px;
+					padding: .2rem;
+					margin: .2rem 0;
+					color: #787878;
 					font-size: .22rem;
+					span {
+						display: block;
+					}
 				}
-			}
-		}
-		&:after {
-			content: '';
-			position: absolute;
-			bottom: 0;
-			left: 0;
-			width: 100%;
-			height: 1.35rem;
-			background-color: #fff;
-		}
-		.earnings {
-			position: absolute;
-			left: -0.1rem;
-    		top: 0.18rem;
-			z-index: 12;
-			background-color: #fff;
-			width: 3rem;
-			height: 1.3rem;
-			border-radius: .67rem;
-			.btn {
-				background-color: #00D984;
-				width: 2.45rem;
-				height: 1rem;
-				color: #fff;
-				box-shadow: 0px .19rem .32rem 0px rgba(0,217,132,0.4);
-				border-radius:50px;
-				margin: .34rem auto 0;
-				text-align: center;
-				overflow: hidden;
-				label {
-					display: block;
-					margin: .13rem 0 0;
+				s {
+					font-size: .2rem;
+					color: #AAAAAA;
 				}
-				span {
-					font-size: .34rem;
-					font-weight: 600;
-					img {
-						width: .38rem;
-						height: .38rem;
-						vertical-align: bottom;
-						margin-right: .14rem;
+				h2 {
+					width: 2rem;
+					word-break: break-all;
+				}
+				h3 {
+					color: #FA6400;
+					font-size: .24rem;
+				}
+				.van-button {
+					height: .66rem;
+					background-color: #FA6400;
+					border: 1px solid #FA6400;
+					font-size: .26rem;
+					margin-top: .2rem;
+				}
+				&.ysq {
+					&::after {
+						content: '';
+						position: absolute;
+						top: 1.4rem;
+						right: .1rem;
+						width: 1.2rem;
+						height: 1rem;
+						background: url(../../assets/img/ysq.png) no-repeat center;
+						background-size: 100% 100%;
 					}
 				}
 			}
 		}
 	}
-		
+	
 	.van-dialog {
 		.van-dialog__content {
 			p {
@@ -326,14 +210,6 @@ export default {
 				background-size: 100% 100%;
 			}
 		}
-	}
-
-	@keyframes float {
-		0%   {top: 0; right: 0;}
-		25%  {top: .07rem; right: .1rem;}
-		50%  {top: 0; right: .2rem;}
-		75%   {top: .07rem; right: .1rem;}
-		100% {top: 0; right: 0;}
 	}
 }
 </style>

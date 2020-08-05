@@ -1,21 +1,9 @@
 <template>
 	<div class="invite-page">
-		<HeaderBar title="邀请"></HeaderBar>
+		<HeaderBar color="transparent"></HeaderBar>
 		<div class="main">
-			<div class="qrImg">
-				<vue-qr :text="registerPagePath" :margin="0"></vue-qr>
-			</div>
 			<p v-clipboard:copy="code" v-clipboard:success="onCopy" v-clipboard:error="onError">邀请码:{{code}}  <img src="../../../public/img/copy-icon02.png"></p>
-			<div class="btn" @click="share" v-if="isInApp">分享二维码</div>
-			<div
-				class="btn"
-				v-clipboard:copy="registerPagePath"
-				v-clipboard:success="onCopy2"
-				v-clipboard:error="onError2" 
-				v-else>
-				点击分享到微信
-			</div>
-			<!-- <div class="btn" v-else @click="$router.push('downloadInviteImg?save=1&code=' + code)">保存图片</div> -->
+			<div class="btn" @click="$router.push('/inviteShare')">现在去邀请</div>
 		</div>
 		<van-dialog
 			v-model="dialogShow"
@@ -73,8 +61,11 @@ export default {
 	height: 100%;
 	display: flex;
 	flex-direction: column;
-	// background: #0D0D0D url(../../../public/img/invite-bg.jpg) no-repeat center top;
-	background-size: 100% 100%;
+	background: rgb(22,213,228); /* Old browsers */
+	background: -moz-linear-gradient(top,  rgba(22,213,228,1) 0%, rgba(66,193,202,1) 100%); /* FF3.6-15 */
+	background: -webkit-linear-gradient(top,  rgba(22,213,228,1) 0%,rgba(66,193,202,1) 100%); /* Chrome10-25,Safari5.1-6 */
+	background: linear-gradient(to bottom,  rgba(22,213,228,1) 0%,rgba(66,193,202,1) 100%); /* W3C, IE10+, FF16+, Chrome26+, Opera12+, Safari7+ */
+	filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#16d5e4', endColorstr='#42c1ca',GradientType=0 ); /* IE6-9 */
 	.main{
 		position: absolute;
 		left: 0;
@@ -84,19 +75,7 @@ export default {
 		overflow: hidden;
 		overflow-y: scroll;
 		-webkit-overflow-scrolling: touch;
-		// padding-top: 6.89rem;
 		box-sizing: border-box;
-		.qrImg{
-			width: 2rem;
-			height: 2rem;
-			background: #fff;
-			border-radius: .04rem;
-			padding: .08rem;
-			margin: 0 auto;
-			img{
-				width: 100%;
-			}
-		}
 		&>p{
 			display: block;
 			width: 2rem;
@@ -120,13 +99,13 @@ export default {
 			height: .96rem;
 			line-height: .96rem;
 			text-align: center;
-			color: #5A2708;
+			color: #8A6C1F;
 			font-size: .3rem;
 			font-weight: 500;
-			background: #FFF200;
+			background: #FFDE78;
 			margin: 0 auto;
 			margin-top: 3.17rem;
-			border-radius: .48rem;
+			border-radius: .12rem;
 			font-weight: 700;
 		}
 	}

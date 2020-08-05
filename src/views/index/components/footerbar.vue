@@ -1,7 +1,7 @@
 <template>
-	<van-tabbar v-model="active" active-color="#333333" route>
+	<van-tabbar v-model="active" active-color="#42C1CA" route>
 		<van-tabbar-item to="/home">
-			<span>航海</span>
+			<span>首页</span>
 			<img
 				slot="icon"
 				slot-scope="props"
@@ -9,7 +9,7 @@
 			>
 		</van-tabbar-item>
 		<van-tabbar-item to="/war">
-			<span>舰队</span>
+			<span>橱窗</span>
 			<img
 				slot="icon"
 				slot-scope="props"

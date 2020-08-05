@@ -3,8 +3,8 @@
 		<div class="download" v-if="$route.query.code">
 			<img src="../../../public/img/login_logo.png" alt="">
 			<div>
-				<h4>彼岸</h4>
-				<p>彼岸就在眼前</p>
+				<h4>星际云</h4>
+				<p>星际云就在眼前</p>
 			</div>
 			<a href="/download.html">点击下载</a>
 		</div>
@@ -125,11 +125,11 @@ export default {
 		.input-item {
 			margin-bottom: .4rem;
 			.flex-wrap {
-				background-color: #FCFDFF;
+				background-color: #F6F9FC;
 				display: flex;
 				align-items: center;
 				height: 1rem;
-				border-radius: .5rem;
+				border-radius:.12rem;
 				overflow: hidden;
 				border: 1px solid #F6F6F6;
 				.prefix {
@@ -153,8 +153,8 @@ export default {
 					font-size: .3rem;
 				}
 				a {
-					color: #00D984;
-					border: 1px solid #00D984;
+					color: #6BC40D;
+					border: 1px solid #6BC40D;
 					line-height: .36rem;
 					border-radius: .18rem;
 					padding: 0 .1rem;
@@ -168,7 +168,7 @@ export default {
 			}
 		}
 		.enter {
-			border-radius: .45rem;
+			
 		}
 	}
 	.download {

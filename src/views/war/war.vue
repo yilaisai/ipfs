@@ -1,48 +1,59 @@
 <template>
 	<div class="war-page">
-		<div class="topbar">
-			<h3>人脉大比拼</h3>
-			<h2>好友越多，收入越高</h2>
-			<div class="my-fleet" @click="$router.push('/inviteRecord')">
-				<h4>我的舰队: {{userInfo.realTeamNum}}</h4>
-				<i></i>
-			</div>
-			<img class="chest" src="../../../public/img/chest.png" alt="">
-		</div>
-		<div class="main">
-			<section @click="$router.push('/teammateEarnings')">
-				<h5><span>船员累计给我赚钱</span></h5>
-				<div class="flex-wrap">
-					<div>
-						<span class="red">{{userInfo.inviteReward}}<sub>USDT</sub></span>
-						<label>当前等级总收入</label>
+		<div class="header">商品列表</div>
+		<div class="main scroll-y">
+			<ul>
+				<li v-for="(item, index) in 10" :key="index">
+					<div class="name">
+						<img src="../../assets/img/icon/goods_logo.png" alt="">
+						<div>
+							<h3>F3 Filecoin 云存力 <i>限量发售</i></h3>
+							<a href="javascript:;" @click="$router.push('/goodsDetails')">查看合约详情</a>
+						</div>
 					</div>
-					<div>
-						<span>{{$BigNumber(userInfo.rate).times(100)}}%</span>
-						<label>lv.{{userInfo.roleId}} 收益比例</label>
+					<div class="details">
+						<div class="flex-wrap">
+							<div>
+								<label>发售存力</label>
+								<img src="../../assets/img/icon/fscl_icon.png" alt="">
+							</div>
+							<span>2,200 <sub>T</sub></span>
+						</div>
+						<div class="flex-wrap">
+							<div>
+								<label>托管机房</label>
+								<img src="../../assets/img/icon/tgjf_icon.png" alt="">
+							</div>
+							<p>T3+级别 IDC机房</p>
+						</div>
+						<div class="flex-wrap">
+							<div>
+								<label>剩余存力</label>
+								<img src="../../assets/img/icon/sycl_icon.png" alt="">
+							</div>
+							<span>2,200 <sub>T</sub></span>
+						</div>
+						<div class="flex-wrap">
+							<div>
+								<label>合约期限</label>
+								<img src="../../assets/img/icon/fscl_icon.png" alt="">
+							</div>
+							<span>16 <sub>个月</sub></span>
+						</div>
 					</div>
-				</div>
-			</section>
-			<section @click="$router.push('/teamEarnings')">
-				<h5><span>舰队收益</span><a href="javascript:;" @click.stop="showHelp"><img src="../../../public/img/help_icon.png" alt=""></a></h5>
-				<div class="flex-wrap">
-					<div>
-						<span class="red">{{userInfo.teamInviteReward}}<sub>USDT</sub></span>
-						<label>使用收益提现券进行提现</label>
+					<div class="buybar">
+						<div class="price">
+							<h4>现价 : 1750RMB/T</h4>
+							<s>原价 : 1889RMB/T</s>
+							<div>
+								<span>数量</span>
+								<van-stepper v-model="value" integer min="1" max="8" />
+							</div>
+						</div>
+						<van-button type="primary" size="large" @click="$router.push('/confirmOrder')">立即购买</van-button>
 					</div>
-					<div>
-						<span>{{userInfo.withdrawTicket}}</span>
-						<label>收益提取券(张）</label>
-					</div>
-				</div>
-			</section>
-			<section>
-				<h5><span>我的邀请人</span></h5>
-				<div class="centent">
-					<img :src="userInfo.inviterIconUrl" alt="">
-					<span>{{userInfo.inviterNickName}}</span>
-				</div>
-			</section>
+				</li>
+			</ul>
 		</div>
 	</div>
 </template>
@@ -52,6 +63,7 @@ import { mapState } from 'vuex'
 export default {
 	data() { 
 		return {
+			value: 1
 		}
 	},
 	mounted() {
@@ -63,7 +75,7 @@ export default {
 				message: `1.每邀请10个有效船员，可获得一张收益提现券。</br></br>2.每张提现券面值为${this.userInfo.withdrawAmount}USDT,每张可提现${this.userInfo.withdrawAmount} USDT。</br></br>3.舰队收益不满${this.userInfo.withdrawAmount}USDT不可进行提现。`,
 			}).then(() => {
 			});
-		}
+		},
 	},
 	computed: {
 		...mapState(['userInfo'])
@@ -73,107 +85,133 @@ export default {
 
 <style lang="less" scoped>
 .war-page{
-	.topbar {
+	display: flex;
+	flex-direction: column;
+	.header {
 		position: relative;
-		padding: .42rem 0 1.36rem;
-		background-color: #00D984;
-		color: #fff;
-		h3 {
-			font-size: .32rem;
-			padding: 0 .6rem;
-		}
-		h2 {
-			font-size: .48rem;
-			padding: 0 .6rem;
-			margin-top: .3rem;
-		}
-		.my-fleet {
-			display: flex;
-			align-items: center;
-			justify-content: space-between;
-			position: absolute;
-			left: 2.5%;
-			bottom: -.9rem;
-			width: 95%;
-			height: 1.68rem;
-			padding: 0 .2rem 0 .6rem;
-			background-color: #fff;
-			color: #333333;
-			border-radius: .26rem;
-			font-size: .36rem;
-			box-shadow:0px 0px 32px 0px rgba(0,74,47,0.2);
-			i {
-				width: .13rem;
-				height: .22rem;
-				background: url(../../../public/img/arrow_right.png) no-repeat center;
-				background-size: 100% 100%;
-			}
-		}
-		.chest {
-			position: absolute;
-			top: .2rem;
-			right: .38rem;
-			width: 2.2rem;
-		}
+		z-index: 2;
+		font-size: .34rem;
+		color: #323232;
+		text-align: center;
+		background:rgba(255,255,255,1);
+		box-shadow:0px 0px 12px 0px rgba(236,236,236,1);
+		line-height: .88rem;
+		font-weight: 600;
 	}
 	.main {
-		padding: 0.95rem .2rem .2rem;
-		section {
-			background-color: #fff;
-			border-radius: .26rem;
-			margin-top: .24rem;
-			h5 {
-				display: flex;
-				align-items: center;
-				justify-content: space-between;
-				padding: .4rem;
-				font-size: .34rem;
-				img {
-					width: .33rem;
-					height: .33rem;
+		flex: 1;
+		position: relative;
+		z-index: 1;
+		ul {
+			li {
+				background-color: #fff;
+				padding: .3rem .4rem;
+				margin-bottom: .2rem;
+				&:last-child {
+					margin-bottom: 0;
 				}
-			}
-			.flex-wrap {
-				display: flex;
-				padding: 0 0 .4rem 0;
-				div {
-					flex: 1;
-					text-align: center;
-					&:first-child {
-						border-right: 2px solid #EEEEEE;
+				.name {
+					display: flex;
+					align-items: center;
+					img {
+						width: 1.2rem;
+						height: 1.2rem;
+						margin-right: .2rem;
 					}
-					span {
-						font-size: .52rem;
-						font-weight: 600;
-						sub {
-							font-size: .26rem;
-							font-weight: 400;
-							vertical-align: baseline;
+					div {
+						flex: 1;
+						h3 {
+							font-size: .34rem;
+							i {
+								display: inline-block;
+								color: #FA6400;
+								font-size: .2rem;
+								font-weight: 400;
+								line-height: .32rem;
+								border-radius: .16rem;
+								padding: 0 .1rem;
+								font-style: normal;
+								border: 1px solid #FA6400;
+							}
 						}
-						&.red {
-							color: #F42E14;
+						a {
+							font-size: .28rem;
+							color: #FA6400;
 						}
 					}
-					label {
-						display: block;
-						font-size: .24rem;
-						color: #999999;
+				}
+				.details {
+					display: flex;
+					flex-wrap: wrap;
+					justify-content: space-between;
+					margin-top: .2rem;
+					.flex-wrap {
+						display: flex;
+						align-items: center;
+						margin-bottom: .1rem;
+						width: 3.3rem;
+						background:rgba(241,244,247,1);
+						border-radius: .12rem;
+						padding: .2rem;
+						div {
+							margin-right: .2rem;
+							label {
+								display: block;
+								white-space: nowrap;
+								font-size: .22rem;
+								color: #6D7278;
+							}
+							img {
+								display: block;
+								width: .4rem;
+								height: .4rem;
+								margin: .1rem auto 0;
+							}
+						}
+						p {
+							font-size: .3rem;
+							color: #0D959F;
+							font-weight: bold;
+						}
+						span {
+							font-size: .4rem;
+							color: #0D959F;
+							font-weight: bold;
+							sub {
+								vertical-align: baseline;
+								font-size: .24rem;
+							}
+						}
 					}
 				}
-			}
-			.centent {
-				display: flex;
-				justify-content: center;
-				align-items: center;
-				padding: 0 0 .4rem 0;
-				img {
-					width: .86rem;
-					height: .86rem;
-					border-radius: 50%;
-					margin-right: .2rem;
-				}
-				span {
-					font-size: .32rem;
+				.buybar {
+					display: flex;
+					align-items: flex-end;
+					.price {
+						margin-right: .5rem;
+						white-space: nowrap;
+						h4 {
+							font-size: .28rem;
+							color: #FA6400;
+						}
+						s {
+							font-size: .24rem;
+							color: #B4B4B4;
+						}
+						div {
+							display: flex;
+							align-items: center;
+							margin-top: .1rem;
+							span {
+								color: #969696;
+								margin-right: .1rem;
+							}
+						}
+					}
+					.van-button {
+						background-color: #FA6400;
+						border: 1px solid #FA6400;
+					}
 				}
 			}
 		}

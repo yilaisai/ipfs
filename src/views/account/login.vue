@@ -68,12 +68,12 @@ export default {
 		}
 	}
 	.van-cell {
-		background-color: #FCFDFF;
+		background-color: #F6F9FC;
 		overflow: hidden;
 		padding: 0 16px;
 		border: 1px solid #F6F6F6;
 		margin-top: .24rem;
-		border-radius: .5rem;
+		border-radius:.12rem;
 		&::after {
 			left: 0;
 			border-bottom: 0;
@@ -113,7 +113,7 @@ export default {
 		margin: .8rem auto .4rem;
 		width: 1.46rem;
 		height: 1.46rem;
-		background: linear-gradient(-27deg,rgba(0,217,132,1) 0%,rgba(14,216,171,1) 100%);
+		background: #42C1CA;
 		border-radius:50%;
 		img {
 			width: .8rem;

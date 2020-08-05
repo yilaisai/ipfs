@@ -10,9 +10,9 @@ module.exports = {
 			.tap(options => Object.assign(options, { limit: 10260, deleteOriginalAssets: true }))
 	},
 	pwa: {
-		name: '彼岸',
-		short_name: "彼岸",
-  		description: "彼岸",
+		name: '星际云',
+		short_name: "星际云",
+  		description: "星际云",
 		themeColor: '#242A37',
 		msTileColor: '#242A37',
 		appleMobileWebAppCapable: 'yes',

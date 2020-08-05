@@ -69,7 +69,7 @@ export default {
 		min-width: 90px;
 		text-align: center;
 		font-size: .28rem;
-		color: #333333;
+		color: #6BC40D;
 		border-radius: 4px;
 		font-weight: 600;
 		cursor: pointer;

@@ -4,58 +4,69 @@
 			<div class="info-l">
 				<img :src="userInfo.iconUrl" alt="">
 				<div class="text">
-					<h3>{{userInfo.nickName || '--'}} <span>LV{{userInfo.roleId}}</span></h3>
+					<h3>{{userInfo.nickName || '--'}} </h3>
 					<!-- <span>{{userInfo.phone}}</span> -->
-					<span class="userid" v-if="userInfo.roleId > 0">ID : {{userInfo.userId}}</span>
+					<span class="userid">ID : {{userInfo.userId}}</span>
 				</div>
 			</div>
 			<div class="activate" @click="clickHandler">
-				<h4 v-if="userInfo.isActive == 1">邀请船员做任务</h4>
-				<h4 v-else>激活账户开启冒险</h4>
-				<van-icon name="arrow" />
+				<img src="../../assets/img/asic-miner.png" alt="">
+				<h4>我总算力</h4>
+				<span>1500 <sub>T</sub></span>
 			</div>
 		</div>
 		<div class="menu-list">
 			<ul>
-				<li @click="goToWallet">
-					<img src="../../../public/img/assets_icon.png" alt="">
-					<span>我的钱包</span>
-					<label class="red">{{userInfo.amount}} <sub>{{userInfo.coinName}}</sub></label>
-					<i></i>
-				</li>
-				<li @click="$router.push('/billList')">
-					<img src="../../../public/img/bill_icon.png" alt="">
-					<span>我的账单</span>
-					<i></i>
-				</li>
-				<li @click="$router.push('/notice')">
-					<img src="../../../public/img/message_icon.png" alt="">
-					<span :class="{'dot' : totalNotice > totalReadNotice}">消息中心</span>
-					<i></i>
-				</li>
-			</ul>
-			<ul>
-				<li v-if="userInfo.roleId > 0">
-					<img src="../../../public/img/friend_icon.png" alt="">
-					<span>我的邀请码</span>
+				<li @click="$router.push('/inviteShare')">
+					<img src="../../assets/img/icon/friend_icon.png" alt="">
+					<span>邀请好友</span>
 					<label
 						v-clipboard:copy="userInfo.inviteCode"
 						v-clipboard:success="onCopy"
 						v-clipboard:error="onError" >
 						{{userInfo.inviteCode}}
 					</label>
+					<i></i>
 				</li>
+				<!-- <li @click="goToWallet">
+					<img src="../../../public/img/assets_icon.png" alt="">
+					<span>我的钱包</span>
+					<label class="red">{{userInfo.amount}} <sub>{{userInfo.coinName}}</sub></label>
+					<i></i>
+				</li> -->
+				<li @click="$router.push('/transferRecord')">
+					<img src="../../assets/img/icon/zyjl_icon.png" alt="">
+					<span>存力转移记录</span>
+					<i></i>
+				</li>
+				<li @click="$router.push('/billList')">
+					<img src="../../assets/img/icon/jhjl_icon.png" alt="">
+					<span>存力激活记录</span>
+					<i></i>
+				</li>
+				<li @click="$router.push('/orderList')">
+					<img src="../../assets/img/icon/order_icon.png" alt="">
+					<span>我的订单</span>
+					<i></i>
+				</li>
+				<!-- <li @click="$router.push('/notice')">
+					<img src="../../../public/img/message_icon.png" alt="">
+					<span :class="{'dot' : totalNotice > totalReadNotice}">消息中心</span>
+					<i></i>
+				</li> -->
+				<li @click="$router.push('/setting')">
+					<img src="../../assets/img/icon/setting_icon.png" alt="">
+					<span>设置</span>
+					<i></i>
+				</li>
+			</ul>
+			<!-- <ul>
 				<li @click="$router.push('/helpCenter')">
 					<img src="../../../public/img/help_icon.png" alt="">
 					<span>帮助中心</span>
 					<i></i>
 				</li>
-				<li @click="$router.push('/setting')">
-					<img src="../../../public/img/setting_icon.png" alt="">
-					<span>设置</span>
-					<i></i>
-				</li>
-			</ul>
+			</ul> -->
 		</div>
 	</div>
 </template>
@@ -124,22 +135,7 @@ export default {
 			}
 		},
 		clickHandler() {
-			if(this.userInfo.isActive == 0) {
-				this.$router.push('/activateAccount')
-			}else {
-				if(this.userInfo.roleId <= 0) {
-					this.$dialog.confirm({
-						message: '您还未购买船只，是否前去购买？',
-							confirmButtonText:'去购买'
-						}).then(() => {
-							this.$router.push('/buyShip')
-						}).catch(() => {
-						// on cancel
-					});
-				}else {
-					this.$router.push('/task')
-				}
-			}
+			this.$router.push('/hashrate')
 		},
 		onCopy(){
 			this.$toast('复制成功')
@@ -162,7 +158,8 @@ export default {
 		position: relative;
 		padding: 1.2rem .38rem 1.4rem;
 		color: #fff;
-		background-color: #00D984;
+		background: #4FD3DC url(../../assets/img/bg/bg4.png) no-repeat center;
+		background-size: 100% 100%;
 		.info-l {
 			position: relative;
 			z-index: 12;
@@ -199,51 +196,41 @@ export default {
 		.activate {
 			display: flex;
 			align-items: center;
-			justify-content: flex-end;
 			position: absolute;
-			left: 0;
-			bottom: -1.3rem;
-			width: 100%;
-			height: 2.56rem;
-			color: #fff;
-			background: url(../../../public/img/bg1.png) no-repeat center;
-			background-size: 100% 100%;
+			left: 3%;
+			bottom: -0.7rem;
+			width: 94%;
+			height: 1.4rem;
+			color: #000;
+			background-color: #fff;
+			border-radius: .12rem;
+			padding: 0 .2rem;
+			img {
+				height: 1rem;
+			}
 			h4 {
+				flex: 1;
+				font-size: .32rem;
+				margin: 0 .2rem;
+			}
+			span {
+				color: #FA6400;
 				font-size: .48rem;
+				font-weight: bold;
+				sub {
+					font-size: .28rem;
+					vertical-align: baseline;
+					font-weight: 400;
+				}
 			}
-			.van-icon {
-				margin: 0 .4rem 0 .6rem;
-				font-size: .3rem;
-			}
-		}
-		&:after {
-			content: '';
-			position: absolute;
-			width: 1.16rem;
-			height: 1.16rem;
-			background: linear-gradient(-81deg,rgba(0,217,132,1) 0%,rgba(23,237,174,1) 100%);
-			border-radius: 50%;
-			right: 1.4rem;
-			top: .7rem;
-		}
-		&:before {
-			content: '';
-			position: absolute;
-			width: .63rem;
-			height: .63rem;
-			background: linear-gradient(-81deg,rgba(0,217,132,1) 0%,rgba(23,237,174,1) 100%);
-			opacity: 0.68;
-			border-radius:50%;
-			right: .9rem;
-			top: 1.7rem;
 		}
 	}
 	.menu-list {
-		padding: 1.4rem .2rem .2rem;
+		padding: 1.2rem .2rem .2rem;
 	}
 	ul {
 		flex: 1;
-		border-radius: .26rem;
+		border-radius: .12rem;
 		overflow: hidden;
 		margin-bottom: .24rem;
 		li {

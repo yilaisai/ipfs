@@ -1,0 +1,181 @@
+<template>
+	<div class="transfer-record-page">
+		<HeaderBar title="存力转移记录"></HeaderBar>
+		<van-tabs
+			v-model="active"
+			swipeable
+			:border="false"
+			@change="getData"
+			color="#000000"
+			title-active-color="#000000"
+			title-inactive-color="#969696">
+			<van-tab title="全部">
+				<ul>
+					<li v-for="(item,key) in list0" :key="key">
+						<div>
+							<h3>+1000 <sub>T</sub></h3>
+							<span>来自 系统账户</span>
+						</div>
+						<div>
+							<span>F3+</span>
+							<span>000001</span>
+						</div>
+						<div>
+							<span>未激活</span>
+							<p>时间 : 2020-08-03 14:29:43</p>
+						</div>
+					</li>
+				</ul>
+			</van-tab>
+			<van-tab title="转入">
+				<ul>
+					<li v-for="(item,key) in list1" :key="key">
+						<div>
+							<h3>+1000 <sub>T</sub></h3>
+							<span>来自 系统账户</span>
+						</div>
+						<div>
+							<span>F3+</span>
+							<span>000001</span>
+						</div>
+						<div>
+							<span>未激活</span>
+							<p>时间 : 2020-08-03 14:29:43</p>
+						</div>
+					</li>
+				</ul>
+			</van-tab>
+			<van-tab title="转出">
+				<ul>
+					<li v-for="(item,key) in list2" :key="key">
+						<div>
+							<h3>+1000 <sub>T</sub></h3>
+							<span>来自 系统账户</span>
+						</div>
+						<div>
+							<span>F3+</span>
+							<span>000001</span>
+						</div>
+						<div>
+							<span>未激活</span>
+							<p>时间 : 2020-08-03 14:29:43</p>
+						</div>
+					</li>
+				</ul>
+			</van-tab>
+		</van-tabs>
+	</div>
+</template>
+
+<script>
+import { findCrews } from '@/api/request'
+export default {
+	data() { 
+		return {
+			active: 0,
+			list0: [],
+			list1: [],
+			list2: []
+		}
+	},
+	mounted() {
+		this.getData(0)
+	},
+	methods: {
+		showHelp() {
+			this.$dialog.alert({
+				message: '有效船员是指<br/>等级达到Lv1及以上的船员',
+				confirmButtonText: '我知道了'
+			}).then(() => {
+			});
+		},
+		getData(type) {
+			findCrews({type}).then(res => {
+				this['list' + type] = res.result
+			}) 
+		}
+	}
+}
+</script>
+
+<style lang="less" scoped>
+.transfer-record-page{
+	display: flex;
+	flex-direction: column;
+	overflow: hidden;
+	.van-tabs {
+		flex: 1;
+		display: flex;
+		flex-direction: column;
+		overflow: hidden;
+		/deep/.van-tabs__wrap {
+			position: relative;
+			z-index: 2;
+			box-shadow:0px 0px 12px 0px rgba(236,236,236,1);
+		}
+		/deep/.van-tabs__content {
+			position: relative;
+			z-index: 1;
+			flex: 1;
+			overflow: hidden;
+			.van-tab__pane {
+				position: relative;
+				height: 100%;
+				overflow: hidden;
+				ul {
+					position: relative;
+					height: 100%;
+					background-color: #fff;
+					padding: 0 .4rem;
+					overflow-y: auto;
+					-webkit-overflow-scrolling: touch;
+					li {
+						position: relative;
+						z-index: 10;
+						background-color: #fff;
+						border-bottom: 1px solid rgba(0,0,0,.12);
+						padding: .1rem 0;
+						color: #000;
+						div {
+							display: flex;
+							align-items: center;
+							justify-content: space-between;
+							padding: .05rem 0;
+							font-size: .24rem;
+							h3 {
+								font-size: .36rem;
+								font-weight: 600;
+								color: #42C1CA;
+								sub {
+									vertical-align: baseline;
+								}
+							}
+							p {
+								color: #999999;
+								
+							}
+							&:nth-child(2) {
+								justify-content: flex-start;
+								span {
+									margin-right: .2rem;
+								}
+							}
+						}
+					}
+				}
+				.tips {
+					position: absolute;
+					width: 100%;
+					text-align: center;
+					bottom: .7rem;
+					left: 0;
+					font-size: .28rem;
+					span {
+						color: #F42E14;
+					}
+				}
+			}
+		}
+	}
+}
+</style>

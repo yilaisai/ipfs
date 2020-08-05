@@ -12,7 +12,7 @@
 					<CountDownBtn slot="button" @click="getCaptcha" v-model="btnDisabled"></CountDownBtn>
 				</van-field>
 			</div>
-			<p class="tips" v-if="userInfo.isSetFund == 1">修改后24小时内禁止任何交易相关操作（提币）</p>
+			<!-- <p class="tips" v-if="userInfo.isSetFund == 1">修改后24小时内禁止任何交易相关操作（提币）</p> -->
 			<button class="full scale" @click="nextStep">下一步</button>
 		</div>
 	</div>
@@ -65,8 +65,8 @@ export default {
 		.input-wrap {
 			margin-top: .4rem;
 			.van-cell {
-				background-color: #FCFDFF;
-				border-radius: 25px;
+				background-color: #F6F9FC;
+				border-radius:.12rem;
 				margin: .1rem 0;
 				border: 1px solid #F6F6F6;
 				line-height: 30px;
@@ -88,7 +88,6 @@ export default {
 		}
 		button {
 			margin-top: .8rem;
-			border-radius: .45rem;
 		}
 		.tips {
 			font-size: .24rem;

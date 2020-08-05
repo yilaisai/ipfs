@@ -1,7 +1,7 @@
 <template>
 	<div class="order_list-page">
-		<HeaderBar title="充提流水">
-			<a href="javascript:;" class="filter" @click="isShowFilter = !isShowFilter"></a>
+		<HeaderBar title="我的订单">
+			<!-- <a href="javascript:;" class="filter" @click="isShowFilter = !isShowFilter"></a> -->
 		</HeaderBar>
 		<div class="thead">
 			<span>类型</span>
