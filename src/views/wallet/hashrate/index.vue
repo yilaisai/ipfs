@@ -4,21 +4,21 @@
 		<div class="main scroll-y">
 			<div class="summary">
 				<div class="balance">
-					<h3>总算力</h3>
-					<h2>2,200 <sub>T</sub></h2>
+					<h3>总存力</h3>
+					<h2>{{userInfo.tamount}} <sub>T</sub></h2>
 					<div class="flex-wrap">
 						<div>
-							<span>1,000 <sub>T</sub></span>
+							<span>{{$BigNumber(userInfo.tamount).minus(userInfo.activeTAmount)}} <sub>T</sub></span>
 							<label>未激活</label>
 						</div>
 						<div>
-							<span>1,000 <sub>T</sub></span>
+							<span>{{userInfo.activeTAmount}} <sub>T</sub></span>
 							<label>已激活</label>
 						</div>
 					</div>
 				</div>
 				<div class="btn-wrap">
-					<van-button type="primary" size="large" @click="clickHandler">转移</van-button>
+					<van-button type="primary" size="large" @click="clickHandler" :disabled="this.userInfo.tamount <= 0">转移</van-button>
 				</div>
 			</div>
 			<div class="list">
@@ -27,16 +27,16 @@
 					<li class="head">
 						<span>合约名称</span>
 						<span>合约编号</span>
-						<span>持有算力 (T)</span>
-						<span>已激活算力(T)</span>
-						<span>未激活算力(T)</span>
+						<span>持有存力 (T)</span>
+						<span>状态</span>
+						<!-- <span>未激活存力(T)</span> -->
 					</li>
-					<li v-for="(item,index) in 5" :key="index">
-						<span>F3+</span>
-						<span>1000</span>
-						<span>1000</span>
-						<span>1000</span>
-						<span>1000</span>
+					<li v-for="(item,index) in list" :key="index">
+						<span>{{item.name}}</span>
+						<span>{{item.id}}</span>
+						<span>{{item.tamount}}</span>
+						<span>{{item.isActive == 0 ? '未激活' : '已激活'}}</span>
+						<!-- <span>1000</span> -->
 					</li>
 				</ul>
 			</div>
@@ -45,16 +45,40 @@
 </template>
 
 <script>
+import { mapState } from 'vuex'
+import { getMyMinePro } from '@/api/request'
 export default {
 	data() { 
 		return {
-
+			list: []
 		}
+	},
+	mounted() {
+		getMyMinePro().then(res => {
+			this.list = res.result.list
+		})
 	},
 	methods: {
 		clickHandler() {
-			this.$router.push('/transferSelect')
+			if(this.userInfo.tamount <= 0) {
+				return
+			}
+			if(this.userInfo.isSetFundPwd == 0){
+				this.$dialog.confirm({
+					message: '请先设置资金密码！',
+						confirmButtonText:'去设置'
+					}).then(() => {
+						this.$router.push('/updateFundsPwd')
+					}).catch(() => {
+					// on cancel
+				});
+			}else {
+				this.$router.push('/transferSelect')
+			}
 		}
+	},
+	computed: {
+		...mapState(['userInfo'])
 	}
 }
 </script>
@@ -165,12 +189,12 @@ export default {
 					padding: .25rem 0;
 					border-right: 1px solid #D4E2F5;
 					&:nth-child(1) {
-						width: 1.1rem;
-						flex: none;
+						// width: 1.2rem;
+						// flex: none;
 					}
 					&:nth-child(2) {
-						width: 1.1rem;
-						flex: none;
+						// width: 1.2rem;
+						// flex: none;
 					}
 					&:last-child {
 						border-right: none;

@@ -1,6 +1,6 @@
 <template>
 	<div class="updatafundspwd-page">
-		<HeaderBar :title="userInfo.isSetFund == 0 ? '设置资金密码' : '修改资金密码'"></HeaderBar>
+		<HeaderBar :title="userInfo.isSetFundPwd == 0 ? '设置资金密码' : '修改资金密码'"></HeaderBar>
 		<div class="main">
 			<div class="input-wrap">
 				<!-- <label>账号</label> -->
@@ -12,7 +12,7 @@
 					<CountDownBtn slot="button" @click="getCaptcha" v-model="btnDisabled"></CountDownBtn>
 				</van-field>
 			</div>
-			<!-- <p class="tips" v-if="userInfo.isSetFund == 1">修改后24小时内禁止任何交易相关操作（提币）</p> -->
+			<!-- <p class="tips" v-if="userInfo.isSetFundPwd == 1">修改后24小时内禁止任何交易相关操作（提币）</p> -->
 			<button class="full scale" @click="nextStep">下一步</button>
 		</div>
 	</div>
@@ -21,7 +21,7 @@
 <script>
 import CountDownBtn from '@/components/common/countDownBtn'
 import { mapState } from 'vuex'
-import { getCaptcha } from '@/api/request'
+import { getCaptchaPhone2 } from '@/api/request'
 export default {
 	data() { 
 		return {
@@ -32,7 +32,11 @@ export default {
 	methods: {
 		getCaptcha() {
 			this.btnDisabled = true
-			getCaptcha({type: 3}).then(res => {
+			getCaptchaPhone2({
+				phone: this.userInfo.phone,
+				areaCode: this.userInfo.phoneArea,
+				type: 'CHANGE_FUND_PASSWORD'
+			}).then(res => {
 				this.$toast.success(res.msg)
 			}).catch(err => {
 				this.btnDisabled = false

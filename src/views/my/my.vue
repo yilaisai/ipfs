@@ -6,18 +6,18 @@
 				<div class="text">
 					<h3>{{userInfo.nickName || '--'}} </h3>
 					<!-- <span>{{userInfo.phone}}</span> -->
-					<span class="userid">ID : {{userInfo.userId}}</span>
+					<span class="userid">ID : {{userInfo.inviteCode}}</span>
 				</div>
 			</div>
 			<div class="activate" @click="clickHandler">
 				<img src="../../assets/img/asic-miner.png" alt="">
-				<h4>我总算力</h4>
-				<span>1500 <sub>T</sub></span>
+				<h4>我总存力</h4>
+				<span>{{userInfo.tamount}} <sub>T</sub></span>
 			</div>
 		</div>
 		<div class="menu-list">
 			<ul>
-				<li @click="$router.push('/inviteShare')">
+				<li @click="$router.push('/invite')">
 					<img src="../../assets/img/icon/friend_icon.png" alt="">
 					<span>邀请好友</span>
 					<label
@@ -84,17 +84,17 @@ export default {
 	activated() {
 		let readNoticeArr = JSON.parse(localStorage.getItem('readNoticeArr')) || []
 		this.totalReadNotice = readNoticeArr.length
-		getNoticeList({
-			pageNum: 1,
-			pageSize: 1
-		}, {noLoading: true}).then(res => {
-			this.totalNotice = res.result.total
-		})
+		// getNoticeList({
+		// 	pageNum: 1,
+		// 	pageSize: 1
+		// }, {noLoading: true}).then(res => {
+		// 	this.totalNotice = res.result.total
+		// })
 
 		this.$store.dispatch('getUserInfo')
 	},
 	mounted() {
-		if(this.userInfo.isSetFund == 0){
+		if(this.userInfo.isSetFundPwd == 0){
 			if(sessionStorage.getItem('TIPS_FUNDPASSWORD_SET') == 1) return
 			sessionStorage.setItem('TIPS_FUNDPASSWORD_SET', 1)
 			this.$dialog.confirm({
@@ -121,7 +121,7 @@ export default {
 			})
 		},
 		goToWallet() {
-			if(this.userInfo.isSetFund == 0){
+			if(this.userInfo.isSetFundPwd == 0){
 				this.$dialog.confirm({
 					message: '请先设置资金密码！',
 						confirmButtonText:'去设置'

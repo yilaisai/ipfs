@@ -6,7 +6,7 @@
 				<img :src="userInfo.iconUrl" alt="">
 				<div>
 					<p>{{userInfo.phone}}</p>
-					<p v-if="userInfo.roleId > 0">ID : {{userInfo.userId}}</p>
+					<p v-if="userInfo.roleId > 0">ID : {{userInfo.inviteCode}}</p>
 				</div>
 			</div>
 			<div class="nickname">
@@ -40,7 +40,7 @@ export default {
 				this.$toast('昵称太长啦~')
 				return
 			}
-			editNickName({nickName: this.inputValue}).then(res => {
+			editNickName({nickName: this.inputValue, type: 0}).then(res => {
 				this.$toast.success(res.msg)
 				this.isEdit = false
 				this.$store.dispatch('getUserInfo')

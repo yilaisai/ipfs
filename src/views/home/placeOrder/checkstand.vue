@@ -3,9 +3,9 @@
 		<HeaderBar title="收银台" :shadow="true"></HeaderBar>
 		<div class="main scroll-y">
 			<ul>
-				<li><label>订单金额</label><span class="highlight">¥ 1,750</span></li>
-				<li><label>订单编号</label><span>958428283923929329</span></li>
-				<li><label>下单时间</label><span>2020-08-04 11:09:39</span></li>
+				<li><label>订单金额</label><span class="highlight">¥ {{$route.query.price}}</span></li>
+				<li><label>订单编号</label><span>{{orderId}}</span></li>
+				<li><label>下单时间</label><span>{{payTime}}</span></li>
 			</ul>
 			<h2 v-show="payType == 0">选择支付方式</h2>
 			<div class="payment" v-show="payType == 0">
@@ -36,10 +36,10 @@
 				<div class="form-item">
 					<label><img src="../../../assets/img/icon/email.png" alt="">邮箱</label>
 					<div class="input-wrap">
-						<p>293932023@xingjiyun.com</p>
+						<p>{{userInfo.connectEmail}}</p>
 						<a
 							href="javascript:;"
-							v-clipboard:copy="'293932023@xingjiyun.com'"
+							v-clipboard:copy="userInfo.connectEmail"
 							v-clipboard:success="onCopy"
 							v-clipboard:error="onError">
 						</a>
@@ -50,15 +50,15 @@
 			<h2 v-show="payType == 1"><img src="../../../assets/img/icon/usdt_icon.png" alt=""> USDT (ERC20)</h2>
 			<div class="form" v-show="payType == 1">
 				<div class="qr-img">
-					<vue-qr :text="'0xc02aaa39b223fe8d0a0e5c4f27ead9083c756cc2'" :margin="0"></vue-qr>
+					<vue-qr :text="userInfo.address" :margin="0"></vue-qr>
 				</div>
 				<div class="form-item">
 					<label>收款地址</label>
 					<div class="input-wrap">
-						<p>0xc02aaa39b223fe8d0a0e5c4f27ead9083c756cc2</p>
+						<p>{{userInfo.address}}</p>
 						<a
 							href="javascript:;"
-							v-clipboard:copy="'0xc02aaa39b223fe8d0a0e5c4f27ead9083c756cc2'"
+							v-clipboard:copy="userInfo.address"
 							v-clipboard:success="onCopy"
 							v-clipboard:error="onError">
 						</a>
@@ -75,10 +75,13 @@
 
 <script>
 import vueQr from 'vue-qr'
+import { mapState } from 'vuex'
 export default {
 	data() { 
 		return {
-			payType: 0
+			payType: 0,
+			orderId: new Date().getTime(),
+			payTime: this.$fmtDate(new Date(), 'full')
 		}
 	},
 	methods: {
@@ -92,6 +95,9 @@ export default {
 	},
 	components: {
 		vueQr
+	},
+	computed: {
+		...mapState(['userInfo'])
 	}
 }
 </script>

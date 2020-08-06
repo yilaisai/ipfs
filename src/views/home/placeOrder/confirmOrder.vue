@@ -3,20 +3,20 @@
 		<HeaderBar title="确认订单" :shadow="true"></HeaderBar>
 		<div class="main">
 			<div class="goods">
-				<h3>F3 Filecoin 云存力</h3>
+				<h3>{{goods.name}}</h3>
 				<div class="content">
 					<img src="../../../assets/img/goods1.png" alt="">
 					<div class="ctn-right">
-						<h4>F3 Filecoin 云存力</h4>
+						<h4>{{goods.name}}</h4>
 						<div>
-							<span>¥ 1,750</span>
+							<span>¥ {{goods.price}}</span>
 							<label>数量</label>
-							<van-stepper v-model="value" integer min="1" max="8" />
+							<van-stepper v-model="goods.buyAmount" integer min="1" :max="goods.remainAmount" />
 						</div>
 					</div>
 				</div>
-				<p><label>购买帐号</label><span>18292039003</span></p>
-				<h5><p><label>商品小计</label><span>¥ 1,750</span></p></h5>
+				<p><label>购买帐号</label><span>{{userInfo.phone}}</span></p>
+				<h5><p><label>商品小计</label><span>¥ {{$BigNumber(goods.price).times(goods.buyAmount)}}</span></p></h5>
 			</div>
 			<van-button type="primary" size="large" @click="pay">立即支付</van-button>
 		</div>
@@ -24,16 +24,25 @@
 </template>
 
 <script>
+import { mapState } from 'vuex'
 export default {
 	data() { 
 		return {
-			value: 1
+			value: 1,
+			goods: {}
 		}
+	},
+	created() {
+		this.goods = this.$route.query.goods
+		console.log(this.goods)
 	},
 	methods: {
 		pay() {
-			this.$router.push('/checkstand')
+			this.$router.replace('/checkstand?price=' + this.$BigNumber(this.goods.price).times(this.goods.buyAmount))
 		}
+	},
+	computed: {
+		...mapState(['userInfo','assetInfo'])
 	}
 }
 </script>

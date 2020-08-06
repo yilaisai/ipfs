@@ -1,19 +1,9 @@
 <template>
 	<div class="swiper-container banner-swiper-cpt" ref="bannerSwiper">
 		<div class="swiper-wrapper">
-			<div class="swiper-slide">
+			<div class="swiper-slide" v-for="(item,index) in list" :key="index">
 				<a href="javascript:;">
-					<img src="../../assets/img/banner.png" alt="">
-				</a>
-			</div>
-			<div class="swiper-slide">
-				<a href="javascript:;">
-					<img src="../../assets/img/banner.png" alt="">
-				</a>
-			</div>
-			<div class="swiper-slide">
-				<a href="javascript:;">
-					<img src="../../assets/img/banner.png" alt="">
+					<img :src="item.iconUrl" alt="">
 				</a>
 			</div>
 		</div>
@@ -24,6 +14,14 @@
 
 <script>
 export default {
+	props: {
+		list: {
+			type: Array,
+			default: () => {
+				return []
+			}
+		}
+	},
 	data() { 
 		return {
 			mySwiper: null
@@ -40,6 +38,13 @@ export default {
 				el: '.swiper-pagination',
 			}
 		})        
+	},
+	watch: {
+		list() {
+			setTimeout(() => {
+				this.mySwiper.update()
+			}, 200)
+		}
 	}
 }
 </script>

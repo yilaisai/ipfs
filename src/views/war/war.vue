@@ -3,11 +3,11 @@
 		<div class="header">商品列表</div>
 		<div class="main scroll-y">
 			<ul>
-				<li v-for="(item, index) in 10" :key="index">
+				<li v-for="(item, index) in list" :key="index">
 					<div class="name">
 						<img src="../../assets/img/icon/goods_logo.png" alt="">
 						<div>
-							<h3>F3 Filecoin 云存力 <i>限量发售</i></h3>
+							<h3>{{item.name}} <i>限量发售</i></h3>
 							<a href="javascript:;" @click="$router.push('/goodsDetails')">查看合约详情</a>
 						</div>
 					</div>
@@ -17,40 +17,40 @@
 								<label>发售存力</label>
 								<img src="../../assets/img/icon/fscl_icon.png" alt="">
 							</div>
-							<span>2,200 <sub>T</sub></span>
+							<span>{{item.saleAmount}} <sub>T</sub></span>
 						</div>
 						<div class="flex-wrap">
 							<div>
 								<label>托管机房</label>
 								<img src="../../assets/img/icon/tgjf_icon.png" alt="">
 							</div>
-							<p>T3+级别 IDC机房</p>
+							<p>{{item.address}}</p>
 						</div>
 						<div class="flex-wrap">
 							<div>
 								<label>剩余存力</label>
 								<img src="../../assets/img/icon/sycl_icon.png" alt="">
 							</div>
-							<span>2,200 <sub>T</sub></span>
+							<span>{{item.remainAmount}} <sub>T</sub></span>
 						</div>
 						<div class="flex-wrap">
 							<div>
 								<label>合约期限</label>
 								<img src="../../assets/img/icon/fscl_icon.png" alt="">
 							</div>
-							<span>16 <sub>个月</sub></span>
+							<span>{{item.proTime}} <sub>个月</sub></span>
 						</div>
 					</div>
 					<div class="buybar">
 						<div class="price">
-							<h4>现价 : 1750RMB/T</h4>
-							<s>原价 : 1889RMB/T</s>
+							<h4>现价 : {{item.price}}RMB/T</h4>
+							<s>原价 : {{item.orgPrice}}RMB/T</s>
 							<div>
 								<span>数量</span>
-								<van-stepper v-model="value" integer min="1" max="8" />
+								<van-stepper v-model="item.buyAmount" integer min="1" :max="item.remainAmount" />
 							</div>
 						</div>
-						<van-button type="primary" size="large" @click="$router.push('/confirmOrder')">立即购买</van-button>
+						<van-button type="primary" size="large" @click="$router.push({path: '/confirmOrder', query: {goods: item}})">立即购买</van-button>
 					</div>
 				</li>
 			</ul>
@@ -60,13 +60,16 @@
 
 <script>
 import { mapState } from 'vuex'
+import { getMinePros } from '@/api/request'
 export default {
 	data() { 
 		return {
-			value: 1
+			value: 1,
+			list: []
 		}
 	},
-	mounted() {
+	activated() {
+		this.getData()
 	},
 	methods: {
 		showHelp() {
@@ -76,6 +79,14 @@ export default {
 			}).then(() => {
 			});
 		},
+		getData() {
+			getMinePros().then(res => {
+				res.result.list.map(val => {
+					val.buyAmount = 1
+				})
+				this.list = res.result.list
+			})
+		}
 	},
 	computed: {
 		...mapState(['userInfo'])

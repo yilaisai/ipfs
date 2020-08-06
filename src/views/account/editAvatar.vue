@@ -11,7 +11,7 @@
 
 <script>
 import { mapState } from 'vuex'
-import { uploadFile, editUserIcon } from '@/api/request'
+import { uploadFile, editNickName } from '@/api/request'
 import lrz from 'lrz'
 export default {
 	data() { 
@@ -29,7 +29,7 @@ export default {
 				}
                 uploadFile(params).then(res=>{
 					console.log(res.result.urls[0])
-					editUserIcon({url: res.result.urls[0]}).then(res => {
+					editNickName({iconUrl: res.result.urls[0], type: 1}).then(res => {
 						this.$store.dispatch('getUserInfo')
 					})
                 })

@@ -4,17 +4,17 @@
 		<div class="main">
 			<h2>选择需要转移的合约</h2>
 			<div class="select-wrap">
-				<select>
-					<option value="F3">F3</option>
+				<select v-model="selected">
+					<option v-for="(item,index) in list" :key="index" :value="item">{{item.name}}</option>
 				</select>
 			</div>
-			<div class="flex-wrap">
+			<div class="flex-wrap" v-if="selected">
 				<div>
-					<span>1000 T</span>
+					<span>{{selected.isActive == 0 ? selected.tamount : 0}} T</span>
 					<label>未激活</label>
 				</div>
 				<div>
-					<span>1000 T</span>
+					<span>{{selected.isActive == 1 ? selected.tamount : 0}} T</span>
 					<label>已激活</label>
 				</div>
 			</div>
@@ -24,15 +24,26 @@
 </template>
 
 <script>
+import { getMyMinePro } from '@/api/request'
 export default {
 	data() { 
 		return {
-
+			list: [],
+			selected: null
 		}
+	},
+	mounted() {
+		getMyMinePro().then(res => {
+			this.list = res.result.list
+			this.selected = this.list[0]
+		})
 	},
 	methods: {
 		clickHandler() {
-			this.$router.push('/hashrateTransfer')
+			this.$router.push({
+				path: '/hashrateTransfer',
+				query: this.selected
+			})
 		}
 	}
 }

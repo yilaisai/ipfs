@@ -2,12 +2,12 @@
 	<div class="register-success scroll-y">
 		<img class="logo" src="../../../public/img/login_logo.png" alt="">
 		<h3>恭喜您，注册成功啦！</h3>
-		<h4>即刻下载APP，尽情航海！</h4>
+		<h4>现在下载 APP，更多精彩等着你！</h4>
 		<van-button type="primary" size="large" @click="download">立即下载 </van-button>
 		<p @click="$router.replace('/login')">继续体验web版</p>
-		<h5>扫码关注微信公众号</h5>
+		<!-- <h5>扫码关注微信公众号</h5>
 		<img class="qrcode" src="../../../public/img/wxgzh.png" alt="">
-		<p>你想要的教程，这里都有</p>
+		<p>你想要的教程，这里都有</p> -->
 	</div>
 </template>
 

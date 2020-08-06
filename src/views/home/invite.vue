@@ -1,8 +1,30 @@
 <template>
 	<div class="invite-page">
 		<HeaderBar color="transparent"></HeaderBar>
+		<div class="top">
+			<h3>买币不如挖矿</h3>
+			<p>明星可能不能拥有<br />但明星产品 Filecoin 可以</p>
+		</div>
 		<div class="main">
-			<p v-clipboard:copy="code" v-clipboard:success="onCopy" v-clipboard:error="onError">邀请码:{{code}}  <img src="../../../public/img/copy-icon02.png"></p>
+			<div class="content">
+				<h2>邀请好友</h2>
+				<p>团队存力越高，奖励越丰厚</p>
+				<div class="data">
+					<div>
+						<span>{{userInfo.teamNum}}</span>
+						<label>集群人数</label>
+					</div>
+					<div>
+						<span>{{userInfo.teamTAmount}} <sub>T</sub></span>
+						<label>集群存力</label>
+					</div>
+				</div>
+				<div class="invitecode" v-clipboard:copy="userInfo.inviteCode" v-clipboard:success="onCopy" v-clipboard:error="onError">
+					<label>我的邀请码</label>
+					<span>{{userInfo.inviteCode}}</span>
+					<img src="../../assets/img/icon/copy2.png">
+				</div>
+			</div>
 			<div class="btn" @click="$router.push('/inviteShare')">现在去邀请</div>
 		</div>
 		<van-dialog
@@ -17,6 +39,7 @@
 </template>
 <script>
 import vueQr from 'vue-qr'
+import { mapState } from 'vuex'
 export default {
 	components:{
 		vueQr
@@ -52,6 +75,9 @@ export default {
 			this.$toast('复制失败，请手动复制')
 		}
 	},
+	computed: {
+		...mapState(['userInfo'])
+	}
 }
 </script>
 <style lang="less" scoped>
@@ -66,16 +92,127 @@ export default {
 	background: -webkit-linear-gradient(top,  rgba(22,213,228,1) 0%,rgba(66,193,202,1) 100%); /* Chrome10-25,Safari5.1-6 */
 	background: linear-gradient(to bottom,  rgba(22,213,228,1) 0%,rgba(66,193,202,1) 100%); /* W3C, IE10+, FF16+, Chrome26+, Opera12+, Safari7+ */
 	filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#16d5e4', endColorstr='#42c1ca',GradientType=0 ); /* IE6-9 */
+	.top {
+		position: absolute;
+		top: 0;
+		left: 0;
+		width: 100%;
+		height: 6rem;
+		background: url(../../assets/img/bg/bg8.png) no-repeat center;
+		background-size: 100% 100%;
+		h3 {
+			font-size: .56rem;
+			color: #FFDE78;
+			margin: 1rem 0 0 .4rem;
+		}
+		p {
+			color: #E5F4FF;
+			font-size: .4rem;
+			margin: .2rem .4rem;
+			font-weight: 500;
+		}
+	}
 	.main{
 		position: absolute;
 		left: 0;
-		bottom: 1rem;
+		bottom: .9rem;
 		width: 100%;
 		flex: 1;
 		overflow: hidden;
 		overflow-y: scroll;
 		-webkit-overflow-scrolling: touch;
 		box-sizing: border-box;
+		.content {
+			background: url(../../assets/img/bg/bg9.png) no-repeat center;
+			background-size: 100% 100%;
+			width: 86%;
+			margin: 0 auto;
+			text-align: center;
+			overflow: hidden;
+			padding: 0 .4rem .6rem;
+			p {
+				font-size: .28rem;
+				color: #646464;
+			}
+			h2 {
+				font-size: .32rem;
+				line-height: .32rem;
+				margin: .4rem 0 .3rem;
+				&::before {
+					display: inline-block;
+					content: '';
+					width: .62rem;
+					height: .32rem;
+					background: url(../../assets/img/img1.png) no-repeat center;
+					background-size: 100% 100%;
+					vertical-align: middle;
+					margin-right: .2rem;
+				}
+				&::after {
+					display: inline-block;
+					content: '';
+					width: .62rem;
+					height: .32rem;
+					background: url(../../assets/img/img1.png) no-repeat center;
+					background-size: 100% 100%;
+					vertical-align: middle;
+					transform: rotateY(180deg);
+					margin-left: .2rem;
+				}
+			}
+			.data {
+				display: flex;
+				justify-content: space-between;
+				margin-top: .3rem;
+				div {
+					background-color: #F6F9FC;
+					width: 2.75rem;
+					padding: .3rem 0;
+					border-radius: .16rem;
+					span {
+						display: block;
+						color: #000000;
+						font-size: .36rem;
+						font-weight: bold;
+						sub {
+							vertical-align: baseline;
+							font-size:0.24rem;
+						}
+					}
+					label {
+						font-size:0.24rem;
+						font-family:PingFang-SC-Medium,PingFang-SC;
+						font-weight:500;
+						color:rgba(150,150,150,1);
+						line-height:0.24rem;
+					}
+				}
+			}
+			.invitecode {
+				display: flex;
+				align-items: center;
+				background:rgba(246,249,252,1);
+				border-radius:0.12rem;
+				margin-top: .2rem;
+				height:0.96rem;
+				font-size:0.32rem;
+				label {
+					margin: 0 .6rem 0 .3rem;
+				}
+				span {
+					flex: 1;
+					font-weight:600;
+					color: #000;
+					border-right: 1px solid #D1DBE5;
+					text-align: left;
+				}
+				img {
+					width: .32rem;
+					height: .32rem;
+					margin: 0 .3rem;
+				}
+			}
+		}
 		&>p{
 			display: block;
 			width: 2rem;
@@ -104,7 +241,7 @@ export default {
 			font-weight: 500;
 			background: #FFDE78;
 			margin: 0 auto;
-			margin-top: 3.17rem;
+			margin-top: .6rem;
 			border-radius: .12rem;
 			font-weight: 700;
 		}

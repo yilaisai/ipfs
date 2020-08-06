@@ -2,32 +2,33 @@
 	<div class="transfer-page">
 		<div class="header">
 			<div class="tab">
-				<a href="javascript:;" class="active">未激活</a>
-				<a href="javascript:;">已激活</a>
+				<a href="javascript:;" :class="{'active' : !isActive}" @click="isActive = false">未激活</a>
+				<a href="javascript:;" :class="{'active' : isActive}" @click="isActive = true">已激活</a>
 			</div>
 			<a href="javascript:;" class="back" @click="$router.goBack(-1)"></a>
 		</div>
 		<div class="main scroll-y">
 			<div class="form-wrap">
 				<div class="total">
-					<label>未激活算力</label>
-					<span>2,200 <sub>T</sub></span>
+					<label v-show="!isActive">未激活存力</label>
+					<label v-show="isActive">已激活存力</label>
+					<span>{{total}} <sub>T</sub></span>
 				</div>
 				<div class="form">
 					<div class="input-wrap">
 						<label>转移数量</label>
-						<van-field v-model.trim="code" type="text" placeholder="请输入转移数量" clearable></van-field>
+						<van-field v-model.trim="amount" type="number" placeholder="请输入转移数量" clearable></van-field>
 						<div class="other">
-							<p>可转移: <span>2,200</span> T</p>
+							<p>可转移: <span>{{total}}</span> T</p>
 						</div>
 					</div>
 					<div class="input-wrap">
 						<label>转移账号</label>
-						<van-field v-model.trim="code" type="text" placeholder="请输入转移账号" clearable></van-field>
+						<van-field v-model.trim="phone" type="text" placeholder="请输入转移账号" clearable></van-field>
 					</div>
 					<div class="input-wrap">
 						<label>资金密码</label>
-						<van-field v-model.trim="code" type="text" placeholder="请输入资金密码" clearable></van-field>
+						<van-field v-model.trim="fundPwd" type="password" placeholder="请输入资金密码" clearable></van-field>
 					</div>
 					<div class="input-wrap">
 						<van-field v-model.trim="code" type="text" placeholder="请输入短信验证码" clearable>
@@ -44,16 +45,16 @@
 			<div class="content">
 				<ul>
 					<li>
-						<label>合约名称</label><span>F3+</span>
+						<label>合约名称</label><span>{{$route.query.name}}</span>
 					</li>
 					<li>
-						<label>存力状态</label><span>未激活</span>
+						<label>存力状态</label><span>{{$route.query.isActive == 0 ? '未激活' : '已激活'}}</span>
 					</li>
 					<li>
-						<label>转移数量</label><span>100 T</span>
+						<label>转移数量</label><span>{{amount}} T</span>
 					</li>
 					<li>
-						<label>转移帐号</label><span>17695949859</span>
+						<label>转移帐号</label><span>{{phone}}</span>
 					</li>
 				</ul>
 				<p>存力转移后立即生效，确认转移存力吗？</p>
@@ -68,29 +69,87 @@
 
 <script>
 import CountDownBtn from '@/components/common/countDownBtn'
-import { getCaptcha } from '@/api/request'
+import { getCaptchaPhone2, transMine } from '@/api/request'
+import { mapState } from 'vuex'
+import Md5 from 'js-md5'
 export default {
 	data() { 
 		return {
 			code: '',
+			fundPwd: '',
+			phone: '',
+			amount: '',
 			btnDisabled: false,
 			show: false,
-			captcha: ''
+			isActive: false,
 		}
 	},
 	methods: {
 		getCaptcha() {
 			this.btnDisabled = true
-			getCaptcha({type: 3}).then(res => {
+			getCaptchaPhone2({
+				phone: this.userInfo.phone,
+				areaCode: this.userInfo.phoneArea,
+				type: 'TRADE_AMOUNT'
+			}).then(res => {
 				this.$toast.success(res.msg)
 			}).catch(err => {
 				this.btnDisabled = false
 			})
 		},
 		clickHandler() {
+			if(this.amount == '') {
+				this.$toast('请输入转移数量')
+				return
+			}
+			if(this.amount > this.total) {
+				this.$toast('存力不足')
+				return
+			}
+			if(this.phone == '') {
+				this.$toast('请输入转移帐号')
+				return
+			}
+			if(this.fundPwd == '') {
+				this.$toast('请输入资金密码')
+				return
+			}
+			if(this.code == '') {
+				this.$toast('请输入短信验证码')
+				return
+			}
 			this.show = true
 		},
-		pay() {}
+		pay() {
+			transMine({
+				code: this.code,
+				fundPwd: Md5(this.fundPwd),
+				proId: this.$route.query.id,
+				tamount: this.amount
+			}).then(res => {
+				this.$toast.success(res.msg)
+				this.$store.dispatch('getUserInfo')
+				this.$router.goBack(-2)
+			})
+		}
+	},
+	computed: {
+		total() {
+			if(this.isActive) {
+				if(this.$route.query.isActive == 1) {
+					return this.$route.query.tamount
+				}else {
+					return 0
+				}
+			}else {
+				if(this.$route.query.isActive == 0) {
+					return this.$route.query.tamount
+				}else {
+					return 0
+				}
+			}
+		},
+		...mapState(['userInfo'])
 	},
 	components: {
 		CountDownBtn

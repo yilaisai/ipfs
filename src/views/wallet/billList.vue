@@ -12,7 +12,7 @@
 		<van-list
 			v-model="loading"
 			:finished="finished"
-			finished-text="没有更多了"
+			:finished-text="list.length > 0 ? '没有更多了' : ''"
 			@load="onLoad"
 			class="scroll-y"
 			ref="vanList">
@@ -27,6 +27,7 @@
 					<p>时间 : 2020-08-03 14:29:43</p>
 				</li>
 			</ul>
+			<van-empty v-if="list.length == 0 && finished" description="暂无记录" />
 		</van-list>
 
 		<!-- 筛选 -->

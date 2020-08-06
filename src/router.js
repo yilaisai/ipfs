@@ -62,7 +62,7 @@ const router =  new Router({
 			path: "/login",
 			name: "login",
 			meta: { isRoot: true },
-			component: () => import("./views/account/login")
+			component: () => import("./views/account/loginRegister")
 		},
 		{
 			path: "/assets",
@@ -160,18 +160,18 @@ const router =  new Router({
 			component: () => import("./views/home/rankings")
 		},
 		{
-			path: "/hashrate",  //算力
+			path: "/hashrate",  //存力
 			name: "hashrate",
 			meta: { statusBar: '#42C1CA' },
 			component: () => import("./views/wallet/hashrate/index")
 		},
 		{
-			path: "/transferSelect",  //算力转移选择产品
+			path: "/transferSelect",  //存力转移选择产品
 			name: "transferSelect",
 			component: () => import("./views/wallet/hashrate/transferSelect")
 		},
 		{
-			path: "/hashrateTransfer",  //算力转移选择产品
+			path: "/hashrateTransfer",  //存力转移选择产品
 			name: "hashrateTransfer",
 			meta: { statusBar: '#42C1CA' },
 			component: () => import("./views/wallet/hashrate/transfer")

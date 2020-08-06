@@ -27,7 +27,7 @@
 							<div class="flex-wrap">
 								<div class="nickname">
 									<h3><img class="avatar" :src="userInfo.iconUrl" alt=""> 一起挖矿  机会多多</h3>
-									<p>邀请码 <a href="javascript:;">DMDIELS</a></p>
+									<p>邀请码 <a href="javascript:;">{{userInfo.inviteCode}}</a></p>
 								</div>
 								<vue-qr class="qrcode" :text="registerPagePath + userInfo.inviteCode" :margin="0"></vue-qr>
 							</div>
@@ -77,7 +77,7 @@ export default {
 	data(){
 		return {
 			code: localStorage.getItem('inviteCode'),
-			registerPagePath: window.INVITE_URL + '/#/register?code=',
+			registerPagePath: window.INVITE_URL + '/#/login?type=register&code=',
 			dataURL: '',
 			active: 0,
 			show: true,

@@ -11,7 +11,7 @@
 		<van-list
 			v-model="loading"
 			:finished="finished"
-			finished-text="没有更多了"
+			:finished-text="list.length > 0 ? '没有更多了' : ''"
 			@load="onLoad"
 			class="scroll-y"
 			ref="vanList">
@@ -22,6 +22,7 @@
 					<span :class="{'red' : item.transType == 1}">{{item.transType == 1 ? '-' : '+'}}{{item.transType == 2 ? $BigNumber(item.amount).minus(item.fee) : item.amount}}</span>
 				</li>
 			</ul>
+			<van-empty v-if="list.length == 0 && finished" description="暂无订单" />
 		</van-list>
 
 		<!-- 筛选 -->
@@ -64,6 +65,8 @@ export default {
 	},
 	methods: {
 		onLoad() {
+			this.finished = true
+			return
 			// 异步更新数据
 			transferList({
 				transType: this.optType,

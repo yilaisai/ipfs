@@ -3,38 +3,39 @@
 		<div class="main">
 			<div class="banner">
 				<img class="logo" src="../../assets/img/logo.png" alt="">
-				<BannerSwiper />
+				<BannerSwiper :list="bannerList" />
 				<!-- 滚动公告 -->
 				<van-notice-bar
 					v-if="noticeText"
 					:text="noticeText"
 					color="#333"
-					scrollable 
-					@click.native="$router.push('/noticeDetails?id=' + noticeId)">
+					scrollable>
 					<img slot="left-icon" src="../../../public/img/home/broadcast_icon.png" alt="">
 				</van-notice-bar>
 			</div>
 			<ul class="list">
-				<li v-for="(item,index) in 2" :key="index">
-					<h2>F3+ Filecoin 云算力</h2>
+				<li v-for="(item,index) in list" :key="index">
+					<h2>{{item.name}}</h2>
 					<p>
-						<span>总存力：10,000T</span>
-						<span>剩余存力：1,000T</span>
-						<span>合约期限：16个月</span>
+						<span>总存力：{{$BigNumber(item.remainAmount).plus(item.saleAmount)}}T</span>
+						<span>剩余存力：{{item.remainAmount}}T</span>
+						<span>合约期限：{{item.proTime}}个月</span>
 					</p>
-					<s>原价：1990 RMB/T</s>
-					<h3>现价：1750 RMB/T</h3>
-					<van-button type="primary" size="large" @click="pay">立即购买</van-button>
+					<s>原价：{{item.orgPrice}} RMB/T</s>
+					<h3>现价：{{item.price}} RMB/T</h3>
+					<van-button type="primary" size="large" @click="$router.push({path: '/confirmOrder', query: {goods: item}})">立即购买</van-button>
 				</li>
 			</ul>
+			<Products />
 		</div>
 	</div>
 </template>
 
 <script>
 import { mapState } from 'vuex'
-import { getUserTeamSumGun, userActive, getNoticeList, boatInfo } from '@/api/request'
+import { getBannersAndNotices, getMinePros } from '@/api/request'
 import BannerSwiper from '@/components/common/bannerSwiper'
+import Products from './components/products'
 export default {
 	data() { 
 		return {
@@ -43,30 +44,23 @@ export default {
 			list: [],
 			loading: false, //是否在加载中
 			finished: false, //是否加载完所有数据
-			noticeText: '星际云开放场外交易，即日起新老用户完成首笔交易即…',
+			noticeText: '',
 			noticeId: '',
 			totalReadNotice: 0,
 			totalNotice: 0,
+			bannerList: []
 		}
-	},
-	created() {
-	},
-	mounted() {
-		getNoticeList({
-			pageNum: 1,
-			pageSize: 1
-		}).then(res => {
-			this.totalNotice = res.result.total
-			if(res.result.list.length <= 0) return
-			this.noticeText = res.result.list[0].title
-			this.noticeId = res.result.list[0].id
-		})
-		boatInfo().then(res => {
-			this.shipInfo = res.result
-		})
 	},
 	activated() {
 		this.$store.dispatch('getUserInfo')
+		this.getData()
+		getBannersAndNotices().then(res => {
+			console.log(res)
+			this.bannerList = res.result.banners
+			if(res.result.noticeInfos.length > 0) {
+				this.noticeText = res.result.noticeInfos[0].content
+			}
+		})
 	},
 	methods: {
 		clickHandler() {
@@ -95,13 +89,22 @@ export default {
 		},
 		pay() {
 			this.$router.push('/confirmOrder')
+		},
+		getData() {
+			getMinePros().then(res => {
+				res.result.list.map(val => {
+					val.buyAmount = 1
+				})
+				this.list = res.result.list
+			})
 		}
 	},
 	computed: {
 		...mapState(['userInfo'])
 	},
 	components: {
-		BannerSwiper
+		BannerSwiper,
+		Products
 	}
 }
 </script>
@@ -137,6 +140,7 @@ export default {
 		}
 		.list {
 			display: flex;
+			flex-wrap: wrap;
 			justify-content: space-between;
 			padding: 0 .3rem;
 			li {
