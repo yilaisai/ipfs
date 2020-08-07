@@ -1,12 +1,12 @@
 <template>
 	<div class="order_list-page">
-		<HeaderBar title="存力激活记录">
+		<HeaderBar title="合约激活记录">
 			<!-- <a href="javascript:;" class="filter" @click="isShowFilter = !isShowFilter"></a> -->
 		</HeaderBar>
 		<div class="thead">
-			<span>存力</span>
 			<span>合约名称</span>
-			<span>合约详情</span>
+			<span>合约编号</span>
+			<span>持有存力</span>
 			<span>状态</span>
 		</div>
 		<van-list
@@ -19,9 +19,9 @@
 			<ul class="list">
 				<li v-for="(item,key) in list" :key="key">
 					<div>
-						<span>+{{item.tamount}} T</span>
 						<span>{{item.name}}</span>
 						<span>{{item.id}}</span>
+						<span>{{item.tamount}} T</span>
 						<span>已激活</span>
 					</div>
 					<p>时间 : {{$fmtDate( item.activeTimeStamp, 'full')}}</p>
@@ -166,15 +166,15 @@ export default {
 				span {
 					flex: 1;
 					&:nth-child(1) {
-						font-weight: 600;
-						color: #42C1CA;
-						font-size: .36rem;
 					}
 					&:nth-child(2) {
 						text-align: left;
 					}
 					&:nth-child(3) {
 						text-align: center;
+						font-weight: 600;
+						color: #42C1CA;
+						font-size: .36rem;
 					}
 					&:nth-child(4) {
 						text-align: right;

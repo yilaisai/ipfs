@@ -44,11 +44,11 @@
 					<span>存力激活记录</span>
 					<i></i>
 				</li>
-				<li @click="$router.push('/orderList')">
+				<!-- <li @click="$router.push('/orderList')">
 					<img src="../../assets/img/icon/order_icon.png" alt="">
 					<span>我的订单</span>
 					<i></i>
-				</li>
+				</li> -->
 				<!-- <li @click="$router.push('/notice')">
 					<img src="../../../public/img/message_icon.png" alt="">
 					<span :class="{'dot' : totalNotice > totalReadNotice}">消息中心</span>
