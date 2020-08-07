@@ -213,3 +213,7 @@ export function boatInfo(data) {
 export function transMine(data) {
 	return $http.postFormData('/app/user/transMine', data)
 }
+//算力转移记录
+export function getMineRecdList(data) {
+	return $http.postFormData('/app/user/getMineRecdList', data)
+}

@@ -17,14 +17,14 @@
 			class="scroll-y"
 			ref="vanList">
 			<ul class="list">
-				<li v-for="(item,key) in list" :key="key" @click="$router.push({path: '/billDetails', query: {data: item}})">
+				<li v-for="(item,key) in list" :key="key">
 					<div>
-						<span>+1000 T</span>
-						<span>F3+</span>
-						<span>000001</span>
+						<span>+{{item.tamount}} T</span>
+						<span>{{item.name}}</span>
+						<span>{{item.id}}</span>
 						<span>已激活</span>
 					</div>
-					<p>时间 : 2020-08-03 14:29:43</p>
+					<p>时间 : {{$fmtDate( item.activeTime, 'full')}}</p>
 				</li>
 			</ul>
 			<van-empty v-if="list.length == 0 && finished" description="暂无记录" />
@@ -49,7 +49,7 @@
 
 <script>
 import DropdownMenu from '@/components/common/dropdownMenu.vue'
-import { userCoinChange } from '@/api/request'
+import { getMyMinePro } from '@/api/request'
 export default {
 	data() {
 		return {
@@ -74,8 +74,8 @@ export default {
 	methods: {
 		onLoad() {
 			// 异步更新数据
-			userCoinChange({
-				optType: this.optType,
+			getMyMinePro({
+				isActive: 1,
 				pageNum: this.pageNum,
 				pageSize: 30
 			}).then(res => {

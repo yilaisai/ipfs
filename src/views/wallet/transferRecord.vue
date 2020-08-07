@@ -13,54 +13,57 @@
 				<ul>
 					<li v-for="(item,key) in list0" :key="key">
 						<div>
-							<h3>+1000 <sub>T</sub></h3>
-							<span>来自 系统账户</span>
+							<h3 :class="{'red' : item.subOrAdd != 1}">{{item.subOrAdd == 1 ? '+' : '-'}}{{item.tamount}} <sub>T</sub></h3>
+							<span>来自 {{item.fromPhone}}</span>
 						</div>
 						<div>
-							<span>F3+</span>
-							<span>000001</span>
+							<span>{{item.name}}</span>
+							<span>{{item.id}}</span>
 						</div>
 						<div>
-							<span>未激活</span>
-							<p>时间 : 2020-08-03 14:29:43</p>
+							<span>{{item.isActive == 0 ? '未激活' : '已激活'}}</span>
+							<p>时间 : {{$fmtDate(item.createTimeStamp, 'full')}}</p>
 						</div>
 					</li>
+					<van-empty v-if="list0.length == 0" description="暂无记录" />
 				</ul>
 			</van-tab>
 			<van-tab title="转入">
 				<ul>
 					<li v-for="(item,key) in list1" :key="key">
 						<div>
-							<h3>+1000 <sub>T</sub></h3>
-							<span>来自 系统账户</span>
+							<h3 :class="{'red' : item.subOrAdd != 1}">{{item.subOrAdd == 1 ? '+' : '-'}}{{item.tamount}} <sub>T</sub></h3>
+							<span>来自 {{item.fromPhone}}</span>
 						</div>
 						<div>
-							<span>F3+</span>
-							<span>000001</span>
+							<span>{{item.name}}</span>
+							<span>{{item.id}}</span>
 						</div>
 						<div>
-							<span>未激活</span>
-							<p>时间 : 2020-08-03 14:29:43</p>
+							<span>{{item.isActive == 0 ? '未激活' : '已激活'}}</span>
+							<p>时间 : {{$fmtDate(item.createTimeStamp, 'full')}}</p>
 						</div>
 					</li>
+					<van-empty v-if="list1.length == 0" description="暂无记录" />
 				</ul>
 			</van-tab>
 			<van-tab title="转出">
 				<ul>
 					<li v-for="(item,key) in list2" :key="key">
 						<div>
-							<h3>+1000 <sub>T</sub></h3>
-							<span>来自 系统账户</span>
+							<h3 :class="{'red' : item.subOrAdd != 1}">{{item.subOrAdd == 1 ? '+' : '-'}}{{item.tamount}} <sub>T</sub></h3>
+							<span>来自 {{item.fromPhone}}</span>
 						</div>
 						<div>
-							<span>F3+</span>
-							<span>000001</span>
+							<span>{{item.name}}</span>
+							<span>{{item.id}}</span>
 						</div>
 						<div>
-							<span>未激活</span>
-							<p>时间 : 2020-08-03 14:29:43</p>
+							<span>{{item.isActive == 0 ? '未激活' : '已激活'}}</span>
+							<p>时间 : {{$fmtDate(item.createTimeStamp, 'full')}}</p>
 						</div>
 					</li>
+					<van-empty v-if="list2.length == 0" description="暂无记录" />
 				</ul>
 			</van-tab>
 		</van-tabs>
@@ -68,14 +71,16 @@
 </template>
 
 <script>
-import { findCrews } from '@/api/request'
+import { getMineRecdList } from '@/api/request'
 export default {
 	data() { 
 		return {
 			active: 0,
 			list0: [],
 			list1: [],
-			list2: []
+			list2: [],
+			pageNum: 1,
+			pageSize: 1000
 		}
 	},
 	mounted() {
@@ -90,8 +95,12 @@ export default {
 			});
 		},
 		getData(type) {
-			findCrews({type}).then(res => {
-				this['list' + type] = res.result
+			getMineRecdList({
+				type,
+				pageNum: this.pageNum,
+				pageSize: this.pageSize
+			}).then(res => {
+				this['list' + type] = res.result.list
 			}) 
 		}
 	}
@@ -148,6 +157,9 @@ export default {
 								color: #42C1CA;
 								sub {
 									vertical-align: baseline;
+								}
+								&.red {
+									color: #FF0400;
 								}
 							}
 							p {

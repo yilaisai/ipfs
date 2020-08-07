@@ -8,7 +8,7 @@
 						<img src="../../assets/img/icon/goods_logo.png" alt="">
 						<div>
 							<h3>{{item.name}} <i>限量发售</i></h3>
-							<a href="javascript:;" @click="$router.push('/goodsDetails')">查看合约详情</a>
+							<a href="javascript:;" @click="$router.push({path: '/goodsDetails', query: {goods: item}})">查看合约详情</a>
 						</div>
 					</div>
 					<div class="details">

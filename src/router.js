@@ -36,6 +36,12 @@ const router =  new Router({
 					component: () => import('@/views/war/war')
 				},
 				{
+					path: '/earnings',
+					name: 'earnings',
+					meta: { isLogin: true, statusBar: '#ffffff', isRoot: true },
+					component: () => import('@/views/wallet/earnings')
+				},
+				{
 					path: '/my',
 					name: 'my',
 					meta: { isLogin: true, statusBar: '#4FD3DC', isRoot: true },

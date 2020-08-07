@@ -19,7 +19,7 @@ export default {
 		return {
 			isQuit: false,
 			isShowLoading: false,
-			keepAlive: ['buyShip','index', 'login']
+			keepAlive: ['buyShip','index', 'login', 'goodsDetails']
 		}
 	},
 	computed: {

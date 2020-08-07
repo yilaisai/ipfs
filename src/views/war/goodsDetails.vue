@@ -1,6 +1,6 @@
 <template>
 	<div class="goods-detaild-page">
-		<HeaderBar title="F3 Filecoin 云存力(限量发售)" :shadow="true"></HeaderBar>
+		<HeaderBar :title="goods.name" :shadow="true"></HeaderBar>
 		<div class="main scroll-y">
 			<div class="goods">
 				<div class="details">
@@ -9,40 +9,40 @@
 							<label>发售存力</label>
 							<img src="../../assets/img/icon/fscl_icon.png" alt="">
 						</div>
-						<span>2,200 <sub>T</sub></span>
+						<span>{{goods.saleAmount}} <sub>T</sub></span>
 					</div>
 					<div class="flex-wrap">
 						<div>
 							<label>托管机房</label>
 							<img src="../../assets/img/icon/tgjf_icon.png" alt="">
 						</div>
-						<p>T3+级别 IDC机房</p>
+						<p>{{goods.address}}</p>
 					</div>
 					<div class="flex-wrap">
 						<div>
 							<label>剩余存力</label>
 							<img src="../../assets/img/icon/sycl_icon.png" alt="">
 						</div>
-						<span>2,200 <sub>T</sub></span>
+						<span>{{goods.remainAmount}} <sub>T</sub></span>
 					</div>
 					<div class="flex-wrap">
 						<div>
 							<label>合约期限</label>
 							<img src="../../assets/img/icon/fscl_icon.png" alt="">
 						</div>
-						<span>16 <sub>个月</sub></span>
+						<span>{{goods.proTime}} <sub>个月</sub></span>
 					</div>
 				</div>
 				<div class="buybar">
 					<div class="price">
-						<h4>现价 : 1750RMB/T</h4>
-						<s>原价 : 1889RMB/T</s>
+						<h4>现价 : {{goods.price}}RMB/T</h4>
+							<s>原价 : {{goods.orgPrice}}RMB/T</s>
 						<div>
 							<span>数量</span>
-							<van-stepper v-model="value" integer min="1" max="8" />
+							<van-stepper v-model="goods.buyAmount" integer min="1" :max="goods.remainAmount" />
 						</div>
 					</div>
-					<van-button type="primary" size="large" @click="pay">立即购买</van-button>
+					<van-button type="primary" size="large" @click="$router.push({path: '/confirmOrder', query: {goods: goods}})">立即购买</van-button>
 				</div>
 			</div>
 			<div class="text-details">
@@ -66,9 +66,15 @@
 
 <script>
 export default {
+	name: 'goodsDetails',
 	data() { 
 		return {
-
+			goods: null
+		}
+	},
+	activated() {
+		if(typeof this.$route.query.goods == 'object') {
+			this.goods = this.$route.query.goods
 		}
 	}
 }
