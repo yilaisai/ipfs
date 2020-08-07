@@ -26,25 +26,25 @@ const router =  new Router({
 				{
 					path: '/home',
 					name: 'home',
-					meta: { isLogin: true, statusBar: '#4FD3DC', isRoot: true },
+					meta: { isLogin: true, statusBar: '#5DD5DD', isRoot: true },
 					component: () => import('@/views/home/home')
 				},
 				{
 					path: '/war',
 					name: 'war',
-					meta: { isLogin: true, statusBar: '#ffffff', isRoot: true },
+					meta: { isLogin: true, isRoot: true },
 					component: () => import('@/views/war/war')
 				},
 				{
 					path: '/earnings',
 					name: 'earnings',
-					meta: { isLogin: true, statusBar: '#ffffff', isRoot: true },
+					meta: { isLogin: true, isRoot: true },
 					component: () => import('@/views/wallet/earnings')
 				},
 				{
 					path: '/my',
 					name: 'my',
-					meta: { isLogin: true, statusBar: '#4FD3DC', isRoot: true },
+					meta: { isLogin: true, statusBar: '#5DD5DD', isRoot: true },
 					component: () => import('@/views/my/my')
 				}
 			]
@@ -67,7 +67,7 @@ const router =  new Router({
 		{
 			path: "/login",
 			name: "login",
-			meta: { isRoot: true },
+			meta: { isRoot: true, statusBar: '#42C1CA' },
 			component: () => import("./views/account/loginRegister")
 		},
 		{

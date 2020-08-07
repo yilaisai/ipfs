@@ -24,7 +24,7 @@
 						<span>{{item.id}}</span>
 						<span>已激活</span>
 					</div>
-					<p>时间 : {{$fmtDate( item.activeTime, 'full')}}</p>
+					<p>时间 : {{$fmtDate( item.activeTimeStamp, 'full')}}</p>
 				</li>
 			</ul>
 			<van-empty v-if="list.length == 0 && finished" description="暂无记录" />

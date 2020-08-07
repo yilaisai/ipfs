@@ -158,6 +158,7 @@ export default {
 		padding: 0 .35rem 0 .16rem;;
 		line-height: .34rem;
 		border-radius: .17rem;
+		font-size: .22rem;
 		i {
 			position: absolute;
 			top: .1rem;

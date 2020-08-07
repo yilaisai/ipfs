@@ -7,7 +7,7 @@
 					<div class="name">
 						<img src="../../assets/img/icon/goods_logo.png" alt="">
 						<div>
-							<h3>{{item.name}} <i>限量发售</i></h3>
+							<h3><span>{{item.name}}</span> <i>限量发售</i></h3>
 							<a href="javascript:;" @click="$router.push({path: '/goodsDetails', query: {goods: item}})">查看合约详情</a>
 						</div>
 					</div>
@@ -132,7 +132,13 @@ export default {
 					div {
 						flex: 1;
 						h3 {
+							display: flex;
+							align-items: center;
 							font-size: .34rem;
+							span {
+								line-height: .34rem;
+								margin-right: .1rem;
+							}
 							i {
 								display: inline-block;
 								color: #FA6400;

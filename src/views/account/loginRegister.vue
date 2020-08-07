@@ -39,7 +39,7 @@
 					<div class="flex-wrap">
 						<input type="password" v-model.trim="formData.loginPwd1" :disabled="$route.query.code" placeholder="请输入密码">
 					</div>
-					<p class="tips">密码为8～16位，须包含数字及大小写字母</p>
+					<p class="tips">密码为6～18位，数字及大小写字母</p>
 				</div>
 				<div class="input-item">
 					<div class="flex-wrap">
