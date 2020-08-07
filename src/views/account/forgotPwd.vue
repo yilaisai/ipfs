@@ -78,9 +78,9 @@ export default {
 			}
 			this.btnDisabled = true
 			getCaptchaPhone({
-				area: this.formData.prefix,
+				areaCode: this.formData.prefix,
 				phone: this.formData.phone,
-				type: 1
+				type: 'FORGET_PASSWORD'
 			}).then(res => {
 				this.$toast.success(res.msg)
 			}).catch(err => {
