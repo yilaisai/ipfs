@@ -34,7 +34,7 @@
 			<h2 v-show="payType == 2">请联系客服确认支付款项，谢谢！</h2>
 			<div class="form" v-show="payType == 2">
 				<div class="form-item">
-					<label><img src="../../../assets/img/icon/email.png" alt="">邮箱</label>
+					<label><img src="../../../assets/img/icon/email.png" alt="">联系方式</label>
 					<div class="input-wrap">
 						<p>{{userInfo.connectEmail}}</p>
 						<a
