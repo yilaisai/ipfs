@@ -211,7 +211,7 @@ export function boatInfo(data) {
 }
 //转移合约
 export function transMine(data) {
-	return $http.postFormData('/app/user/transMine', data)
+	return $http.post('/app/user/transMine', data)
 }
 //算力转移记录
 export function getMineRecdList(data) {
