@@ -41,7 +41,7 @@
 				</li>
 				<li @click="$router.push('/billList')">
 					<img src="../../assets/img/icon/jhjl_icon.png" alt="">
-					<span>存力激活记录</span>
+					<span>合约激活记录</span>
 					<i></i>
 				</li>
 				<!-- <li @click="$router.push('/orderList')">

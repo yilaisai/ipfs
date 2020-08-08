@@ -2,12 +2,12 @@ if(window.location.href.indexOf('supercards.io') >= 0 || window.location.href.in
 	// window.SERVER_PATH = "http://192.168.120.53:7011"
 	window.SERVER_PATH = "https://api.supercards.io"
 	window.INVITE_URL = "https://web.supercards.io"
-}else if(window.location.href.indexOf('travel-around.world') >= 0) {
-	window.SERVER_PATH = "https://api.supercards.io"
-	window.INVITE_URL = "https://web.supercards.io"
+}else if(window.location.href.indexOf('ipfs1606.com') >= 0) {
+	window.SERVER_PATH = "https://api.ipfs1606.com"
+	window.INVITE_URL = "https://web.ipfs1606.com"
 }else {
-	window.SERVER_PATH = "https://api.supercards.io"
-	window.INVITE_URL = "https://web.supercards.io"
+	window.SERVER_PATH = "https://api.ipfs1606.com"
+	window.INVITE_URL = "https://web.ipfs1606.com"
 }
 
 //h5版本号
