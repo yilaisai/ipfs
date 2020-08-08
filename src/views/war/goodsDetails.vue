@@ -9,7 +9,7 @@
 							<label>发售存力</label>
 							<img src="../../assets/img/icon/fscl_icon.png" alt="">
 						</div>
-						<span>{{goods.saleAmount}} <sub>T</sub></span>
+						<span>{{goods.tAmount}} <sub>T</sub></span>
 					</div>
 					<div class="flex-wrap">
 						<div>
