@@ -326,7 +326,9 @@ export default {
 					background-color: transparent;
 					border: none;
 					border-radius: 0;
+					overflow: hidden;
 					input {
+						overflow: hidden;
 						background-color: #F6F9FC;
 						margin-right: .2rem;
 						border: 1px solid #F6F6F6;

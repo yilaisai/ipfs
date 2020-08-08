@@ -285,6 +285,8 @@ router.beforeEach((to, from, next) => {
 					
 			// })
 			next({path: "login?back=1"})
+			h5Plus.setStatusBarBackground('#42C1CA')
+			h5Plus.setStatusBarStyle("light")
 		} else {
 			next(true);
 		}
