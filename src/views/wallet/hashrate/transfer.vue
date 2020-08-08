@@ -17,7 +17,7 @@
 				<div class="form">
 					<div class="input-wrap">
 						<label>转移数量</label>
-						<van-field v-model.trim="amount" type="number" placeholder="请输入转移数量" clearable></van-field>
+						<van-field v-model.trim.number="amount" type="number" placeholder="请输入转移数量" clearable></van-field>
 						<div class="other">
 							<p>可转移: <span>{{total}}</span> T</p>
 						</div>
@@ -102,7 +102,7 @@ export default {
 				this.$toast('请输入转移数量')
 				return
 			}
-			if(this.amount > this.total) {
+			if(Number(this.amount) > Number(this.total)) {
 				this.$toast('存力不足')
 				return
 			}
