@@ -123,6 +123,7 @@ export default {
 		pay() {
 			transMine({
 				code: this.code,
+				phone: this.phone,
 				fundPwd: Md5(this.fundPwd),
 				proId: this.$route.query.id,
 				tamount: this.amount
