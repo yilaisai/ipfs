@@ -1,6 +1,6 @@
 <template>
 	<div class="transfer-select-page">
-		<HeaderBar title="存力转移" :shadow="true"></HeaderBar>
+		<HeaderBar title="云储力转移" :shadow="true"></HeaderBar>
 		<div class="main">
 			<h2>选择需要转移的合约</h2>
 			<div class="select-wrap">

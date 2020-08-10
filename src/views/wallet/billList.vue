@@ -6,7 +6,7 @@
 		<div class="thead">
 			<span>合约名称</span>
 			<span>合约编号</span>
-			<span>持有存力</span>
+			<span>持有云储力</span>
 			<span>状态</span>
 		</div>
 		<van-list

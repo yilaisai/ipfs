@@ -11,7 +11,7 @@
 			</div>
 			<div class="activate" @click="clickHandler">
 				<img src="../../assets/img/asic-miner.png" alt="">
-				<h4>我总存力</h4>
+				<h4>我总云储力</h4>
 				<span>{{userInfo.tamount}} <sub>T</sub></span>
 			</div>
 		</div>
@@ -20,10 +20,7 @@
 				<li @click="$router.push('/invite')">
 					<img src="../../assets/img/icon/friend_icon.png" alt="">
 					<span>邀请好友</span>
-					<label
-						v-clipboard:copy="userInfo.inviteCode"
-						v-clipboard:success="onCopy"
-						v-clipboard:error="onError" >
+					<label>
 						{{userInfo.inviteCode}}
 					</label>
 					<i></i>
@@ -36,7 +33,7 @@
 				</li> -->
 				<li @click="$router.push('/transferRecord')">
 					<img src="../../assets/img/icon/zyjl_icon.png" alt="">
-					<span>存力转移记录</span>
+					<span>云储力转移记录</span>
 					<i></i>
 				</li>
 				<li @click="$router.push('/billList')">
@@ -135,7 +132,7 @@ export default {
 			}
 		},
 		clickHandler() {
-			this.$router.push('/hashrate')
+			// this.$router.push('/hashrate')
 		},
 		onCopy(){
 			this.$toast('复制成功')

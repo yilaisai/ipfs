@@ -166,18 +166,18 @@ const router =  new Router({
 			component: () => import("./views/home/rankings")
 		},
 		{
-			path: "/hashrate",  //存力
+			path: "/hashrate",  //云储力
 			name: "hashrate",
 			meta: { statusBar: '#42C1CA' },
 			component: () => import("./views/wallet/hashrate/index")
 		},
 		{
-			path: "/transferSelect",  //存力转移选择产品
+			path: "/transferSelect",  //云储力转移选择产品
 			name: "transferSelect",
 			component: () => import("./views/wallet/hashrate/transferSelect")
 		},
 		{
-			path: "/hashrateTransfer",  //存力转移选择产品
+			path: "/hashrateTransfer",  //云储力转移选择产品
 			name: "hashrateTransfer",
 			meta: { statusBar: '#42C1CA' },
 			component: () => import("./views/wallet/hashrate/transfer")
@@ -194,7 +194,7 @@ const router =  new Router({
 			component: () => import("./views/wallet/orderList")
 		},
 		{
-			path: "/transferRecord",  //存力转移记录
+			path: "/transferRecord",  //云储力转移记录
 			name: "transferRecord",
 			component: () => import("./views/wallet/transferRecord")
 		},

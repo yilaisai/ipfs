@@ -10,23 +10,26 @@
 							<div>
 								<p>第二名</p>
 								<h4>286,348 <sub>T</sub></h4>
-								<p>集群存力</p>
+								<p>集群云储力</p>
 							</div>
 							<div>
 								<p>第一名</p>
 								<h4>968,889 <sub>T</sub></h4>
-								<p>集群存力</p>
+								<p>集群云储力</p>
 							</div>
 							<div>
 								<p>第三名</p>
 								<h4>198,893 <sub>T</sub></h4>
-								<p>集群存力</p>
+								<p>集群云储力</p>
 							</div>
 						</div>
 						<div class="content">
 							<div class="flex-wrap">
 								<div class="nickname">
-									<h3><img class="avatar" :src="userInfo.iconUrl" alt=""> 一起挖矿  机会多多</h3>
+									<h3>
+										<img class="avatar" :src="userInfo.iconUrl" alt="" v-if="isPlus">
+										<img class="avatar" src="../../../public/img/login_logo.png" alt="" v-else>
+										 一起挖矿  机会多多</h3>
 									<p>邀请码 <a href="javascript:;">{{userInfo.inviteCode}}</a></p>
 								</div>
 								<vue-qr class="qrcode" :text="registerPagePath + userInfo.inviteCode" :margin="0"></vue-qr>
@@ -53,13 +56,17 @@
 		</div>
 		<van-popup v-model="show" position="bottom" :closeable="true" :overlay="false">
 			<ul v-show="!isLoading">
-				<li @click="toImage('SHARE')">
+				<li @click="toImage('SHARE')" v-if="isPlus">
 					<img src="../../../public/img/share/share_icon.png" alt="">
 					<span>分享</span>
 				</li>
-				<li @click="toImage('SAVE')">
+				<li @click="toImage('SAVE')" v-if="isPlus">
 					<img src="../../../public/img/share/save_icon.png" alt="">
 					<span>保存</span>
+				</li>
+				<li @click="toImage('H5DOWNLOAD')" v-if="!isPlus">
+					<img src="../../../public/img/share/save_icon.png" alt="">
+					<span>保存图片</span>
 				</li>
 			</ul>
 			<h3 v-show="isLoading">图片处理中，请稍等...</h3>
@@ -81,7 +88,8 @@ export default {
 			dataURL: '',
 			active: 0,
 			show: true,
-			isLoading: false
+			isLoading: false,
+			isPlus: true
 		}
 	},
 	mounted(){
@@ -114,8 +122,14 @@ export default {
 				this.dataURL = dataURL
 				if(type == 'SHARE') {
 					this.downLoadBase64(dataURL, 'shareimg' + new Date().getTime())
-				}else {
+				}else if(type == 'SAVE') {
 					this.saveImg(dataURL, 'shareimg' + new Date().getTime())
+				}else {
+					var dlLink = document.createElement('a')
+					dlLink.download = 'shareimg' + new Date().getTime() + '.png'
+					dlLink.href = dataURL
+					dlLink.click()
+					this.isLoading = false
 				}
 			}).catch(err => {
 				console.log(err)
@@ -186,15 +200,21 @@ export default {
 	beforeRouteEnter(to, from, next) {
 		next((vm) => {
 			if(!window.plus) {
-				vm.$dialog.confirm({
-					message: '分享邀请好友功能需要下载APP进行操作？',
-						confirmButtonText:'立即下载'
-					}).then(() => {
-						window.open('https://www.travel-around.world')
-						vm.$router.goBack(-1)
-					}).catch(() => {
-						vm.$router.goBack(-1)
-				})
+				vm.isPlus = false
+				var ua = navigator.userAgent.toLowerCase()
+				var u = navigator.userAgent;
+				var isAndroid = u.indexOf('Android') > -1 || u.indexOf('Adr') > -1; //android终端
+				if(isAndroid) {
+					vm.$dialog.confirm({
+						message: '分享邀请好友功能需要下载APP进行操作？',
+							confirmButtonText:'立即下载'
+						}).then(() => {
+							window.open('https://www.travel-around.world')
+							vm.$router.goBack(-1)
+						}).catch(() => {
+							vm.$router.goBack(-1)
+					})
+				}
 			}
 		})
 	}

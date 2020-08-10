@@ -33,7 +33,7 @@
 		<div class="table">
 			<ul>
 				<li class="head">
-					<span>挖矿存力 (T)</span>
+					<span>挖矿云储力 (T)</span>
 					<span>24小时收益 ({{coin}})</span>
 					<span>时间 </span>
 				</li>

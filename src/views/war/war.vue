@@ -14,7 +14,7 @@
 					<div class="details">
 						<div class="flex-wrap">
 							<div>
-								<label>发售存力</label>
+								<label>发售云储力</label>
 								<img src="../../assets/img/icon/fscl_icon.png" alt="">
 							</div>
 							<span>{{item.tAmount}} <sub>T</sub></span>
@@ -28,7 +28,7 @@
 						</div>
 						<div class="flex-wrap">
 							<div>
-								<label>剩余存力</label>
+								<label>剩余云储力</label>
 								<img src="../../assets/img/icon/sycl_icon.png" alt="">
 							</div>
 							<span>{{item.remainAmount}} <sub>T</sub></span>

@@ -8,7 +8,7 @@
 		<div class="main">
 			<div class="content">
 				<h2>邀请好友</h2>
-				<p>团队存力越高，奖励越丰厚</p>
+				<p>团队云储力越高，奖励越丰厚</p>
 				<div class="data">
 					<div>
 						<span>{{userInfo.teamNum}}</span>
@@ -16,7 +16,7 @@
 					</div>
 					<div>
 						<span>{{userInfo.teamTAmount}} <sub>T</sub></span>
-						<label>集群存力</label>
+						<label>集群云储力</label>
 					</div>
 				</div>
 				<div class="invitecode" v-clipboard:copy="userInfo.inviteCode" v-clipboard:success="onCopy" v-clipboard:error="onError">

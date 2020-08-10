@@ -17,8 +17,8 @@
 				<li v-for="(item,index) in list" :key="index">
 					<h2>{{item.name}}</h2>
 					<p>
-						<span>总存力：{{$BigNumber(item.remainAmount).plus(item.saleAmount)}}T</span>
-						<span>剩余存力：{{item.remainAmount}}T</span>
+						<span>总云储力：{{$BigNumber(item.remainAmount).plus(item.saleAmount)}}T</span>
+						<span>剩余云储力：{{item.remainAmount}}T</span>
 						<span>合约期限：{{item.proTime}}个月</span>
 					</p>
 					<s>原价：{{item.orgPrice}} RMB/T</s>

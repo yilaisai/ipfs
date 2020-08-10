@@ -1,10 +1,10 @@
 <template>
 	<div class="hashrate-page">
-		<HeaderBar title="我的存力"></HeaderBar>
+		<HeaderBar title="我的云储力"></HeaderBar>
 		<div class="main scroll-y">
 			<div class="summary">
 				<div class="balance">
-					<h3>总存力</h3>
+					<h3>总云储力</h3>
 					<h2>{{userInfo.tamount}} <sub>T</sub></h2>
 					<div class="flex-wrap">
 						<div>
@@ -27,9 +27,9 @@
 					<li class="head">
 						<span>合约名称</span>
 						<span>合约编号</span>
-						<span>持有存力 (T)</span>
+						<span>持有云储力 (T)</span>
 						<span>状态</span>
-						<!-- <span>未激活存力(T)</span> -->
+						<!-- <span>未激活云储力(T)</span> -->
 					</li>
 					<li v-for="(item,index) in list" :key="index">
 						<span>{{item.name}}</span>

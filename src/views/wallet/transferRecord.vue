@@ -1,6 +1,6 @@
 <template>
 	<div class="transfer-record-page">
-		<HeaderBar title="存力转移记录"></HeaderBar>
+		<HeaderBar title="云储力转移记录"></HeaderBar>
 		<van-tabs
 			v-model="active"
 			swipeable

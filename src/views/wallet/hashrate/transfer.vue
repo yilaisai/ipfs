@@ -10,8 +10,8 @@
 		<div class="main scroll-y">
 			<div class="form-wrap">
 				<div class="total">
-					<label v-show="!isActive">未激活存力</label>
-					<label v-show="isActive">已激活存力</label>
+					<label v-show="!isActive">未激活云储力</label>
+					<label v-show="isActive">已激活云储力</label>
 					<span>{{total}} <sub>T</sub></span>
 				</div>
 				<div class="form">
@@ -35,20 +35,20 @@
 							<CountDownBtn slot="button" @click="getCaptcha" v-model="btnDisabled"></CountDownBtn>
 						</van-field>
 					</div>
-					<van-button type="primary" size="large" @click="clickHandler">存力转移</van-button>
+					<van-button type="primary" size="large" @click="clickHandler">云储力转移</van-button>
 				</div>
 			</div>
 		</div>
 
 		<van-popup v-model="show" position="bottom">
-			<h3>确认转移存力</h3>
+			<h3>确认转移云储力</h3>
 			<div class="content">
 				<ul>
 					<li>
 						<label>合约名称</label><span>{{$route.query.name}}</span>
 					</li>
 					<li>
-						<label>存力状态</label><span>{{$route.query.isActive == 0 ? '未激活' : '已激活'}}</span>
+						<label>云储力状态</label><span>{{$route.query.isActive == 0 ? '未激活' : '已激活'}}</span>
 					</li>
 					<li>
 						<label>转移数量</label><span>{{amount}} T</span>
@@ -57,7 +57,7 @@
 						<label>转移帐号</label><span>{{phone}}</span>
 					</li>
 				</ul>
-				<p>存力转移后立即生效，确认转移存力吗？</p>
+				<p>云储力转移后立即生效，确认转移云储力吗？</p>
 				<div class="btn-wrap">
 					<van-button type="text" size="small" @click="show = false">取消</van-button>
 					<van-button type="primary" size="small" @click="pay">确认</van-button>
@@ -103,7 +103,7 @@ export default {
 				return
 			}
 			if(Number(this.amount) > Number(this.total)) {
-				this.$toast('存力不足')
+				this.$toast('云储力不足')
 				return
 			}
 			if(this.phone == '') {

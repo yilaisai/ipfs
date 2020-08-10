@@ -108,7 +108,7 @@ export function myIndexInfo(data) {
 export function userCoinChange(data) {
 	return $http.postFormData('/app/user/userCoinChange', data)
 }
-//存力产品列表
+//云储力产品列表
 export function getMinePros(data = {}) {
 	data.pageNum = 1
 	data.pageSize = 100

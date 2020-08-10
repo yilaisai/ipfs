@@ -68,29 +68,32 @@
 					<span>持续发展</span>
 				</li>
 			</ul>
-			<div class="bg-title">
-				<img src="../../../assets/img/home/bg2.png" alt="">
+			<div class="text-title">
 				<div>
 					<h3>星际云机房</h3>
 				</div>
 			</div>
+
 			<ul class="content2">
+				<img src="../../../assets/img/home/img2.png" alt="">
 				<li>
 					<h3>全球IDC机房节点布局</h3>
 					<p>共享全球挖矿收益</p>
 				</li>
 				<li>
-					<h3>UPS不间断电源系统</h3>
-					<p>保证7*24小时供电</p>
-				</li>
-				<li>
 					<h3>企业级光纤宽带专线</h3>
 					<p>快速稳定</p>
+				</li>
+				<img src="../../../assets/img/home/img3.png" alt="">
+				<li>
+					<h3>UPS不间断电源系统</h3>
+					<p>保证7*24小时供电</p>
 				</li>
 				<li>
 					<h3>专业运维团队</h3>
 					<p>全方位运维服务</p>
 				</li>
+				<img src="../../../assets/img/home/img4.png" alt="">
 				<li>
 					<h3>企业级安全防护</h3>
 					<p>保障服务器安全及用户资产</p>
@@ -107,25 +110,25 @@
 			<div class="bg-title">
 				<img src="../../../assets/img/home/bg2.png" alt="">
 				<div>
-					<h3>星际云矿池</h3>
-					<h4>云存力优势</h4>
+					<h3>七彩矿池</h3>
+					<h4>云储力优势</h4>
 				</div>
 			</div>
 			<ul class="content3">
 				<li>
 					<img src="../../../assets/img/home/decentralized.png" alt="">
 					<h3>技术实力强</h3>
-					<p>技术实力强/星际云矿池是由星际云强大的技术团队独立研发创立，并获得多项技术专利。其技术团队有着超过十年的分布式存储经验，在 Fliecoin 挖矿领域被证实有着巨大的技术优势。</p>
+					<p>技术实力强/七彩矿池是由星际云强大的技术团队独立研发创立，并获得多项技术专利。其技术团队有着超过十年的分布式存储经验，在 Fliecoin 挖矿领域被证实有着巨大的技术优势。</p>
 				</li>
 				<li>
 					<img src="../../../assets/img/home/cpu-mining.png" alt="">
 					<h3>安全稳定</h3>
-					<p>安全稳定/星际云矿池采用的小蜜蜂 F1 矿机由星际云独家研发，稳定可靠。其技术团队长期服务于华为等头部用户，将保证星际云矿池拥有一流的安全及稳定性。</p>
+					<p>安全稳定/七彩矿池采用的七彩矿机由星际云独家研发，稳定可靠。其技术团队长期服务于华为等头部用户，将保证七彩矿池拥有一流的安全及稳定性。</p>
 				</li>
 				<li>
 					<img src="../../../assets/img/home/gpu-mining.png" alt="">
 					<h3>回报有保障</h3>
-					<p>回报有保障/星际云矿池采用星际云技术研发团队独家开发的挖矿稀土，高效稳定，同样的硬件配置可提供 2 倍以上的挖矿效率，使得星际云能够提供更加丰富的回报。</p>
+					<p>回报有保障/七彩矿池采用星际云技术研发团队独家开发的挖矿稀土，高效稳定，同样的硬件配置可提供 2 倍以上的挖矿效率，使得星际云能够提供更加丰富的回报。</p>
 				</li>
 			</ul>
 		</div>
@@ -191,6 +194,16 @@ export default {
 				color:rgba(50,50,50,1);
 				line-height:0.24rem;
 			}
+		}
+	}
+	.text-title {
+		border-top: 2px solid #000000;
+		border-bottom: 2px solid #000000;
+		h3 {
+			font-size:0.4rem;
+			text-align: center;
+			padding: .3rem 0;
+			color: #000000;
 		}
 	}
 	p {
@@ -269,6 +282,11 @@ export default {
 		display: flex;
 		flex-wrap: wrap;
 		margin-bottom: .1rem;
+		margin-top: .4rem;
+		img {
+			width: 100%;
+			margin: 0 0 .3rem 0;
+		}
 		li {
 			width: 50%;
 			margin-bottom: .24rem;
