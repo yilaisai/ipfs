@@ -101,7 +101,7 @@ export default {
 	.header {
 		position: relative;
 		z-index: 2;
-		font-size: .34rem;
+		font-size: .32rem;
 		color: #323232;
 		text-align: center;
 		background:rgba(255,255,255,1);

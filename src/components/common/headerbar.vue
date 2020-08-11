@@ -47,7 +47,7 @@ export default {
 	background-color: #FFFFFF;
 	color: #333333;
 	&.shadow {
-		box-shadow:0px 2px 11px 0px rgba(194,194,194,0.5);
+		box-shadow:0px 0px 12px 0px rgba(236,236,236,1);
 		&.black {
 			box-shadow: 0 0 .1rem #000;
 		}

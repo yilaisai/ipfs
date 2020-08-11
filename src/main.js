@@ -67,3 +67,8 @@ window.onUserClickBack = function() {
 		
 	}
 }
+
+window.addEventListener('beforeinstallprompt', event => {
+	event.userChoice.then(result => {console.log(result.outcome)
+	})
+})

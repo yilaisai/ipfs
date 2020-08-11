@@ -1,0 +1,111 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<meta charset="utf-8">
+
+    <meta content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=0" name="viewport"/>
+    
+    <title>星际云下载</title>
+</head>
+<style>
+	html,body{
+		margin:0;
+		padding:0;
+		height:100%
+	}
+	.installation {
+  background: #fff;
+  height: 100%;
+  width: 100%;
+}
+.installation .content {
+  text-align: center;
+  padding-top: 45px;
+  background: #fff;
+  height: calc(100vh - 46px);
+  overflow-y: auto;
+  -webkit-overflow-scrolling: touch;
+}
+.installation .content h3 {
+  font-size: 24px;
+  color: #323232;
+  margin: 0;
+  padding: 0;
+}
+.installation .content a {
+  margin: 25px 0 60px 0;
+  font-size: 14px;
+  text-decoration-line: none;
+  color: #fff;
+  background: #2e6bf8;
+  display: inline-block;
+  border-radius: 21px;
+  width: 140px;
+  height: 42px;
+  line-height: 42px;
+  font-weight: 500;
+  text-decoration: none;
+  box-shadow: 1px 1px 10px #2e6bf8;
+}
+.installation .content img {
+  width: 80%;
+  margin: 15px 0;
+}
+.installation .content .tips {
+  display: flex;
+  justify-content: center;
+  position: relative;
+  height: 16px;
+  margin-bottom: 36px;
+}
+.installation .content .tips span {
+  color: #969696;
+  font-size: 14px;
+  background: #fff;
+  display: inline-block;
+  position: absolute;
+  top: -9px;
+}
+.installation .content .tips .tips_line {
+  height: 1px;
+  width: 100%;
+  background: #F0F0F0;
+  position: absolute;
+}
+.installation .content p {
+  font-size: 14px;
+  color: #323232;
+  text-align: center;
+  padding: 0 20px;
+}
+.installation .content p b {
+  color: #5E87D8;
+}
+</style>
+<body>
+        
+    <div class='installation'>
+        <div class="content">
+            <h3>iOS 使用教程</h3>
+            <a onclick="downloadapp()">开始使用</a>
+            <div class="tips">
+                <div class="tips_line"></div>
+                <span>如何将Web版添加到手机主屏幕？</span>
+            </div>
+            <p>一、在应用页面选择分享</p>
+            <img src="./img/download/use_ios1.jpg" alt="">
+            <p>二、点击「<b>添加到主屏幕</b>」</p>
+            <img src="./img/download/use_ios2.jpg" alt="">
+            <p>三、点击「<b>添加</b>」即可快速添加到主屏幕啦</p>
+            <img src="./img/download/use_ios3.jpg" alt=""> 
+        </div>
+    </div>
+
+    <script>
+      	function downloadapp(){
+			window.location.href = "index.html"
+       	}
+   
+    </script>
+</body>
+</html>

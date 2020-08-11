@@ -39,7 +39,7 @@ const router =  new Router({
 					path: '/earnings',
 					name: 'earnings',
 					meta: { isLogin: true, isRoot: true },
-					component: () => import('@/views/wallet/earnings')
+					component: () => import('@/views/wallet/earnings/list')
 				},
 				{
 					path: '/my',
@@ -48,6 +48,12 @@ const router =  new Router({
 					component: () => import('@/views/my/my')
 				}
 			]
+		},
+		{
+			path: '/earningsDetails',
+			name: 'earningsDetails',
+			meta: { isLogin: true },
+			component: () => import('@/views/wallet/earnings/index')
 		},
 		{
 			path: "/register",

@@ -1,6 +1,7 @@
 <template>
 	<div class="earnings-page">
 		<div class="banner">
+			<HeaderBar :title="coin + '收益记录'" color="transparent"></HeaderBar>
 			<div class="content">
 				<div class="flex-wrap">
 					<div>
@@ -16,7 +17,7 @@
 				</div>
 				<van-button type="primary" size="large" @click="withdraw">提现</van-button>
 			</div>
-			<div class="coin-select">
+			<!-- <div class="coin-select">
 				<div class="selected" @click="selectShow = !selectShow">
 					<img :src="'./img/coin/' + coin + '.png'" alt="">
 					<span>{{coin}}</span>
@@ -28,7 +29,7 @@
 						<span>{{item}}</span>
 					</li>
 				</ul>
-			</div>
+			</div> -->
 		</div>
 		<div class="table">
 			<ul>
@@ -53,6 +54,9 @@ export default {
 			selectShow: false
 		}
 	},
+	mounted() {
+		this.coin = this.$route.query.coin
+	},
 	methods: {
 		withdraw() {
 			this.$toast('暂未开放')
@@ -73,7 +77,7 @@ export default {
 		overflow: hidden;
 		.content {
 			width: 92%;
-			margin: 1.64rem auto .3rem;
+			margin: 0.54rem auto .3rem;
 			background:rgba(255,255,255,1);
 			box-shadow:0rem 0.04rem 0.16rem 0rem rgba(12,81,86,0.2);
 			border-radius:0.18rem;

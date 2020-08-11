@@ -13,11 +13,11 @@ module.exports = {
 		name: '星际云',
 		short_name: "星际云",
   		description: "星际云",
-		themeColor: '#242A37',
-		msTileColor: '#242A37',
+		themeColor: '#5DD5DD',
+		msTileColor: '#5DD5DD',
 		appleMobileWebAppCapable: 'yes',
 		appleMobileWebAppStatusBarStyle: 'black',
-		backgroundColor: '#242A37',
+		backgroundColor: '#5DD5DD',
 	 
 		// 配置 workbox 插件
 		workboxPluginMode: 'InjectManifest',
