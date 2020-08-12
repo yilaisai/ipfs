@@ -1,5 +1,3 @@
-importScripts("precache-manifest.f0a28306035f7a9d57bd1944fe8ddf15.js");
-
 // set the prefix and suffix of our sw's name
 workbox.core.setCacheNameDetails({
 	prefix: 'xjy-app',

@@ -22,7 +22,7 @@
 export default {
 	data() { 
 		return {
-			coinList: ['BTC', 'ETH', 'EOS', 'XMR', 'FIL'],
+			coinList: ['FIL', 'BTC', 'BHD', 'EOS', 'ETH', 'ZEC'],
 		}
 	}
 }

@@ -11,7 +11,7 @@
 			</div>
 			<div class="activate" @click="clickHandler">
 				<img src="../../assets/img/asic-miner.png" alt="">
-				<h4>我总云储力</h4>
+				<h4>我的总云储力</h4>
 				<span>{{userInfo.tamount}} <sub>T</sub></span>
 			</div>
 		</div>

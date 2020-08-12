@@ -18,12 +18,17 @@ module.exports = {
 		appleMobileWebAppCapable: 'yes',
 		appleMobileWebAppStatusBarStyle: 'black',
 		backgroundColor: '#5DD5DD',
+		permissions: {
+			"desktop-notification": {
+			  "description": "Needed for creating system notifications."
+			}
+		},
 	 
 		// 配置 workbox 插件
 		workboxPluginMode: 'InjectManifest',
 		workboxOptions: {
 		  // InjectManifest 模式下 swSrc 是必填的。
-		  swSrc: './public/service-worker.js', // 本地service-worker.js相对路径
+		  swSrc: 'src/service-worker.js', // 本地service-worker.js相对路径
 		  importWorkboxFrom: 'disabled', // 决定是否引入workbox
 		  exclude: [/\.html$/, /\.css.map$/, /service-worker.js$/] // 缓存列表排除的文件，可以是文件名或正则
 		}
