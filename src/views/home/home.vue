@@ -5,12 +5,16 @@
 				<img class="logo" src="../../assets/img/logo.png" alt="">
 				<BannerSwiper :list="bannerList" />
 				<!-- 滚动公告 -->
-				<van-notice-bar
-					v-if="noticeText"
-					:text="noticeText"
-					color="#333"
-					scrollable>
+				<van-notice-bar :scrollable="false">
 					<img slot="left-icon" src="../../../public/img/home/broadcast_icon.png" alt="">
+					<van-swipe
+						vertical
+						class="notice-swipe"
+						:autoplay="3000"
+						:show-indicators="false"
+					>
+						<van-swipe-item v-for="(item,index) in noticeList" :key="index">{{item.content}}</van-swipe-item>
+					</van-swipe>
 				</van-notice-bar>
 			</div>
 			<ul class="list">
@@ -45,6 +49,7 @@ export default {
 			loading: false, //是否在加载中
 			finished: false, //是否加载完所有数据
 			noticeText: '',
+			noticeList: [],
 			noticeId: '',
 			totalReadNotice: 0,
 			totalNotice: 0,
@@ -59,6 +64,7 @@ export default {
 			this.bannerList = res.result.banners
 			if(res.result.noticeInfos.length > 0) {
 				this.noticeText = res.result.noticeInfos[0].content
+				this.noticeList = res.result.noticeInfos
 			}
 		})
 	},
@@ -132,10 +138,19 @@ export default {
 			margin: .2rem auto;
 			height: .6rem;
 			padding: 0;
+			color: #000000;
 			img {
 				width: .3rem;
 				height: .3rem;
 				margin-right: .1rem;
+			}
+			.notice-swipe {
+				height: .6rem;
+				line-height: .6rem;
+				/deep/.van-swipe-item {
+					text-overflow: ellipsis;
+					overflow: hidden;
+				}
 			}
 		}
 		.list {

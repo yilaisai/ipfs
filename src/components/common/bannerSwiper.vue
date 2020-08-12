@@ -8,7 +8,7 @@
 			</div>
 		</div>
 		<!-- 分页器 -->
-		<div class="swiper-pagination"></div>
+		<div class="swiper-pagination" v-show="list.length > 1"></div>
 	</div>
 </template>
 
