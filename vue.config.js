@@ -29,7 +29,7 @@ module.exports = {
 		workboxOptions: {
 		  // InjectManifest 模式下 swSrc 是必填的。
 		  swSrc: 'src/service-worker.js', // 本地service-worker.js相对路径
-		  importWorkboxFrom: 'disabled', // 决定是否引入workbox
+		//   importWorkboxFrom: 'disabled', // 决定是否引入workbox
 		  exclude: [/\.html$/, /\.css.map$/, /service-worker.js$/] // 缓存列表排除的文件，可以是文件名或正则
 		}
 	}
