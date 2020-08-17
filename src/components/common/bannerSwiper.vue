@@ -3,7 +3,7 @@
 		<div class="swiper-wrapper">
 			<div class="swiper-slide" v-for="(item,index) in list" :key="index">
 				<a href="javascript:;">
-					<img :src="item.iconUrl" alt="">
+					<img :src="item.imgUrl" alt="">
 				</a>
 			</div>
 		</div>

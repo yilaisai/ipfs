@@ -3,8 +3,8 @@
 		<HeaderBar title="公告详情"></HeaderBar>
 		<div class="main">
 			<h3>{{pageData.title}}</h3>
-			<p class="time">{{pageData.createTime}}</p>
-			<p class="content">{{pageData.content}}</p>
+			<p class="time">{{$fmtDate(pageData.createTime, 'full')}}</p>
+			<p class="content" v-html="pageData.content"></p>
 		</div>
 	</div>
 </template>
@@ -58,8 +58,11 @@ export default {
 			text-align: center;
 			font-size: .14rem;
 		}
-		.content {
+		/deep/.content {
 			padding: .2rem 0 .1rem;
+			img {
+				width: 100%;
+			}
 		}
 	}
 }

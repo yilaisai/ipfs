@@ -18,7 +18,7 @@
 					</div>
 				</div>
 				<div class="btn-wrap">
-					<van-button type="primary" size="large" @click="clickHandler" :disabled="this.userInfo.tamount <= 0">转移</van-button>
+					<!-- <van-button type="primary" size="large" @click="clickHandler" :disabled="this.userInfo.tamount <= 0">转移</van-button> -->
 				</div>
 			</div>
 			<div class="list">

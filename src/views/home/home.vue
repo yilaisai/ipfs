@@ -13,7 +13,7 @@
 						:autoplay="3000"
 						:show-indicators="false"
 					>
-						<van-swipe-item v-for="(item,index) in noticeList" :key="index">{{item.content}}</van-swipe-item>
+						<van-swipe-item v-for="(item,index) in noticeList" :key="index" @click="$router.push('/noticeDetails?id=' + item.id)">{{item.title}}</van-swipe-item>
 					</van-swipe>
 				</van-notice-bar>
 			</div>

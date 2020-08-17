@@ -1,6 +1,6 @@
 <template>
 	<div class="notice-page">
-		<HeaderBar title="消息中心">
+		<HeaderBar title="公告列表">
 			<a href="javascript:;" class="other" @click="readAll">全部已读</a>
 		</HeaderBar>
 		<van-list
@@ -12,7 +12,7 @@
 			<div class="item" v-for="(item,index) in list" :key="index" @click="$router.push('/noticeDetails?id=' + item.id)">
 				<div class="text">
 					<h4>{{item.title}}</h4>
-					<span>{{item.createTime}}</span>
+					<span>{{$fmtDate(item.createTime, 'full')}}</span>
 				</div>
 				<i v-if="readNoticeArr.indexOf(item.id) < 0"></i>
 			</div>
@@ -21,7 +21,7 @@
 </template>
 
 <script>
-import { getNoticeList } from '@/api/request'
+import { getBannersAndNotices } from '@/api/request'
 export default {
 	data() { 
 		return {
@@ -41,27 +41,28 @@ export default {
 			this.getData()
 		},
 		getData() {
-			getNoticeList({
+			getBannersAndNotices({
 				pageNum: this.pageNum,
 				pageSize: 20
 			}).then(res => {
-				this.list = this.list.concat(res.result.list)
+				this.list = this.list.concat(res.result.noticeInfos)
 				this.loading = false
-				if(res.result.nextPage == 0) {
-					this.finished = true
-				}
+				// if(res.result.nextPage == 0) {
+				// 	this.finished = true
+				// }
+				this.finished = true
 			}).catch(err => {
 				this.finished = true
 				this.loading = false
 			})
 		},
 		readAll() {
-			getNoticeList({
+			getBannersAndNotices({
 				pageNum: this.pageNum,
 				pageSize: 20121212
 			}).then(res => {
 				let arr = []
-				res.result.list.forEach((val, idx) => {
+				res.result.noticeInfos.forEach((val, idx) => {
 					arr.push(val.id)
 				})
 				this.readNoticeArr = arr

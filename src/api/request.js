@@ -58,7 +58,7 @@ export function getNoticeList(data, config = {}) {
 }
 //获取公告详情
 export function getNoticeInfo(data) {
-	return $http.postFormData('/app/notice/open/getNoticeInfo', data)
+	return $http.postFormData('/app/user/getNoticeDetail', data)
 }
 //军械库
 export function getUserGameDrops(data) {

@@ -132,7 +132,7 @@ export default {
 			}
 		},
 		clickHandler() {
-			// this.$router.push('/hashrate')
+			this.$router.push('/hashrate')
 		},
 		onCopy(){
 			this.$toast('复制成功')

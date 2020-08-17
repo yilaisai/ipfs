@@ -2,7 +2,7 @@
 	<div class="edit-avatar-page">
 		<HeaderBar title="个人头像"></HeaderBar>
 		<div class="main">
-			<van-uploader :after-read="imgSelected" @oversize="imgOversize" :max-size="2 * 1024 * 1024">
+			<van-uploader :after-read="imgSelected" @oversize="imgOversize" :max-size="5 * 1024 * 1024">
 				<img :src="userInfo.iconUrl" alt="">
 			</van-uploader>
 		</div>
@@ -36,7 +36,7 @@ export default {
             })
 		},
 		imgOversize(filesObj) {
-			this.$toast.fail('图片过大！请选择2M以内的图片')
+			this.$toast.fail('图片过大！请选择5M以内的图片')
 		}
 	},
 	computed: {
