@@ -12,7 +12,7 @@
 				<div class="data">
 					<div>
 						<span>{{userInfo.teamNum}}</span>
-						<label>集群人数</label>
+						<label>集群NT</label>
 					</div>
 					<div>
 						<span>{{userInfo.teamTAmount}} <sub>T</sub></span>
