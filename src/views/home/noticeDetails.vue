@@ -1,7 +1,7 @@
 <template>
 	<div class="notice-details">
 		<HeaderBar title="公告详情"></HeaderBar>
-		<div class="main">
+		<div class="main" v-if="pageData.title">
 			<h3>{{pageData.title}}</h3>
 			<p class="time">{{$fmtDate(pageData.createTime, 'full')}}</p>
 			<p class="content" v-html="pageData.content"></p>
