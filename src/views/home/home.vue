@@ -18,7 +18,7 @@
 				</van-notice-bar>
 			</div>
 			<ul class="list">
-				<li v-for="(item,index) in list" :key="index">
+				<li v-for="(item,index) in list" :key="index" :class="{'ysq' : item.remainAmount <= 0}">
 					<h2>{{item.name}}</h2>
 					<p>
 						<span>总云储力：{{$BigNumber(item.remainAmount).plus(item.saleAmount)}}T</span>
@@ -27,7 +27,7 @@
 					</p>
 					<s>原价：{{item.orgPrice}} RMB/T</s>
 					<h3>现价：{{item.price}} RMB/T</h3>
-					<van-button type="primary" size="large" @click="$router.push({path: '/confirmOrder', query: {goods: item}})">立即购买</van-button>
+					<van-button type="primary" size="large" @click="clickHandler(item)">立即购买</van-button>
 				</li>
 			</ul>
 			<Products />
@@ -69,29 +69,12 @@ export default {
 		})
 	},
 	methods: {
-		clickHandler() {
-			if(this.userInfo.isActive == 0) {
-				this.$dialog.confirm({
-					message: '您的账户还未激活，是否立即激活？',
-						confirmButtonText:'去激活'
-					}).then(() => {
-						this.$router.push('/activateAccount')
-					}).catch(() => {
-				})
-			}else {
-				if(this.userInfo.roleId <= 0) {
-					this.$dialog.confirm({
-						message: '您还未购买船只，是否前去购买？',
-							confirmButtonText:'去购买'
-						}).then(() => {
-							this.$router.push('/buyShip')
-						}).catch(() => {
-						// on cancel
-					});
-				}else {
-					this.$router.push('/inviteShare')
-				}
+		clickHandler(item) {
+			if(item.remainAmount <= 0) {
+				this.$toast('已售罄')
+				return
 			}
+			this.$router.push({path: '/confirmOrder', query: {goods: item}})
 		},
 		pay() {
 			this.$router.push('/confirmOrder')

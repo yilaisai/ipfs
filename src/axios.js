@@ -1,5 +1,5 @@
 import axios from 'axios'
-import router from './router.js'
+import router from './router/router.js'
 import qs from 'qs'
 import { Toast } from 'vant';
 import store from './store'

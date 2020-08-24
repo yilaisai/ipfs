@@ -5,12 +5,12 @@
             <p class="tips">证件需在有效期内，照片文字清晰可见，图片格式支持 JPG/PNG,大小不超过 2M</p>
             <h4>请上传您的身份证人像面</h4>
             <van-uploader :after-read="uploadCardFront">
-                <img v-show="!cardFrontUrl" class="default-img" src="../../../../public/img/my/cardBack.png" />
+                <img v-show="!cardFrontUrl" class="default-img" src="../../../assets/img/my/cardBack.png" />
                 <img v-show="cardFrontUrl" class="default-img" :src="cardFrontUrl" />
             </van-uploader>
             <h4>请上传您的身份证国徽面</h4>
             <van-uploader :after-read="uploadCardBack">
-                <img v-show="!cardBackUrl" class="default-img" src="../../../../public/img/my/cardFront.png" />
+                <img v-show="!cardBackUrl" class="default-img" src="../../../assets/img/my/cardFront.png" />
                 <img v-show="cardBackUrl" class="default-img" :src="cardBackUrl" />
             </van-uploader>
             <button class="full scale" @click="nextStep">下一步</button>

@@ -50,7 +50,7 @@
 								<van-stepper v-model="item.buyAmount" integer min="1" :max="item.remainAmount" />
 							</div>
 						</div>
-						<van-button type="primary" size="large" @click="$router.push({path: '/confirmOrder', query: {goods: item}})">立即购买</van-button>
+						<van-button type="primary" size="large" :disabled="item.remainAmount <= 0" @click="$router.push({path: '/confirmOrder', query: {goods: item}})">{{item.remainAmount <= 0 ? '已售罄' : '立即购买'}}</van-button>
 					</div>
 				</li>
 			</ul>

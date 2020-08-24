@@ -5,7 +5,7 @@
             <p class="tips">请您上传一张手持身份证正面照和个人签字的照片，个人签字的内容包含 (文案 : Hosen) 和 (当前日期 : xx 年 xx 月 xx 日)，请确保照片个人签字的内容清晰可见。</p>
             <p class="tips2">1、人像清晰 <br />2、证件号码清晰<br />3、手写文字清晰<br />4、手写文字包含规定文案及当前日期</p>
             <van-uploader :after-read="uploadCardBack">
-                <img v-show="!imgurl" class="default-img" src="../../../../public/img/my/senior.png" />
+                <img v-show="!imgurl" class="default-img" src="../../../assets/img/my/senior.png" />
                 <img v-show="imgurl" class="default-img" :src="imgurl" />
             </van-uploader>
             <button class="full scale" @click="nextStep">提交认证</button>

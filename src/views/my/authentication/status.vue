@@ -4,8 +4,8 @@
 		<div class="main">
 			<div class="status">
 				<label>实名认证</label>
-				<span class="success" v-if="userInfo.auditStatus == 1">认证成功 <img src="../../../../public/img/my/status1.png" alt=""></span>
-				<span class="failed" v-if="userInfo.auditStatus == 0">认证未通过 <img src="../../../../public/img/my/status2.png" alt=""></span>
+				<span class="success" v-if="userInfo.auditStatus == 1">认证成功 <img src="../../../assets/img/my/status1.png" alt=""></span>
+				<span class="failed" v-if="userInfo.auditStatus == 0">认证未通过 <img src="../../../assets/img/my/status2.png" alt=""></span>
 			</div>
 			<ul class="info" v-if="userInfo.auditStatus == 1">
 				<li>
