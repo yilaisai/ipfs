@@ -19,24 +19,45 @@
 			<span>橱窗</span>
 			<img
 				slot="icon"
+				v-if="props.active"
 				slot-scope="props"
-				:src="props.active ? './img/footerbar/zhanchang_active.png' : './img/footerbar/zhanchang.png'"
+				src="../../../../public/img/footerbar/zhanchang_active.png"
+			>
+			<img
+				slot="icon"
+				v-else
+				slot-scope="props"
+				src="../../../../public/img/footerbar/zhanchang.png"
 			>
 		</van-tabbar-item>
 		<van-tabbar-item to="/earnings">
 			<span>挖矿收益</span>
 			<img
 				slot="icon"
+				v-if="props.active"
 				slot-scope="props"
-				:src="props.active ? './img/footerbar/earnings_active.png' : './img/footerbar/earnings.png'"
+				src="../../../../public/img/footerbar/earnings_active.png"
+			>
+			<img
+				slot="icon"
+				v-else
+				slot-scope="props"
+				src="../../../../public/img/footerbar/earnings.png"
 			>
 		</van-tabbar-item>
 		<van-tabbar-item to="/my">
 			<span>我的</span>
 			<img
 				slot="icon"
+				v-if="props.active"
 				slot-scope="props"
-				:src="props.active ? './img/footerbar/my_active.png' : './img/footerbar/my.png'"
+				src="../../../../public/img/footerbar/my_active.png"
+			>
+			<img
+				slot="icon"
+				v-else
+				slot-scope="props"
+				src="../../../../public/img/footerbar/my.png"
 			>
 		</van-tabbar-item>
 	</van-tabbar>

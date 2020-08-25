@@ -42,7 +42,7 @@
 							<van-stepper v-model="goods.buyAmount" integer min="1" :max="goods.remainAmount" />
 						</div>
 					</div>
-					<van-button type="primary" size="large" @click="$router.push({path: '/confirmOrder', query: {goods: goods}})">立即购买</van-button>
+					<van-button type="primary" size="large" :disabled="goods.remainAmount <= 0" @click="$router.push({path: '/confirmOrder', query: {goods: goods}})">{{goods.remainAmount <= 0 ? '已售罄' : '立即购买'}}</van-button>
 				</div>
 			</div>
 			<div class="text-details">
@@ -69,7 +69,7 @@ export default {
 	name: 'goodsDetails',
 	data() { 
 		return {
-			goods: null
+			goods: {}
 		}
 	},
 	activated() {
