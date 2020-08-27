@@ -16,7 +16,6 @@ const actions = {
 			commit('saveUserInfo', res.result)
 		})
 	}
-	
 }
 
 export default actions
