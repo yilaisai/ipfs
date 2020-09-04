@@ -60,8 +60,8 @@ export default {
 			if(this.userInfo.auditStatus == -1) {
 				this.$router.push('/auth1')
 			}else {
-				// this.$router.push('/authStatus')
-				this.$router.push('/auth1')
+				this.$router.push('/authStatus')
+				// this.$router.push('/auth1')
 			}
 		}
 	},

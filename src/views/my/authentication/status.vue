@@ -5,7 +5,7 @@
 			<div class="status">
 				<label>身份认证</label>
 				<span class="success" v-if="userInfo.auditStatus == 1"><img src="../../../assets/img/my/status1.svg" alt=""><i>认证成功</i></span>
-				<span class="failed" v-if="userInfo.auditStatus"><img src="../../../assets/img/my/status2.svg" alt=""> <i>认证未通过</i></span>
+				<span class="failed" v-else><img src="../../../assets/img/my/status2.svg" alt=""> <i>认证未通过</i></span>
 			</div>
 			<ul class="info" v-if="userInfo.auditStatus == 1">
 				<li>

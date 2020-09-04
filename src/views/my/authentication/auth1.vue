@@ -42,9 +42,9 @@ export default {
     created() {
         if(sessionStorage.getItem('authInfo')) {
             const authInfo = JSON.parse(sessionStorage.getItem('authInfo'))
-            this.realName = authInfo.realName
+            this.realName = authInfo.realName 
             this.cardNo = authInfo.cardNo
-        }
+        }   
     },
     methods: {
         nextStep() {

@@ -77,6 +77,7 @@
         })
       },
       onRefresh(){
+        this.pageNum = 1
         this.finished = false;
         this.loading = true;
         this.getWithdrawList()

@@ -52,6 +52,7 @@ export default {
                 imgurl: this.imgurl,
             }).then(res => {
                 this.$toast.success(res.msg)
+                this.$store.dispatch('getUserInfo')
                 this.$router.push('/setting')
             })
         }

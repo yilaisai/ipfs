@@ -135,6 +135,7 @@ export default {
 			this.getList()
 		},
 		onRefresh(){
+			this.formData.pageNum = 1
 			this.finished = false;
 			this.loading = true;
 			this.getList()
