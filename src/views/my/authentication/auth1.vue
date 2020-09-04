@@ -1,14 +1,29 @@
 <template>
 	<div class="auth1-page">
-		<HeaderBar title="实名认证"></HeaderBar>
+		<HeaderBar title="实名认证" :shadow="true"></HeaderBar>
 		<div class="main">
-			<van-cell-group>
-                <van-field label="姓名" v-model.trim="realName" placeholder="请输入" />
-                <van-field label="身份证号" v-model.trim="cardNo" placeholder="请输入" 
+			<!-- <van-cell-group>
+                <van-cell title="姓名" />
+                <van-field v-model.trim="realName" placeholder="请输入" />
+                <van-cell title="身份证号" />
+                <van-field  v-model.trim="cardNo" placeholder="请输入" 
                 oninput="value=value.replace(/[^0-9|xX]/g,'')"
                 onkeyup="value=value.replace(/[^0-9|xX]/g,'')"
                 onpaste="value=value.replace(/[^0-9|xX]/g,'')"/>
-            </van-cell-group>
+            </van-cell-group> -->
+            <div class="inputBox">
+                <div class="name">
+                    <span>姓名</span>
+                    <input type="text" v-model.trim="realName" placeholder="请输入">
+                </div>
+                <div class="cardNoBox">
+                    <span>身份证号</span>
+                    <input type="text" v-model.trim="cardNo" placeholder="请输入"
+                    oninput="value=value.replace(/[^0-9|xX]/g,'')"
+                    onkeyup="value=value.replace(/[^0-9|xX]/g,'')"
+                    onpaste="value=value.replace(/[^0-9|xX]/g,'')">
+                </div>
+            </div>
             <button class="full scale" @click="nextStep">下一步</button>
 		</div>
 	</div>
@@ -76,9 +91,38 @@ export default {
 </script>
 
 <style lang="less" scoped>
-button {
-    display: block;
-    margin: .4rem auto 0;
-    width: 90%;
+.auth1-page {
+    background: #FFF;
+    .main {
+        padding:.5rem;
+        .inputBox {
+            >div {
+                margin-bottom:.5rem;
+                display: flex;
+                flex-direction: column;
+                span {
+                    margin-bottom:.12rem;
+                    color:#646464;
+                    font-size:.32rem;
+                    font-weight: 500;
+                }
+                input {
+                    padding:0 .32rem;
+                    height:.96rem;
+                    outline: none;
+                    border:none;
+                    border-radius:.12rem;
+                    background: #F6F9FC;
+                    font-size:.32rem;
+                }
+            }
+        }
+    }
+    button {
+        display: block;
+        margin: 1rem auto 0;
+        border-radius: .12rem;
+    }
 }
+
 </style>

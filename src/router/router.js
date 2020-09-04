@@ -62,6 +62,11 @@ const router =  new Router({
 			component: () => import("@/views/home/invite")
 		},
 		{
+			path: "/inviteList",//邀请
+			name: "inviteList",
+			component: () => import("@/views/home/inviteList")
+		},
+		{
 			path: "/inviteRecord",  //编辑头像
 			name: "inviteRecord",
 			component: () => import("@/views/war/inviteRecord")

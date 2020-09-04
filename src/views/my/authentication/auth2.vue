@@ -1,16 +1,16 @@
 <template>
     <div class="auth2-page">
-        <HeaderBar title="实名认证"></HeaderBar>
+        <HeaderBar title="身份认证" :shadow="true"></HeaderBar>
         <div class="main">
             <p class="tips">证件需在有效期内，照片文字清晰可见，图片格式支持 JPG/PNG,大小不超过 2M</p>
             <h4>请上传您的身份证人像面</h4>
             <van-uploader :after-read="uploadCardFront">
-                <img v-show="!cardFrontUrl" class="default-img" src="../../../assets/img/my/cardBack.png" />
+                <img v-show="!cardFrontUrl" class="default-img" src="../../../assets/img/my/cardFront.svg" />
                 <img v-show="cardFrontUrl" class="default-img" :src="cardFrontUrl" />
             </van-uploader>
             <h4>请上传您的身份证国徽面</h4>
             <van-uploader :after-read="uploadCardBack">
-                <img v-show="!cardBackUrl" class="default-img" src="../../../assets/img/my/cardFront.png" />
+                <img v-show="!cardBackUrl" class="default-img" src="../../../assets/img/my/cardBack.svg" />
                 <img v-show="cardBackUrl" class="default-img" :src="cardBackUrl" />
             </van-uploader>
             <button class="full scale" @click="nextStep">下一步</button>
@@ -88,6 +88,7 @@ export default {
 .auth2-page {
     display: flex;
     flex-direction: column;
+    background: #FFF;
     .main {
         overflow-y: auto;
         .tips {
@@ -103,9 +104,11 @@ export default {
             margin: .4rem 0 .2rem;
         }
         .default-img {
+            width:100%;
             display: block;
-            width: 90%; 
+            padding:0 1rem;
             margin: 0 auto;
+            box-sizing: border-box;
         }
         button {
             display: block;

@@ -217,3 +217,27 @@ export function transMine(data) {
 export function getMineRecdList(data) {
 	return $http.postFormData('/app/user/getMineRecdList', data)
 }
+//实名认证 姓名和身份证号
+export function updateRealInfo(data){
+	return $http.postFormData('app/user/updateRealInfo', data)
+}
+//实名认证 身份证图片
+export function checkCardImg(data) {
+	return $http.postFormData('app/user/checkCardImg', data)
+}
+//实名认证 手持照
+export function updateSeniorImg(data) {
+	return $http.postFormData('app/user/updateSeniorImg', data)
+}
+// 收益记录列表
+export function getMineRewardList(data){
+	return $http.postFormData('app/user/getMineRewardList', data)
+}
+//提现
+export function withDraw(data){
+	return $http.postFormData('app/user/withdraw',data)
+}
+//提现
+export function getWithdrawList(data){
+	return $http.postFormData('app/user/withdrawList',data)
+}

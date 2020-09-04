@@ -121,5 +121,12 @@ export default {
 			color: #fff;
 		}
 	}
+	&.green {
+		background-color:#2B9FA7;
+		color:#FFF;
+		.go-back {
+			background-image: url('../../../public/img/arrow_left_white.png');
+		}
+	}
 }
 </style>

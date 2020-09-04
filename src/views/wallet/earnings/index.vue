@@ -36,30 +36,109 @@
 				<li class="head">
 					<span>挖矿云储力 (T)</span>
 					<span>24小时收益 ({{coin}})</span>
+					<span>收益类型</span>
 					<span>时间 </span>
 				</li>
 			</ul>
-			<van-empty class="empty-image" :image="'./img/empty.png'" description="暂时还没有收益信息哦"/>
+			<van-pull-refresh v-model="refreshing" @refresh="onRefresh" class="list">
+				<van-empty class="empty-image" :image="'./img/empty.png'" description="暂时还没有收益信息哦" v-if="!list.length"/>
+				<van-list
+					v-model="loading"
+					:finished="finished"
+					finished-text="没有更多了"
+					@load="onLoad"
+					v-else
+				>
+					<van-cell v-for="item in list" :key="item">
+						<span>98,998,859</span>
+						<span>988,867</span>
+						<span>基础收益</span>
+						<span>2020.02.05</span>
+					</van-cell>
+				</van-list>
+			</van-pull-refresh>
 		</div>
 	</div>
 </template>
 
 <script>
 import { mapState } from 'vuex'
+import { getMineRewardList } from '@/api/request'
 export default {
 	data() { 
 		return {
 			coin: 'FIL',
 			coinList: ['BTC', 'ETH', 'EOS', 'XMR', 'FIL'],
-			selectShow: false
+			selectShow: false,
+			list:[],
+			loading: false,
+			finished: false,
+			refreshing:false,
+			formData:{
+				pageNum:1,
+				pageSize:10,
+			},
+			total:0,
 		}
 	},
 	mounted() {
 		this.coin = this.$route.query.coin
+		this.getList()
 	},
 	methods: {
+		getList(){
+				getMineRewardList({
+					pageNum : this.formData.pageNum,
+					pageSize : this.formData.pageSize
+				}, {noLoading: true}).then(res => {
+					if (this.refreshing) {
+						this.list = []
+						this.refreshing = false
+					}
+					let list = res.result.list
+					this.total = res.result.total
+					for (let i = 0 ; i <list.length ; i++) {
+						this.list.push(list[i])
+					}
+					this.loading = false
+					if (this.list.length>this.total) {
+						this.finished = true;
+					}
+				})
+		},
+		getMoreList(){
+			getMineRewardList({
+				pageNum : this.formData.pageNum,
+				pageSize : this.formData.pageSize
+			}, {noLoading: true}).then(res => {
+				if (this.refreshing) {
+					this.list = []
+					this.refreshing = false
+					this.formData.pageNum = 1
+				}
+				let list = res.result.list
+				this.total = res.result.total
+				for (let i = 0 ; i <list.length ; i++) {
+					this.list.push(list[i])
+				}
+				this.loading = false
+				if (this.list.length>this.total) {
+					this.finished = true;
+				}
+			})
+		},
 		withdraw() {
-			this.$toast('暂未开放')
+			this.$router.push({path:'/withdraw',query:{'coin':this.coin}})
+		},
+		onLoad(){
+			this.formData.pageNum++
+			this.getList()
+		},
+		onRefresh(){
+			this.finished = false;
+			this.loading = true;
+			this.getList()
+			this.$toast('刷新列表')
 		}
 	},
 	computed: {
@@ -71,10 +150,13 @@ export default {
 <style lang="less" scoped>
 .earnings-page{
 	background-color: #fff;
+	display: flex;
+	flex-direction: column;
+	overflow: hidden;
 	.banner {
 		background: #F1F4F7 url(../../../assets/img/bg/bg11.png) no-repeat top center;
 		background-size: 100% auto;
-		overflow: hidden;
+		// overflow: hidden;
 		.content {
 			width: 92%;
 			margin: 0.54rem auto .3rem;
@@ -174,6 +256,10 @@ export default {
 		}
 	}
 	.table {
+		flex:1;
+		display: flex;
+		flex-direction: column;
+		overflow: hidden;
 		ul {
 			li {
 				display: flex;
@@ -181,13 +267,17 @@ export default {
 				padding: 0 .4rem;
 				span {
 					flex: 1;
-					&:nth-child(1) {
+					text-align: center;
+					&:first-of-type {
+						width:28%;
+						flex:none;
 						text-align: left;
 					}
-					&:nth-child(2) {
-						text-align: center;
+					&:nth-of-type(2) {
+						width:30%;
+						flex:none;
 					}
-					&:nth-child(3) {
+					&:last-of-type {
 						text-align: right;
 					}
 				}
@@ -201,15 +291,54 @@ export default {
 				}
 			}
 		}
+		.list {
+			flex:1;
+			overflow-y: auto;
+		}
+		/deep/ .van-list {
+			.van-cell {
+				height:.8rem;
+				padding:0 .4rem;
+				background: rgba(216,216,216,.2);
+				&:nth-of-type(2n){
+					background: #FFF;
+				}
+				.van-cell__value {
+					display: flex;
+					align-items: center;
+					span {
+						flex:1;
+						text-align: center;
+						font-size:.22rem;
+						color:#000;
+						&:first-of-type {
+							width:28%;
+							flex:none;
+							text-align: left;
+						}
+						&:nth-of-type(2) {
+							width:30%;
+							flex:none;
+						}
+						&:last-of-type {
+							text-align: right;
+						}
+					}
+				}
+				&::after{
+					border-bottom:0;
+				}
+			}
+		}
 		/deep/.empty-image {
-			margin-top: 1rem;
+
 			.van-empty__image {
 				height: auto;
 				img {
 					display: block;
 					width: 1.2rem;
 					height: 1.2rem;
-					margin: 0 auto;
+					margin: 1rem auto 0;
 				}
 			}
 			.van-empty__description {

@@ -53,5 +53,35 @@ const wallet = [
 		meta: { isLogin: true },
 		component: () => import('@/views/wallet/earnings/index')
 	},
+	{
+		path: '/withdraw',
+		name: 'withdraw',
+		meta: { isLogin: true },
+		component: () => import('@/views/wallet/withdraw/index')
+	},
+	{
+		path: '/withdrawList',
+		name: 'withdrawList',
+		meta: { isLogin: true },
+		component: () => import('@/views/wallet/withdraw/list')
+	},
+	{
+		path: '/withdrawDetail',
+		name: 'withdrawDetail',
+		meta: { isLogin: true },
+		component: () => import('@/views/wallet/withdraw/detail')
+	},
+	{
+		path: '/addressManage',
+		name: 'addressManage',
+		meta: { isLogin: true },
+		component: () => import('@/views/wallet/address/index')
+	},
+	{
+		path: '/addAddress',
+		name: 'addAddress',
+		meta: { isLogin: true },
+		component: () => import('@/views/wallet/address/add')
+	},
 ]
 export default wallet

@@ -14,9 +14,13 @@
 						<span>{{userInfo.teamNum}}</span>
 						<label>集群NT</label>
 					</div>
+					<div @click="$router.push('/inviteList')">
+						<span>{{userInfo.teamTAmount}} <sub>T</sub></span>
+						<label>集群云储力<img src="../../assets/img/icon/arrow3.png" alt=""></label>
+					</div>
 					<div>
 						<span>{{userInfo.teamTAmount}} <sub>T</sub></span>
-						<label>集群云储力</label>
+						<label>最大矿池</label>
 					</div>
 				</div>
 				<div class="invitecode" v-clipboard:copy="userInfo.inviteCode" v-clipboard:success="onCopy" v-clipboard:error="onError">
@@ -166,9 +170,13 @@ export default {
 				margin-top: .3rem;
 				div {
 					background-color: #F6F9FC;
-					width: 2.75rem;
+					flex:1;
 					padding: .3rem 0;
+					margin-right:.2rem;
 					border-radius: .16rem;
+					&:last-of-type {
+						margin-right:0;
+					}
 					span {
 						display: block;
 						color: #000000;
@@ -185,6 +193,11 @@ export default {
 						font-weight:500;
 						color:rgba(150,150,150,1);
 						line-height:0.24rem;
+						img {
+							width:.1rem;
+							height:.16rem;
+							margin-left:.08rem;
+						}
 					}
 				}
 			}

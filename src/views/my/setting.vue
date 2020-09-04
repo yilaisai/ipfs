@@ -13,6 +13,7 @@
 				<!-- <van-cell title="身份认证" is-link value="未认证" /> -->
 				<van-cell title="登录密码" is-link value="修改" to="/updateLoginPwd" />
 				<van-cell title="资金密码" is-link :value="userInfo.isSetFundPwd == 0 ? '未设置' : '修改'" to="/updateFundsPwd" />
+				<van-cell title="实名认证" is-link :value="userInfo.auditStatus == -1 ? '未认证' : userInfo.auditStatus == 0 ?'未通过':userInfo.auditStatus == 2 ?'审核中':userInfo.auditStatus == 1?'已通过':'未认证'" @click="goAuth" />
 				<!-- <van-cell title="开启音效" is-link>
 					<template #right-icon>
 						<van-switch v-model="checked" active-color="#00D984" size="24px" />
@@ -53,6 +54,15 @@ export default {
 			}).catch(() => {
 				// on cancel
 			})
+		},
+		goAuth(){
+			if (this.userInfo.auditStatus == 2) return 
+			if(this.userInfo.auditStatus == -1) {
+				this.$router.push('/auth1')
+			}else {
+				// this.$router.push('/authStatus')
+				this.$router.push('/auth1')
+			}
 		}
 	},
 	computed: {

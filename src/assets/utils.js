@@ -34,7 +34,7 @@ const fmtDate = (obj, type) => {
 		break
 	}
 }
-
+Vue.filter('fmtDate',fmtDate)
 /**
  * 账号格式化
  * @param {String} str

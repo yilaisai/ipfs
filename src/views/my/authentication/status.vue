@@ -1,20 +1,20 @@
 <template>
 	<div class="status-page">
-		<HeaderBar title="实名认证"></HeaderBar>
+		<HeaderBar title="身份认证" :shadow="true"></HeaderBar>
 		<div class="main">
 			<div class="status">
-				<label>实名认证</label>
-				<span class="success" v-if="userInfo.auditStatus == 1">认证成功 <img src="../../../assets/img/my/status1.png" alt=""></span>
-				<span class="failed" v-if="userInfo.auditStatus == 0">认证未通过 <img src="../../../assets/img/my/status2.png" alt=""></span>
+				<label>身份认证</label>
+				<span class="success" v-if="userInfo.auditStatus == 1"><img src="../../../assets/img/my/status1.svg" alt=""><i>认证成功</i></span>
+				<span class="failed" v-if="userInfo.auditStatus"><img src="../../../assets/img/my/status2.svg" alt=""> <i>认证未通过</i></span>
 			</div>
 			<ul class="info" v-if="userInfo.auditStatus == 1">
 				<li>
 					<label>姓名</label>
-					<span>{{userInfo.realName}}</span>
+					<span>{{userInfo.realName || '天天'}}</span>
 				</li>
 				<li>
 					<label>身份证号</label>
-					<span>{{userInfo.cardNo}}</span>
+					<span>{{userInfo.cardNo || "360681199900317012"}}</span>
 				</li>
 			</ul>
 			<p v-if="userInfo.auditStatus == 0" class="reason">原因：{{userInfo.reason.split("|")[0]}} <br />{{userInfo.reason.split("|")[1]}}<br />{{userInfo.reason.split("|")[2]}}</p>
@@ -55,10 +55,17 @@ export default {
 				font-weight: 600;
 			}
 			span {
-				font-size: .24rem;
+				font-size: .28rem;
+				line-height: 1em;
+				display: flex;
+				align-items: center;
 				img {
-					width: .24rem;
-					height: .24rem;
+					width: .28rem;
+					height: .28rem;
+					margin-right:.1rem;
+				}
+				i {
+					font-style: normal;
 				}
 				&.success {
 					color: #09BB07;
@@ -70,17 +77,17 @@ export default {
 		}
 		.info {
 			font-size: .28rem;
-			padding: .4rem .4rem;
+			padding: .6rem .4rem;
 			background-color: #fff;
 			li {
 				display: flex;
 				justify-content: space-between;
-				margin-bottom: .4rem;
+				margin-bottom: .6rem;
 				label {
-					color: #969696;
+					color: #646464;
 				}
 				span {
-					color: #323232;
+					color: #000;
 				}
 				&:last-child {
 					margin-bottom: 0;
