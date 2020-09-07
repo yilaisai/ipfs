@@ -23,7 +23,7 @@
 					<p>
 						<span>总云储力：{{$BigNumber(item.remainAmount).plus(item.saleAmount)}}T</span>
 						<span>剩余云储力：{{item.remainAmount}}T</span>
-						<span>合约期限：{{item.proTime}}个月</span>
+						<span>合约期限：{{Math.floor(item.proTime / 30)}}个月</span>
 					</p>
 					<s>原价：{{item.orgPrice}} RMB/T</s>
 					<h3>现价：{{item.price}} RMB/T</h3>

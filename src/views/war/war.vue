@@ -38,7 +38,7 @@
 								<label>合约期限</label>
 								<img src="../../assets/img/icon/fscl_icon.png" alt="">
 							</div>
-							<span>{{item.proTime}} <sub>个月</sub></span>
+							<span>{{Math.floor(item.proTime / 30)}} <sub>个月</sub></span>
 						</div>
 					</div>
 					<div class="buybar">
