@@ -6,12 +6,12 @@
 				<div class="flex-wrap">
 					<div>
 						<img :src="'./img/coin/' + coin + '.png'" alt="">
-						<h3>0</h3>
+						<h3>{{coin == 'FIL'?0:0}}</h3>
 						<span>累计收益({{coin}})</span>
 					</div>
 					<div>
 						<img :src="'./img/coin/' + coin + '.png'" alt="">
-						<h3>0</h3>
+						<h3>{{coin == 'FIL'?userInfo.amount:0}}</h3>
 						<span>账户余额({{coin}})</span>
 					</div>
 				</div>
@@ -45,15 +45,15 @@
 				<van-list
 					v-model="loading"
 					:finished="finished"
-					finished-text="没有更多了"
+					
 					@load="onLoad"
 					v-else
 				>
-					<van-cell v-for="item in list" :key="item">
-						<span>98,998,859</span>
-						<span>988,867</span>
-						<span>基础收益</span>
-						<span>2020.02.05</span>
+					<van-cell v-for="(item,index) in list" :key="index">
+						<span>{{item.activeAmount}}</span>
+						<span>{{item.amount}}</span>
+						<span>{{item.type == 0?'基础收益':item.type == 1?'奖励收益':'分红收益'}}</span>
+						<span>{{item.createTimeStamp | fmtDate('full')}}</span>
 					</van-cell>
 				</van-list>
 			</van-pull-refresh>
@@ -83,7 +83,9 @@ export default {
 	},
 	mounted() {
 		this.coin = this.$route.query.coin
-		this.getList()
+		if(this.coin == 'FIL') {
+			this.getList()
+		}
 	},
 	methods: {
 		getList(){
@@ -101,7 +103,7 @@ export default {
 						this.list.push(list[i])
 					}
 					this.loading = false
-					if (this.list.length>this.total) {
+					if (this.list.length>=this.total) {
 						this.finished = true;
 					}
 				})
