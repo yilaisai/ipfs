@@ -241,3 +241,7 @@ export function withDraw(data){
 export function getWithdrawList(data){
 	return $http.postFormData('app/user/withdrawList',data)
 }
+//直邀列表
+export function getInviteUsers(data){
+	return $http.postFormData('app/user/inviteUsers',data)
+}

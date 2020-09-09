@@ -19,7 +19,7 @@
 						<label>集群云储力<img src="../../assets/img/icon/arrow3.png" alt=""></label>
 					</div>
 					<div>
-						<span>{{userInfo.teamTAmount}} <sub>T</sub></span>
+						<span>{{userInfo.bigAmount}} <sub>T</sub></span>
 						<label>最大矿池</label>
 					</div>
 				</div>
@@ -42,12 +42,12 @@
 	</div>
 </template>
 <script>
-import vueQr from 'vue-qr'
+// import vueQr from 'vue-qr'
 import { mapState } from 'vuex'
 export default {
-	components:{
-		vueQr
-	},
+	// components:{
+	// 	vueQr
+	// },
 	data(){
 		return {
 			code: localStorage.getItem('inviteCode'),

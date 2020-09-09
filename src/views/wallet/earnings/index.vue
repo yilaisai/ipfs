@@ -35,7 +35,7 @@
 			<ul>
 				<li class="head">
 					<span>挖矿云储力 (T)</span>
-					<span>24小时收益 ({{coin}})</span>
+					<span>收益 ({{coin}})</span>
 					<span>收益类型</span>
 					<span>时间 </span>
 				</li>
@@ -107,27 +107,6 @@ export default {
 						this.finished = true;
 					}
 				})
-		},
-		getMoreList(){
-			getMineRewardList({
-				pageNum : this.formData.pageNum,
-				pageSize : this.formData.pageSize
-			}, {noLoading: true}).then(res => {
-				if (this.refreshing) {
-					this.list = []
-					this.refreshing = false
-					this.formData.pageNum = 1
-				}
-				let list = res.result.list
-				this.total = res.result.total
-				for (let i = 0 ; i <list.length ; i++) {
-					this.list.push(list[i])
-				}
-				this.loading = false
-				if (this.list.length>this.total) {
-					this.finished = true;
-				}
-			})
 		},
 		withdraw() {
 			this.$router.push({path:'/withdraw',query:{'coin':this.coin}})
