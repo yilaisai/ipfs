@@ -9,9 +9,9 @@
 						<img :src="'./img/coin/' + item + '.png'" alt="">
 						<i>{{item}}</i>
 					</span>
-					<span>0</span>
-					<span>0</span>
-					<span>0</span>
+					<span>{{item == "FIL"?userInfo.activeTAmount:0}}</span>
+					<span>{{item == "FIL"?userInfo.baseReward:0}}</span>
+					<span>{{item == "FIL"?userInfo.amount:0}}</span>
 				</li>
 			</ul>
 		</div>
@@ -19,11 +19,15 @@
 </template>
 
 <script>
+import { mapState } from 'vuex'
 export default {
 	data() { 
 		return {
 			coinList: ['FIL', 'BTC', 'BHD', 'EOS', 'ETH', 'ZEC'],
 		}
+	},
+	computed: {
+		...mapState(['userInfo'])
 	}
 }
 </script>

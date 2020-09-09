@@ -6,7 +6,7 @@
 				<div class="flex-wrap">
 					<div>
 						<img :src="'./img/coin/' + coin + '.png'" alt="">
-						<h3>{{coin == 'FIL'?0:0}}</h3>
+						<h3>{{coin == 'FIL'?userInfo.totalAmount:0}}</h3>
 						<span>累计收益({{coin}})</span>
 					</div>
 					<div>
