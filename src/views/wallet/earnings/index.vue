@@ -52,7 +52,7 @@
 					<van-cell v-for="(item,index) in list" :key="index">
 						<span>{{item.activeAmount}}</span>
 						<span>{{item.amount}}</span>
-						<span>{{item.type == 0?'基础收益':item.type == 1?'奖励收益':'分红收益'}}</span>
+						<span>{{item.type == 0?'基础收益':item.type == 1?'矿池奖励':'分红收益'}}</span>
 						<span>{{item.createTimeStamp | fmtDate('full')}}</span>
 					</van-cell>
 				</van-list>
