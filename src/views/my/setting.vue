@@ -9,7 +9,7 @@
 					</template>
 				</van-cell>
 				<van-cell title="昵称" is-link :value="userInfo.nickName" to="/userinfo" />
-				<van-cell title="手机号" :value="userInfo.phone + '（已绑定）'" />
+				<van-cell title="手机号" :value="userInfo.phone" />
 				<!-- <van-cell title="身份认证" is-link value="未认证" /> -->
 				<van-cell title="登录密码" is-link value="修改" to="/updateLoginPwd" />
 				<van-cell title="资金密码" is-link :value="userInfo.isSetFundPwd == 0 ? '未设置' : '修改'" to="/updateFundsPwd" />
