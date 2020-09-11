@@ -1,6 +1,6 @@
 <template>
     <div class="com-header-bar" :class="[color, {'shadow':shadow}]">
-        <a href="javascript:;" class="go-back" @click="$router.goBack(-1)" v-if="back"></a>
+        <a href="javascript:;" class="go-back" @click="goBack" v-if="back"></a>
         <h2>{{title}}</h2>
 		<div class="other">
 			<slot ></slot>
@@ -34,6 +34,12 @@ export default {
 		}
 	},
 	mounted() {
+	},
+	methods:{
+		goBack(){
+			this.$router.goBack(-1)
+			this.$emit('goBack')
+		}
 	}
 }
 </script>

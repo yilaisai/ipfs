@@ -1,6 +1,6 @@
 <template>
 	<div class="setting-page">
-		<HeaderBar title="设置"></HeaderBar>
+		<HeaderBar title="设置" @goBack="goBack"></HeaderBar>
 		<div class="main">
 			<van-cell-group>
 				<van-cell title="头像" is-link to="/editAvatar">
@@ -63,6 +63,11 @@ export default {
 				this.$router.push('/authStatus')
 				// this.$router.push('/auth1')
 			}
+		},
+		goBack(){
+			setTimeout(()=>{
+				this.$router.replace('/my')
+			},50)
 		}
 	},
 	computed: {
