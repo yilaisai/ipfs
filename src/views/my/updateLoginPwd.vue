@@ -5,7 +5,7 @@
 			<p>账号 : {{userInfo.phone}}</p>
 			<div class="input-wrap">
 				<!-- <label>请输入旧密码</label> -->
-				<van-field v-model.trim="oldLoginPwd" type="password" placeholder="旧密码登录" clearable />
+				<van-field v-model.trim="oldLoginPwd" type="password" placeholder="旧登录密码" clearable />
 				<div class="other">
 					<span></span>
 					<a href="javascript:;" @click="$router.push('/forgotPwd')">忘记密码？</a>
