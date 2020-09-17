@@ -14,9 +14,13 @@
 						<span>{{userInfo.teamNum}}</span>
 						<label>集群NT</label>
 					</div>
-					<div @click="$router.push('/inviteList')">
+					<!-- <div @click="$router.push('/inviteList')">
 						<span>{{userInfo.teamTAmount}} <sub>T</sub></span>
 						<label>集群云储力<img src="../../assets/img/icon/arrow3.png" alt=""></label>
+					</div> -->
+					<div>
+						<span>{{userInfo.teamTAmount}} <sub>T</sub></span>
+						<label>集群云储力</label>
 					</div>
 					<div>
 						<span>{{userInfo.bigAmount}} <sub>T</sub></span>
