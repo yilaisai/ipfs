@@ -17,6 +17,20 @@
 					</van-swipe>
 				</van-notice-bar>
 			</div>
+			<ul class="info">
+				<li @click="$router.push('/overView')">
+					<span>{{height}}</span>
+					<span>区块高度 <img src="../../assets/img/home/right.png" alt=""></span>
+				</li>
+				<li @click="$router.push('/overView')">
+					<span>{{$changeToPiB(overview.totalQualityAdjPower) || 0}} PiB</span>
+					<span>全网有效算力 <img src="../../assets/img/home/right.png" alt=""></span>
+				</li>
+				<li @click="$router.push('/overView')">
+					<span>{{overview.activeMiners || 0}}</span>
+					<span>活跃矿工数 <img src="../../assets/img/home/right.png" alt=""></span>
+				</li>
+			</ul>
 			<ul class="list">
 				<li v-for="(item,index) in list" :key="index" :class="{'ysq' : item.remainAmount <= 0}">
 					<h2>{{item.name}}</h2>
@@ -36,10 +50,11 @@
 </template>
 
 <script>
-import { mapState } from 'vuex'
+import { mapState,mapMutations } from 'vuex'
 import { getBannersAndNotices, getMinePros } from '@/api/request'
 import BannerSwiper from '@/components/common/bannerSwiper'
 import Products from './components/products'
+import { $http } from '@/axios'
 export default {
 	data() { 
 		return {
@@ -53,14 +68,14 @@ export default {
 			noticeId: '',
 			totalReadNotice: 0,
 			totalNotice: 0,
-			bannerList: []
+			bannerList: [],
+			timer:null
 		}
 	},
 	activated() {
 		this.$store.dispatch('getUserInfo')
 		this.getData()
 		getBannersAndNotices().then(res => {
-			console.log(res)
 			this.bannerList = res.result.banners
 			if(res.result.noticeInfos.length > 0) {
 				this.noticeText = res.result.noticeInfos[0].content
@@ -86,10 +101,10 @@ export default {
 				})
 				this.list = res.result.list
 			})
-		}
+		},
 	},
 	computed: {
-		...mapState(['userInfo'])
+		...mapState(['userInfo','overview','height'])
 	},
 	components: {
 		BannerSwiper,
@@ -111,6 +126,36 @@ export default {
 				display: block;
 				height: .6rem;
 				margin: .2rem auto;
+			}
+		}
+		.info {
+			width: 100%;
+			background: #FFF;
+			border-top:.01rem solid #E6E6E6;
+			display: flex;
+			justify-content: space-between;
+			align-items: center;
+			padding: .1rem 0.15rem 0;
+			box-sizing: border-box;
+			li {
+				flex:1;
+				height:1.56rem;
+				padding-top:.3rem;
+				background: url(../../assets/img/bg/bg14.png) no-repeat top center;
+				background-size: 100% 1.56rem;
+				display: flex;
+				flex-direction: column;
+				align-items: center;
+				box-sizing: border-box;
+				span {
+					color:#FFF;
+					&:first-of-type {
+						margin-bottom:.2rem;
+					}
+					img {
+						width:.08rem;
+					}
+				}
 			}
 		}
 		.van-notice-bar {

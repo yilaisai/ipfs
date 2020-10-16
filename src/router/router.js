@@ -117,6 +117,16 @@ const router =  new Router({
 			name: "checkstand",
 			component: () => import("@/views/home/placeOrder/checkstand")
 		},
+		{
+			path: "/overView",  //全网信息
+			name: "overView",
+			component: () => import("@/views/overView/index")
+		},
+		{
+			path: "/rank",  //全网信息
+			name: "rank",
+			component: () => import("@/views/overView/rank")
+		},
 	]
 });
 

@@ -29,6 +29,9 @@ const fmtDate = (obj, type) => {
 		
 		return m.substring(m.length - 2, m.length) + "-" + d.substring(d.length - 2, d.length) + " " + h + ":" + minutes
 		break
+	case 'hour':
+		return h + ":" + minutes
+		break
 	default: 
 		return y + "-" + m.substring(m.length - 2, m.length) + "-" + d.substring(d.length - 2, d.length)
 		break
@@ -154,7 +157,16 @@ const decimalNumber = (number, decimal = 0) => {
 	return BigNumber( Math.floor( n.times(Math.pow(10, decimal)) ) ).div(Math.pow(10, decimal))
 }
 
-
+/**
+ * websocket获取到数据单位转换
+ */
+ const changeToPiB = (number,unit = 'PiB') => {
+	if(unit == 'PiB') {
+		return Math.round((number/1024/1024/1024/1024/1024)*100)/100
+	} else if (unit == 'TiB') {
+		return Math.round((number/1024/1024/1024/1024)*100)/100
+	}
+ }
 
 
 const extendMethods = {
@@ -167,7 +179,8 @@ const extendMethods = {
 	getBrowser,
 	BigNumber,
 	decimalNumber,
-	bus
+	bus,
+	changeToPiB
 }
 
 export default {

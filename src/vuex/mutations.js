@@ -23,6 +23,12 @@ const mutations = {
 			localStorage.removeItem('token')
 		}
 		state.token = val
+	},
+	setOverview(state, payload) { 
+		state.overview = payload
+	},
+	setHeight(state, payload) {
+		state.height = payload
 	}
 }
 

@@ -12,14 +12,16 @@
 </template>
 
 <script>
-import {mapState} from 'vuex'
+import { mapState,mapMutations } from 'vuex'
 import { getVersionInfo } from '@/api/request' 
 export default {
 	data() {
 		return {
 			isQuit: false,
 			isShowLoading: false,
-			keepAlive: ['buyShip','index', 'login', 'goodsDetails']
+			keepAlive: ['buyShip','index', 'login', 'goodsDetails'],
+			websock:'',
+			timer:null
 		}
 	},
 	computed: {
@@ -68,8 +70,11 @@ export default {
 		this.$bus.$on('loading', (isShow) => {
 			this.isShowLoading = isShow
 		})
+
+		this.intWebSocket()
 	},
 	methods: {
+		...mapMutations(['setOverview','setHeight']),
 		getVersionInfo() {
 			try {
 				var loading = plus.nativeUI.showWaiting("版本检测中...")
@@ -102,7 +107,47 @@ export default {
 				// loading.setTitle('网络异常，请检查网络')
 				plus.nativeUI.closeWaiting()
 			})
-		}
+		},
+		intWebSocket(){
+			if ("WebSocket" in window){
+				this.websock = new WebSocket(`wss://filfox.info/socket.io/?EIO=3&transport=websocket`)
+				this.websock.onopen = this.webSocketonopen;
+				this.websock.onmessage = this.webSocketonmessage;
+				this.websock.onclose = this.webSocketonclose;
+				this.websock.onerror = this.webSocketonerror;
+			} else {
+				console.log('您的浏览器不支持websocket,请升级浏览器！')
+			}
+		},
+		webSocketonopen(ws){
+			console.log('Websock已连接...')
+			if(this.timer) clearInterval(this.timer)
+			this.websock.send(2)
+			this.timer = setInterval(()=>{
+				this.websock.send(2)
+			},25000)
+			this.websock.send(42+JSON.stringify(["subscribe","blockchain"]));
+			this.websock.send(42+JSON.stringify(["subscribe","account"]));
+			this.websock.send(42+JSON.stringify(["subscribe","tipset"]));
+		},
+		webSocketonmessage(e){
+			if(e.data.slice(0,2) == '42') {
+				let data = JSON.parse(e.data.slice(2))
+				if (data && data[0] == "blockchain/overview") {
+					this.setOverview(data[1])
+				} else if(!(data[1] instanceof Array)) {
+					this.setHeight(data[1].height)
+				}
+			}
+		},
+		webSocketonclose(e){
+			console.log('websocket关闭重连')
+			console.log('websocket 断开: ' + e.code + ' ' + e.reason + ' ' + e.wasClean)
+			setTimeout(()=>{this.intWebSocket()},1000)
+		},
+		webSocketonerror(){
+			console.log('websocket链接异常！')
+		},
 	}
 }
 </script>

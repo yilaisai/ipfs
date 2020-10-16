@@ -20,7 +20,11 @@ export default new Vuex.Store({
 		userInfo:{},
 		isBack: false,
 		transitionName: "slide-left",
-		token: ''
+		token: '',
+		overview:{
+			power:{}
+		},
+		height:0,
 	},
 	mutations,
 	actions,
