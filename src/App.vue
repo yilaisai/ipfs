@@ -48,7 +48,6 @@ export default {
 				this.$router.goBack(-1)
 			}
 		})
-
 		if(window.plus) {
 			that.getVersionInfo()
 			plus.push.addEventListener('click', function(msg){
