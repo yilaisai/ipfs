@@ -18,7 +18,7 @@
 				<p><label>购买帐号</label><span>{{userInfo.phone}}</span></p>
 				<h5><p><label>商品小计</label><span>¥ {{$BigNumber(goods.price).times(goods.buyAmount)}}</span></p></h5>
 			</div>
-			<van-button type="primary" size="large" @click="show = true">立即支付</van-button>
+			<van-button type="primary" size="large" @click="pay">立即支付</van-button>
 		</div>
 		<van-dialog v-model="show" title="标题" :show-confirm-button="false" @confirm="pay">
 			<div class="content">
@@ -70,10 +70,10 @@ export default {
 	},
 	methods: {
 		pay() {
-			if(!this.checked) {
-				this.$toast('请阅读并同意合约！')
-				return
-			}
+			// if(!this.checked) {
+			// 	this.$toast('请阅读并同意合约！')
+			// 	return
+			// }
 			this.$router.replace('/checkstand?price=' + this.$BigNumber(this.goods.price).times(this.goods.buyAmount))
 		}
 	},
