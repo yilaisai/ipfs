@@ -18,18 +18,50 @@
 				<p><label>购买帐号</label><span>{{userInfo.phone}}</span></p>
 				<h5><p><label>商品小计</label><span>¥ {{$BigNumber(goods.price).times(goods.buyAmount)}}</span></p></h5>
 			</div>
-			<van-button type="primary" size="large" @click="pay">立即支付</van-button>
+			<van-button type="primary" size="large" @click="show = true">立即支付</van-button>
 		</div>
+		<van-dialog v-model="show" title="标题" :show-confirm-button="false" @confirm="pay">
+			<div class="content">
+				<p>凡事都很垃圾打</p>
+				<p>凡事都很垃圾打</p>
+				<p>凡事都很垃圾打</p>
+				<p>凡事都很垃圾打</p>
+				<p>凡事都很垃圾打</p>
+				<p>凡事都很垃圾打</p>
+				<p>凡事都很垃圾打</p>
+				<p>凡事都很垃圾打</p>
+				<p>凡事都很垃圾打</p>
+				<p>凡事都很垃圾打</p>
+				<p>凡事都很垃圾打</p>
+				<p>凡事都很垃圾打</p>
+				<p>凡事都很垃圾打</p>
+				<p>凡事都很垃圾打</p>
+				<p>凡事都很垃圾打</p>
+				<p>凡事都很垃圾打</p>
+				<p>凡事都很垃圾打</p>
+				<p>凡事都很垃圾打</p>
+				<p>凡事都很垃圾打</p>
+				<p>凡事都很垃圾打</p>
+				<p>凡事都很垃圾打</p>
+			</div>
+			<van-checkbox v-model="checked">我已阅读并同意</van-checkbox>
+			<div class="btns">
+				<van-button type="default" class="cancel" @click="show = false">取消</van-button>
+				<van-button type="primary" class="confirm" @click="pay">确定</van-button>
+			</div>
+		</van-dialog>
 	</div>
+	
 </template>
-
 <script>
 import { mapState } from 'vuex'
 export default {
 	data() { 
 		return {
 			value: 1,
-			goods: {}
+			goods: {},
+			show:false,
+			checked:false
 		}
 	},
 	created() {
@@ -38,6 +70,10 @@ export default {
 	},
 	methods: {
 		pay() {
+			if(!this.checked) {
+				this.$toast('请阅读并同意合约！')
+				return
+			}
 			this.$router.replace('/checkstand?price=' + this.$BigNumber(this.goods.price).times(this.goods.buyAmount))
 		}
 	},
@@ -143,6 +179,47 @@ export default {
 			font-size: .34rem;
 			border: 1px solid #FA6400;
 			margin: 1.2rem auto 0;
+		}
+	}
+}
+/deep/ .van-dialog {
+	.van-dialog__header {
+		padding:.3rem 0 ;
+	}
+	.van-dialog__content {
+		padding:0 .3rem .3rem .4rem;
+		.content {
+			margin-bottom:.3rem;
+			max-height:5rem;
+			overflow-y:auto;
+			font-size:.24rem;
+		}
+		.van-checkbox {
+			font-size:.24rem;
+			.van-checkbox__icon {
+				font-size:.28rem;
+			}
+		}
+		.btns {
+			padding:0 .2rem;
+			margin-top:.2rem;
+			display: flex;
+			justify-content: space-between;
+			align-items: center;
+			.van-button {
+				flex:1;
+				margin-right:.5rem;
+				&:last-of-type {
+					margin-right:0;
+				}
+			}
+			.cancel {
+				color:#232323;
+			}
+			.confirm {
+				background: #FA6400;
+				border:1px solid #FA6400;
+			}
 		}
 	}
 }

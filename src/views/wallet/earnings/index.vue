@@ -3,7 +3,7 @@
 		<div class="banner">
 			<HeaderBar :title="coin + '收益记录'" color="transparent"></HeaderBar>
 			<div class="content">
-				<div class="flex-wrap">
+				<div class="flex-wrap flex-top">
 					<div>
 						<img :src="'./img/coin/' + coin + '.png'" alt="">
 						<h3>{{coin == 'FIL'?userInfo.totalAmount:0}}</h3>
@@ -13,6 +13,18 @@
 						<img :src="'./img/coin/' + coin + '.png'" alt="">
 						<h3>{{coin == 'FIL'?userInfo.amount:0}}</h3>
 						<span>账户余额({{coin}})</span>
+					</div>
+				</div>
+				<div class="flex-wrap">
+					<div>
+						<img :src="'./img/coin/' + coin + '.png'" alt="">
+						<h3>{{coin == 'FIL'?userInfo.pledge:0}}</h3>
+						<span>质押({{coin}})</span>
+					</div>
+					<div>
+						<img :src="'./img/coin/' + coin + '.png'" alt="">
+						<h3>{{coin == 'FIL'?userInfo.poolAmount:0}}</h3>
+						<span>锁仓({{coin}})</span>
 					</div>
 				</div>
 				<van-button type="primary" size="large" @click="withdraw">提现</van-button>
@@ -52,7 +64,7 @@
 					<van-cell v-for="(item,index) in list" :key="index">
 						<span>{{item.activeAmount}}</span>
 						<span>{{item.amount}}</span>
-						<span>{{item.type == 0?'基础收益':item.type == 1?'矿池奖励':'分红收益'}}</span>
+						<span>{{item.type == 0?'基础收益':item.type == 1?'矿池奖励':item.type == 2?'分红收益':'线性释放收益'}}</span>
 						<span>{{item.createTimeStamp | fmtDate('full')}}</span>
 					</van-cell>
 				</van-list>
@@ -172,6 +184,9 @@ export default {
 						color: #000;
 					}
 				}
+			}
+			.flex-top {
+				margin-bottom:.1rem;
 			}
 			.van-button {
 				margin-top: .2rem;
@@ -303,6 +318,7 @@ export default {
 							flex:none;
 						}
 						&:last-of-type {
+							line-height: 1.5em;
 							text-align: right;
 						}
 					}
