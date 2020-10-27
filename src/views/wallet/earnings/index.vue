@@ -61,7 +61,8 @@
 				>
 					<van-cell v-for="(item,index) in list" :key="index">
 						<span>{{item.activeAmount}}</span>
-						<span>{{item.lineUseAmount}}</span>
+						<span v-if="item.type == 3">{{item.lineUseAmount}}</span>
+						<span v-else>{{item.amount}}</span>
 						<span>{{item.type == 0?'基础收益':item.type == 1?'矿池奖励':item.type == 2?'分红收益':'线性释放收益'}}</span>
 						<span>{{item.createTimeStamp | fmtDate('full')}}</span>
 					</van-cell>
