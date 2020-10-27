@@ -32,12 +32,21 @@
 						</div>
 						<span>{{Math.floor(goods.proTime / 30)}} <sub>个月</sub></span>
 					</div>
+					<div class="flex-wrap">
+						<div>
+							<label>质押</label>
+							<img src="../../assets/img/icon/zy_icon.png" alt="">
+						</div>
+						<span>{{Math.floor(goods.pledge)}} <sub>FIL/T</sub></span>
+					</div>
 				</div>
 				<div class="buybar">
 					<div class="price">
-						<h4>现价 : {{goods.price}}RMB/T</h4>
+						<div class="price-left">
+							<h4>现价 : {{goods.price}}RMB/T</h4>
 							<s>原价 : {{goods.orgPrice}}RMB/T</s>
-						<div>
+						</div>
+						<div class="price-right">
 							<span>数量</span>
 							<van-stepper v-model="goods.buyAmount" integer min="1" :max="goods.remainAmount" />
 						</div>
@@ -104,17 +113,18 @@ export default {
 					border-radius: .12rem;
 					padding: .2rem;
 					div {
+						min-width:1rem;
 						margin-right: .2rem;
 						label {
 							display: block;
 							white-space: nowrap;
-							font-size: .22rem;
+							font-size: .2rem;
 							color: #6D7278;
 						}
 						img {
 							display: block;
-							width: .4rem;
-							height: .4rem;
+							// width: .4rem;
+							height: .36rem;
 							margin: .1rem auto 0;
 						}
 					}
@@ -135,30 +145,40 @@ export default {
 				}
 			}
 			.buybar {
+				margin-top:.3rem;
 				display: flex;
+				flex-direction: column;
 				align-items: flex-end;
 				.price {
-					margin-right: .5rem;
+					width:100%;
+					margin-bottom:.2rem;
 					white-space: nowrap;
-					h4 {
-						font-size: .28rem;
-						color: #FA6400;
+					display: flex;
+					justify-content: space-between;
+					.price-left {
+						h4 {
+							font-size: .26rem;
+							color: #FA6400;
+						}
+						s {
+							font-size: .2rem;
+							color: #B4B4B4;
+						}
 					}
-					s {
-						font-size: .24rem;
-						color: #B4B4B4;
-					}
-					div {
+					.price-right {
 						display: flex;
 						align-items: center;
 						margin-top: .1rem;
 						span {
 							color: #969696;
 							margin-right: .1rem;
+							font-size:.24rem;
 						}
 					}
 				}
 				.van-button {
+					height:.88rem;
+					font-size:.32rem;
 					background-color: #FA6400;
 					border: 1px solid #FA6400;
 				}

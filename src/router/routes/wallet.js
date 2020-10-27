@@ -48,28 +48,34 @@ const wallet = [
 		component: () => import("@/views/wallet/billList")
 	},
 	{
-		path: '/earningsDetails',
+		path: '/earningsDetails',  //收益记录
 		name: 'earningsDetails',
 		meta: { isLogin: true },
 		component: () => import('@/views/wallet/earnings/index')
 	},
 	{
+		path: '/earningsLock',  //锁仓列表
+		name: 'earningsLock',
+		meta: { isLogin: true },
+		component: () => import('@/views/wallet/earnings/lock')
+	},
+	{
 		path: '/withdraw',
 		name: 'withdraw',
 		meta: { isLogin: true },
-		component: () => import('@/views/wallet/withdraw/index')
+		component: () => import('@/views/wallet/balance/withdraw/index')
 	},
 	{
 		path: '/withdrawList',
 		name: 'withdrawList',
 		meta: { isLogin: true },
-		component: () => import('@/views/wallet/withdraw/list')
+		component: () => import('@/views/wallet/balance/withdraw/list')
 	},
 	{
 		path: '/withdrawDetail',
 		name: 'withdrawDetail',
 		meta: { isLogin: true },
-		component: () => import('@/views/wallet/withdraw/detail')
+		component: () => import('@/views/wallet/balance/withdraw/detail')
 	},
 	{
 		path: '/addressManage',
@@ -82,6 +88,24 @@ const wallet = [
 		name: 'addAddress',
 		meta: { isLogin: true },
 		component: () => import('@/views/wallet/address/add')
+	},
+	{
+		path: '/balance',
+		name: 'balance',
+		meta: { isLogin: true },
+		component: () => import('@/views/wallet/balance/index')
+	},
+	{
+		path: '/recharge',
+		name: 'recharge',
+		meta: { isLogin: true },
+		component: () => import('@/views/wallet/balance/recharge/index')
+	},
+	{
+		path: '/rechargeDetail',
+		name: 'rechargeDetail',
+		meta: { isLogin: true },
+		component: () => import('@/views/wallet/balance/recharge/detail')
 	},
 ]
 export default wallet

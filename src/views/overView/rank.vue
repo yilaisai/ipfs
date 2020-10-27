@@ -122,9 +122,11 @@
     },
     methods: {
       onLoad(){
+        console.log('onload')
         this.getData()
       },
       changeTable(){
+        console.log(this.active)
         let dom = document.getElementsByClassName('van-tabs__content')
         dom[0].scrollTo(0,0)
         this.page = 0
@@ -226,11 +228,13 @@
     display: flex;
     flex-direction: column;
     overflow: hidden;
+    background: #FFF;
     /deep/ .van-tabs {
       flex:1;
       display: flex;
       flex-direction: column;
-      overflow: hidden;
+      overflow-y: hidden;
+
       .van-tabs__wrap {
         height:.8rem;
       }
@@ -241,6 +245,7 @@
         position: relative;
         padding-top:.6rem;
         background: #FFF;
+        
         li {
           height:.86rem;
           padding:0 .3rem;

@@ -5,29 +5,27 @@
 			<div class="content">
 				<div class="flex-wrap flex-top">
 					<div>
-						<img :src="'./img/coin/' + coin + '.png'" alt="">
 						<h3>{{coin == 'FIL'?userInfo.totalAmount:0}}</h3>
 						<span>累计收益({{coin}})</span>
 					</div>
 					<div>
-						<img :src="'./img/coin/' + coin + '.png'" alt="">
 						<h3>{{coin == 'FIL'?userInfo.amount:0}}</h3>
 						<span>账户余额({{coin}})</span>
+						<!-- <span>账户余额({{coin}}) <img src="../../../assets/img/icon/arrow3.png" class="icon"></span> -->
 					</div>
 				</div>
 				<div class="flex-wrap">
 					<div>
-						<img :src="'./img/coin/' + coin + '.png'" alt="">
 						<h3>{{coin == 'FIL'?userInfo.pledge:0}}</h3>
 						<span>质押({{coin}})</span>
 					</div>
 					<div>
-						<img :src="'./img/coin/' + coin + '.png'" alt="">
 						<h3>{{coin == 'FIL'?userInfo.poolAmount:0}}</h3>
 						<span>锁仓({{coin}})</span>
+						<!-- <span>锁仓({{coin}}) <img src="../../../assets/img/icon/arrow3.png" class="icon"></span> -->
 					</div>
 				</div>
-				<van-button type="primary" size="large" @click="withdraw">提现</van-button>
+				<!-- <van-button type="primary" size="large" @click="withdraw">提现</van-button> -->
 			</div>
 			<!-- <div class="coin-select">
 				<div class="selected" @click="selectShow = !selectShow">
@@ -63,7 +61,7 @@
 				>
 					<van-cell v-for="(item,index) in list" :key="index">
 						<span>{{item.activeAmount}}</span>
-						<span>{{item.amount}}</span>
+						<span>{{item.lineUseAmount}}</span>
 						<span>{{item.type == 0?'基础收益':item.type == 1?'矿池奖励':item.type == 2?'分红收益':'线性释放收益'}}</span>
 						<span>{{item.createTimeStamp | fmtDate('full')}}</span>
 					</van-cell>
@@ -133,6 +131,20 @@ export default {
 			this.loading = true;
 			this.getList()
 			this.$toast('刷新列表')
+		},
+		goBalance(){
+			if(this.coin == 'FIL') {
+				this.$router.push('/balance')
+			} else {
+				this.$toast('暂未开放')
+			}
+		},
+		goLock(){
+			if(this.coin == 'FIL') {
+				this.$router.push('/earningsLock')
+			} else {
+				this.$toast('暂未开放')
+			}
 		}
 	},
 	computed: {
@@ -169,19 +181,23 @@ export default {
 					&:first-child {
 						border-right: 2px solid #E0E3E6;
 					}
-					img {
-						display: block;
-						width: .6rem;
-						height: .6rem;
-						margin: 0 auto .1rem;
-					}
+					// img {
+					// 	display: block;
+					// 	width: .6rem;
+					// 	height: .6rem;
+					// 	margin: 0 auto .1rem;
+					// }
 					h3 {
 						font-size:0.36rem;
 						color: #FA6400;
 					}
 					span {
 						font-size:0.2rem;
-						color: #000;
+						color: #646464;
+						.icon {
+							width: 0.08rem;
+							height:.14rem;
+						}
 					}
 				}
 			}
@@ -266,12 +282,16 @@ export default {
 					flex: 1;
 					text-align: center;
 					&:first-of-type {
-						width:28%;
+						width:26%;
 						flex:none;
 						text-align: left;
 					}
 					&:nth-of-type(2) {
-						width:30%;
+						width:26%;
+						flex:none;
+					}
+					&:nth-of-type(3) {
+						width:26%;
 						flex:none;
 					}
 					&:last-of-type {
@@ -309,12 +329,16 @@ export default {
 						font-size:.22rem;
 						color:#000;
 						&:first-of-type {
-							width:28%;
+							width:26%;
 							flex:none;
 							text-align: left;
 						}
 						&:nth-of-type(2) {
-							width:30%;
+							width:26%;
+							flex:none;
+						}
+						&:nth-of-type(3) {
+							width:26%;
 							flex:none;
 						}
 						&:last-of-type {

@@ -233,6 +233,10 @@ export function updateSeniorImg(data) {
 export function getMineRewardList(data){
 	return $http.postFormData('app/user/getMineRewardList', data)
 }
+//收益记录汇总
+export function getSumMineRewardList(data) {
+	return $http.postFormData('app/user/getSumMineRewardList',data)
+}
 //提现
 export function withDraw(data){
 	return $http.postFormData('app/user/withdraw',data)
