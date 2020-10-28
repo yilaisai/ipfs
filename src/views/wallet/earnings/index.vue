@@ -25,7 +25,7 @@
 						<!-- <span>锁仓({{coin}}) <img src="../../../assets/img/icon/arrow3.png" class="icon"></span> -->
 					</div>
 				</div>
-				<!-- <van-button type="primary" size="large" @click="withdraw">提现</van-button> -->
+				<van-button type="primary" size="large" @click="withdraw">提现</van-button>
 			</div>
 			<!-- <div class="coin-select">
 				<div class="selected" @click="selectShow = !selectShow">
@@ -60,10 +60,9 @@
 					v-else
 				>
 					<van-cell v-for="(item,index) in list" :key="index">
-						<span>{{item.activeAmount}}</span>
-						<span v-if="item.type == 3">{{item.lineUseAmount}}</span>
-						<span v-else>{{item.amount}}</span>
-						<span>{{item.type == 0?'基础收益':item.type == 1?'矿池奖励':item.type == 2?'分红收益':'线性释放收益'}}</span>
+						<span>{{userInfo.activeTAmount}}</span>
+						<span>{{item.optTypeStr == '系统回收'?"-"+item.amount:item.amount}}</span>
+						<span>{{item.optTypeStr}}</span>
 						<span>{{item.createTimeStamp | fmtDate('full')}}</span>
 					</van-cell>
 				</van-list>
@@ -74,7 +73,7 @@
 
 <script>
 import { mapState } from 'vuex'
-import { getMineRewardList } from '@/api/request'
+import { getMineRewardList, getUserRewardFlowRecds } from '@/api/request'
 export default {
 	data() { 
 		return {
@@ -100,7 +99,7 @@ export default {
 	},
 	methods: {
 		getList(){
-				getMineRewardList({
+				getUserRewardFlowRecds({
 					pageNum : this.formData.pageNum,
 					pageSize : this.formData.pageSize
 				}, {noLoading: true}).then(res => {

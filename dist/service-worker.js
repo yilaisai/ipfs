@@ -1,4 +1,4 @@
-importScripts("https://cdn.myun.info/workbox-v4.3.1/workbox-sw.js", "precache-manifest.9efc38344ff52fad5e8aec4bc3803a52.js");
+importScripts("https://cdn.myun.info/workbox-v4.3.1/workbox-sw.js", "precache-manifest.1d11ecc8783cf5f006bf1daffdc61a4e.js");
 
 if (workbox) {
     console.log(`Yay! Workbox is loaded!`);

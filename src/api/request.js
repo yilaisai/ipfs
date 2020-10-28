@@ -249,3 +249,7 @@ export function getWithdrawList(data){
 export function getInviteUsers(data){
 	return $http.postFormData('app/user/inviteUsers',data)
 }
+//收益累计记录
+export function getUserRewardFlowRecds(data) {
+	return $http.postFormData('app/user/getUserRewardFlowRecds',data)
+}
