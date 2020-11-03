@@ -61,8 +61,8 @@
 				>
 					<van-cell v-for="(item,index) in list" :key="index">
 						<span>{{userInfo.activeTAmount}}</span>
-						<span>{{item.optTypeStr == '系统回收'?"-"+item.amount:item.amount}}</span>
-						<span>{{item.optTypeStr}}</span>
+						<span>{{item.optType == '6'?"-"+item.amount:item.amount}}</span>
+						<span>{{item.optType | changeOptType}}</span>
 						<span>{{item.createTimeStamp | fmtDate('full')}}</span>
 					</van-cell>
 				</van-list>
