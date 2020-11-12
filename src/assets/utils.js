@@ -172,7 +172,7 @@ const decimalNumber = (number, decimal = 0) => {
  * 收益类型匹配
  */
 const changeOptType = (val) => {
-	return val == 0?'提币':val == 1?'充币':val == 2?'基本收益':val == 3?'矿池收益':val ==4?'分红收益':val ==5?'提币审核失败':val == 6?'系统回收':val == 7?'系统补发':val == 8?'基础线性锁仓':val == 9?'基础线性释放':val == 10?'矿池线性锁仓':val == 11?'矿池线性释放':'未分类'
+	return val == 0?'提币':val == 1?'充币':val == 2?'基础收益':val == 3?'矿池收益':val ==4?'分红收益':val ==5?'提币审核失败':val == 6?'系统回收':val == 7?'系统补发':val == 8?'基础线性锁仓':val == 9?'基础线性释放':val == 10?'矿池线性锁仓':val == 11?'矿池线性释放':'未分类'
 }
 Vue.filter('changeOptType',changeOptType)
 const extendMethods = {
