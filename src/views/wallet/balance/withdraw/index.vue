@@ -24,7 +24,7 @@
           <div>
             <span>{{coin}}</span>
             <span class="line"></span>
-            <span @click="amount = userInfo.amount">ALL</span>
+            <span @click="allInput">ALL</span>
           </div>
         </div>
         <div class="tips">
@@ -116,10 +116,10 @@
       clearNoNum_Amount(){  
         this.amount = this.amount + ""
         this.amount = this.amount.replace(/^\.$/g,"")  //清除第一个“.”   
-        this.amount = this.amount.replace(/[^\d.]/g,"")  //清除“数字”和“.”以外的字符   
-        this.amount = this.amount.replace(/\.{2,}/g,".") //只保留第一个. 清除多余的   
-        this.amount = this.amount.replace(".","$#$").replace(/\./g,"").replace("$#$",".")  
-        this.amount = this.amount.replace(/^(\-)*(\d+)\.(\d\d\d\d).*$/,'$1$2.$3') //只能输入四个小数   
+        this.amount = this.amount.replace(/[^\d]/g,"")  //清除“数字”和“.”以外的字符   
+        // this.amount = this.amount.replace(/\.{2,}/g,".") //只保留第一个. 清除多余的   
+        // this.amount = this.amount.replace(".","$#$").replace(/\./g,"").replace("$#$",".")  
+        // this.amount = this.amount.replace(/^(\-)*(\d+)\.(\d\d\d\d).*$/,'$1$2.$3') //只能输入四个小数   
         if(this.amount.indexOf(".") < 0 && this.amount != ""){ //以上已经过滤，此处控制的是如果没有小数点，首位不能为类似于 01、02的金额  
           this.amount = parseFloat(this.amount)
         }
@@ -134,6 +134,9 @@
         //   return
         // }
         this.show = true
+      },
+      allInput(){
+        this.amount = Math.floor(this.userInfo.amount)
       },
       conofirm(){
         if(!this.code || !this.fundPwd) {
