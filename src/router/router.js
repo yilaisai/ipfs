@@ -67,20 +67,11 @@ const router =  new Router({
 			component: () => import("@/views/home/inviteList")
 		},
 		{
-			path: "/inviteRecord",  //编辑头像
-			name: "inviteRecord",
-			component: () => import("@/views/war/inviteRecord")
-		},
-		{
 			path: "/inviteShare",//邀请分享
 			name: "inviteShare",
 			component: () => import("@/views/home/inviteShare")
 		},
-		{
-			path: "/downloadInviteImg",//下载邀请分享
-			name: "downloadInviteImg",
-			component: () => import("@/views/home/downloadInviteImg")
-		},
+
 		{
 			path: "/notice",  //公告列表
 			name: "notice",

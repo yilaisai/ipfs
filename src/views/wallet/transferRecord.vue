@@ -87,13 +87,6 @@ export default {
 		this.getData(0)
 	},
 	methods: {
-		showHelp() {
-			this.$dialog.alert({
-				message: '有效船员是指<br/>等级达到Lv1及以上的船员',
-				confirmButtonText: '我知道了'
-			}).then(() => {
-			});
-		},
 		getData(type) {
 			getMineRecdList({
 				type,

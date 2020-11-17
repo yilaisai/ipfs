@@ -17,12 +17,6 @@ const wallet = [
 		component: () => import("@/views/wallet/hashrate/transfer")
 	},
 	{
-		path: "/wallet",  //钱包
-		name: "wallet",
-		meta: { statusBar: '#0ED8AB' },
-		component: () => import("@/views/wallet/index")
-	},
-	{
 		path: "/orderList",  //交易订单列表
 		name: "orderList",
 		component: () => import("@/views/wallet/orderList")

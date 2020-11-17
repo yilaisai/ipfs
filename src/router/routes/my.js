@@ -20,11 +20,6 @@ const my = [
 		component: () => import('@/views/my/authentication/auth3')
 	},
 	{
-		path: "/assets",
-		name: "assets",
-		component: () => import("@/views/my/assets")
-	},
-	{
 		path: "/userInfo",  //用户信息
 		name: "userInfo",
 		component: () => import("@/views/my/userInfo")
@@ -53,11 +48,6 @@ const my = [
 		path: "/inputFundPwd2",  //修改资金密码
 		name: "inputFundPwd2",
 		component: () => import("@/views/my/inputFundPwd2")
-	},
-	{
-		path: "/helpCenter",  //帮助中心
-		name: "helpCenter",
-		component: () => import("@/views/my/helpCenter")
 	},
 	{
 		path: "/setting",  //设置
