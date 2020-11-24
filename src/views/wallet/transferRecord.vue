@@ -18,7 +18,7 @@
 						</div>
 						<div>
 							<span>{{item.name}}</span>
-							<span>{{item.id}}</span>
+							<span>{{item.proId}}</span>
 						</div>
 						<div>
 							<span>{{item.isActive == 0 ? '未激活' : '已激活'}}</span>
@@ -37,7 +37,7 @@
 						</div>
 						<div>
 							<span>{{item.name}}</span>
-							<span>{{item.id}}</span>
+							<span>{{item.proId}}</span>
 						</div>
 						<div>
 							<span>{{item.isActive == 0 ? '未激活' : '已激活'}}</span>
@@ -56,7 +56,7 @@
 						</div>
 						<div>
 							<span>{{item.name}}</span>
-							<span>{{item.id}}</span>
+							<span>{{item.proId}}</span>
 						</div>
 						<div>
 							<span>{{item.isActive == 0 ? '未激活' : '已激活'}}</span>

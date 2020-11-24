@@ -22,44 +22,79 @@
         </div>
       </div>
       <div class="bottom">
-        <div class="title">交易记录</div>
-        <div class="tab">
-          <span>收益</span>
-          <span>锁仓</span>
-          <span>币种</span>
-          <span>状态</span>
-        </div>
-        <div class="container">
-          
-            <van-list
-              v-model="loading"
-              :finished="finished"
-              finished-text="没有更多了"
-              @load="onLoad">
-              <ul>
-                <li class="item" v-for="(item,index) in list" :key="index">
-                  <div class="item-top">
-                    <span>提现</span>
-                    <span>-398</span>
-                    <span>FIL</span>
-                    <span class="red">审核失败</span>
-                  </div>
-                  <div class="item-bottom">
-                    <span>2020-08-24 15:24</span>
-                    <img src="../../../assets/img/icon/arrow3.png" alt="">
-                  </div>
-                </li>
-              </ul>
-            </van-list>
-          
-        </div>
+        <van-tabs 
+          v-model="active" 
+          sticky 
+          color="#2C353F" 
+          @change="changeTable">  
+          <van-tab title="充值记录">
+            <div class="tab">
+              <span>类型</span>
+              <span>数量</span>
+              <span>币种</span>
+              <span>状态</span>
+            </div>
+            <div class="container">
+                <van-list
+                  v-model="loading"
+                  :finished="finished"
+                  finished-text="没有更多了"
+                  @load="onLoad">
+                  <ul>
+                    <li class="item" v-for="(item,index) in list" :key="index" @click="$router.push({path:'/rechargeDetail',query:{data:JSON.stringify(item)}})">
+                      <div class="item-top">
+                        <span>充值</span>
+                        <span>{{item.amount}}</span>
+                        <span>FIL</span>
+                        <span :class="item.optStatus == 0?'gray':item.optStatus ==1 ?'':item.optStatus ==2?'green':'red'">{{item.optStatus | filterRecharge}}</span>
+                      </div>
+                      <div class="item-bottom">
+                        <span>{{item.createTimestamp | fmtDate('full')}}</span>
+                        <img src="../../../assets/img/icon/arrow3.png" alt="">
+                      </div>
+                    </li>
+                  </ul>
+                </van-list>
+            </div>
+          </van-tab>
+          <van-tab title="提现记录">
+            <div class="tab">
+              <span>类型</span>
+              <span>数量</span>
+              <span>币种</span>
+              <span>状态</span>
+            </div>
+            <div class="container">
+              <van-list
+                v-model="loading"
+                :finished="finished"
+                finished-text="没有更多了"
+                @load="onLoad">
+                <ul>
+                  <li class="item" v-for="(item,index) in list" :key="index" @click="$router.push({path:'/withdrawDetail',query:{data:JSON.stringify(item)}})">
+                    <div class="item-top">
+                      <span>提现</span>
+                      <span>{{item.amount}}</span>
+                      <span>FIL</span>
+                      <span :class="item.recdStatus == 0?'gray':item.recdStatus ==1 ?'green':item.recdStatus ==2?'green':'red'">{{item.recdStatus | filterWithdraw}}</span>
+                    </div>
+                    <div class="item-bottom">
+                      <span>{{item.createTimestamp | fmtDate('full')}}</span>
+                      <img src="../../../assets/img/icon/arrow3.png" alt="">
+                    </div>
+                  </li>
+                </ul>
+              </van-list>
+            </div>
+          </van-tab>
+        </van-tabs>
       </div>
     </div>
   </div>
 </template>
 <script>
   import { mapState } from 'vuex'
-  import {getMineRewardList} from '@/api/request'
+  import {getRechargeList, getWithdrawList} from '@/api/request'
   export default {
     data() {
       return { 
@@ -69,30 +104,96 @@
         total:0,
         form:{
           pageNum:0,
-          pageSize:5,
-          lineStatus:0
-        }
+          pageSize:6,
+        },
+        active:0
       }
     },
     computed: {
       ...mapState(['userInfo'])
     },
+    mounted(){
+      this.getData()
+    },
     methods: {
       onLoad(){
-        this.form.pageNum++
+        console.log('onload')
         this.getData()
       },
       getData(){
-        getMineRewardList(this.form).then(res => {
-          let result = res.result
-          this.total = result.total
-          this.list = this.form.pageNum == 1?result.list:this.list.concat(result.list)
-          this.loading = false;
-          if (this.list.length >= this.total) {
-            this.finished = true;
-          }
-        })
+        this.form.pageNum++
+        if(this.active == 0) {
+          // 充值记录
+          getRechargeList(this.form).then(res => {
+            let result = res.result
+            this.total = result.total
+            this.list = this.form.pageNum == 1?result.list:this.list.concat(result.list)
+            this.loading = false;
+            if (this.list.length >= this.total) {
+              this.finished = true;
+            }
+          })
+        } else {
+          //提现记录
+          getWithdrawList(this.form).then(res => {
+            let result = res.result
+            this.total = result.total
+            this.list = this.form.pageNum == 1?result.list:this.list.concat(result.list)
+            this.loading = false;
+            if (this.list.length >= this.total) {
+              this.finished = true;
+            }
+          })
+        }
+      },
+      changeTable(){
+        this.list = []
+        let dom = document.getElementsByClassName('van-tabs__content')
+        dom[0].scrollTo(0,0)
+        this.form.pageNum = 0
+        this.loading = false
+        this.finished = false
+        this.onLoad()
       }
+    },
+    filters:{
+      filterRecharge(val) {
+        switch(val) {
+          case 0:
+            return '审核失败'
+            break
+          case 1:
+            return '充值成功'
+            break
+          case 2:
+            return '待审核'
+            break
+          case 3:
+            return '审核失败'
+            break
+          default:
+            break
+        }
+      },
+      filterWithdraw(val){
+        switch(val) {
+          case 0:
+            return '审核失败'
+            break
+          case 1:
+            return '提现成功'
+            break
+          case 2:
+            return '待审核'
+            break
+          case 3:
+            return '审核失败'
+            break
+          default:
+            break
+        }
+      },
+
     },
   }
 </script>
@@ -166,6 +267,26 @@
         overflow: hidden;
         display: flex;
         flex-direction: column;
+        /deep/ .van-tabs {
+          display: flex;
+          flex-direction: column;
+          overflow-y: hidden;
+          .van-tabs__content {
+            flex:1;
+            overflow: hidden;
+            display: flex;
+            flex-direction: column;
+            .van-tab__pane {
+              height:100%;
+              display: flex;
+              flex-direction: column;
+              .container {
+                flex:1;
+                overflow: hidden;
+              }
+            }
+          }
+        }
         .title {
           height:1rem;
           line-height: 1rem;
@@ -194,10 +315,6 @@
               text-align: right;
             }
           }
-        }
-        .container {
-          flex:1;
-          overflow: hidden;
         }
         /deep/ .van-list {
           height:100%;

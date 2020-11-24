@@ -253,3 +253,11 @@ export function getInviteUsers(data){
 export function getUserRewardFlowRecds(data) {
 	return $http.postFormData('app/user/getUserRewardFlowRecds',data)
 }
+//充值
+export function recharge(data) {
+	return $http.postFormData('app/user/recharge',data)
+}
+//充值记录
+export function getRechargeList(data) {
+	return $http.postFormData('app/user/getUserRechargeRecds',data)
+}

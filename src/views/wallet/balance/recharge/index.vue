@@ -11,9 +11,9 @@
       <div class="flex-wrap">
         <label>请向以下地址进行转账</label>
         <div class="copyBox">
-          <span class="text">{{address}}</span>
+          <span class="text">{{userInfo.toAddr}}</span>
           <span class="line"></span>
-          <span class="copy" v-clipboard:copy="address" v-clipboard:success="onCopy" v-clipboard:error="onError">复制</span>
+          <span class="copy" v-clipboard:copy="userInfo.toAddr" v-clipboard:success="onCopy" v-clipboard:error="onError">复制</span>
         </div>
       </div>
       <div class="flex-wrap tips">
@@ -23,7 +23,7 @@
       </div>
       <div class="flex-wrap">
         <label>TXID</label>
-        <textarea v-model="TXID" placeholder="请输入TXID"></textarea>
+        <textarea v-model="txId" placeholder="请输入TXID"></textarea>
       </div>
       <div class="flex-wrap">
         <label>上传充值凭证（最多3张）</label>
@@ -31,24 +31,28 @@
       </div>
     </div>
     <footer>
-			<button class="full scale" @click="recharge">提交</button>
+			<button class="full scale" @click="recharge" :disabled="!this.amount || !this.txId || !this.urls.length || btnDisabled">提交</button>
 		</footer>
   </div>
 </template>
 <script>
-  import {getCaptchaPhone, withDraw, uploadFile} from '@/api/request'
+  import {getCaptchaPhone, withDraw, uploadFile, recharge} from '@/api/request'
   import CountDownBtn from '@/components/common/countDownBtn.vue'
   import Md5 from 'js-md5'
   import lrz from 'lrz'
+  import { mapState } from 'vuex'
   export default {
     data() {
       return { 
         amount:'',
-        address:'078b24fb3c1f844cd54ee4c99c5c7b397576d295138deb0b51d218db017d12cb',
-        TXID:'',
+        txId:'',
         fileList:[],
-        urls:[]
+        urls:[],
+        btnDisabled:false
       }
+    },
+    computed:{
+      ...mapState(['userInfo'])
     },
     mounted(){
     },
@@ -65,7 +69,18 @@
         }
       },
       recharge(){
-        
+        this.btnDisabled = true
+        recharge({
+          amount:this.amount,
+          txId:this.txId,
+          urls:this.urls.join(',')
+        }).then(res => {
+          this.btnDisabled = false
+          this.$toast(res.msg)
+          this.$router.push('/balance')
+        }).catch(err=> {
+          this.btnDisabled = false
+        })
       },
       onCopy(){
         this.$toast('复制成功')
@@ -152,6 +167,8 @@
             color:#323232;
             font-size:.24rem;
             word-break:break-all;
+            display: flex;
+            align-items: center;
           }
           .line {
             position: relative;

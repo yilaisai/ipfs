@@ -4,14 +4,19 @@
 			<HeaderBar :title="coin + '收益记录'" color="transparent"></HeaderBar>
 			<div class="content">
 				<div class="flex-wrap flex-top">
+					<div @click="$router.push('/balance')">
+						<h3>{{coin == 'FIL'?userInfo.amount:0}}</h3>
+						<span>账户余额({{coin}}) <img src="../../../assets/img/icon/arrow3.png" class="icon"></span>
+					</div>
+				</div>
+				<div class="flex-wrap">
 					<div>
 						<h3>{{coin == 'FIL'?userInfo.totalAmount:0}}</h3>
 						<span>累计收益({{coin}})</span>
 					</div>
 					<div>
-						<h3>{{coin == 'FIL'?userInfo.amount:0}}</h3>
-						<span>账户余额({{coin}})</span>
-						<!-- <span>账户余额({{coin}}) <img src="../../../assets/img/icon/arrow3.png" class="icon"></span> -->
+						<h3>{{coin == 'FIL'?userInfo.totalWithdraw:0}}</h3>
+						<span>累计提现({{coin}})</span>
 					</div>
 				</div>
 				<div class="flex-wrap">
@@ -25,7 +30,7 @@
 						<!-- <span>锁仓({{coin}}) <img src="../../../assets/img/icon/arrow3.png" class="icon"></span> -->
 					</div>
 				</div>
-				<van-button type="primary" size="large" @click="withdraw">提现</van-button>
+				<!-- <van-button type="primary" size="large" @click="withdraw">提现</van-button> -->
 			</div>
 			<!-- <div class="coin-select">
 				<div class="selected" @click="selectShow = !selectShow">
@@ -165,21 +170,21 @@ export default {
 		// overflow: hidden;
 		.content {
 			width: 92%;
-			margin: 0.54rem auto .3rem;
+			margin: 0.3rem auto .3rem;
 			background:rgba(255,255,255,1);
 			box-shadow:0rem 0.04rem 0.16rem 0rem rgba(12,81,86,0.2);
 			border-radius:0.18rem;
-			padding: .3rem;
+			padding: .25rem;
 			.flex-wrap {
 				display: flex;
 				background-color: #F0F3F6;
-				border-radius:0.12rem;
-				padding: .34rem;
+				// border-radius:0.12rem;
+				padding: .15rem;
 				div {
 					flex: 1;
 					text-align: center;
 					&:first-child {
-						border-right: 2px solid #E0E3E6;
+						border-right: 1px solid #E0E3E6;
 					}
 					// img {
 					// 	display: block;
@@ -202,7 +207,11 @@ export default {
 				}
 			}
 			.flex-top {
-				margin-bottom:.1rem;
+				div {
+					&:first-of-type {
+						border-right:none;
+					}
+				}
 			}
 			.van-button {
 				margin-top: .2rem;

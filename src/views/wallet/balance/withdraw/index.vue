@@ -1,7 +1,7 @@
 <template>
   <div class='withdraw-page'>
     <HeaderBar title="提现" :back="true" :shadow="true" color="white" class="header">
-      <div class="record" @click="$router.push('/withdrawList')">操作记录</div>
+      <!-- <div class="record" @click="$router.push('/withdrawList')">操作记录</div> -->
     </HeaderBar>
     <div class="main">
       <div class="coin-wrap">

@@ -9,7 +9,7 @@
         </li>
         <li>
           <span>类型</span>
-          <span>提现</span>
+          <span>充值</span>
         </li>
         <li>
           <span>主网</span>
@@ -17,15 +17,15 @@
         </li>
         <li>
           <span>状态</span>
-          <span>{{detail.recdStatus | filterStatus}}</span>
+          <span>{{detail.optStatus | filterStatus}}</span>
         </li>
         <li>
           <span>TXID</span>
           <span class="word">{{detail.txId}}</span>
         </li>
-        <li>
+        <li @click="ImagePreview(detail.urls.split(','))">
           <span>充值凭证</span>
-          <img src="" alt="">
+          <span>点击查看</span>
         </li>
         <li>
           <span>时间</span>
@@ -36,7 +36,7 @@
   </div>
 </template>
 <script>
-  
+  import { ImagePreview } from 'vant';
   export default {
     data() {
       return { 
@@ -48,21 +48,24 @@
       this.detail = JSON.parse(this.$route.query.data)
     },
     methods: {
+      ImagePreview(urls){
+        return ImagePreview(urls)
+      }
     },
     filters:{
       filterStatus(status){
         switch(status) {
           case 0:
-            return '提现失败'
+            return '充值失败'
             break;
           case 1:
-            return '提现成功'
+            return '充值成功'
             break;
           case 2:
             return '待审核'
             break;
           case 3:
-            return '审核成功'
+            return '审核失败'
             break;
           default:
             break;
