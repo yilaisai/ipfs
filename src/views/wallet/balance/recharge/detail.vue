@@ -4,7 +4,7 @@
     <div class="main">
       <ul>
         <li class="amount">
-          <span>- {{detail.amount}}</span>
+          <span>+ {{detail.amount}}</span>
           <span>FIL</span>
         </li>
         <li>
