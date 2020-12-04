@@ -54,5 +54,25 @@ const my = [
 		name: "setting",
 		component: () => import("@/views/my/setting")
 	},
+	{
+		path: "/financeOrders",  //我的理财订单
+		name: "financeOrders",
+		component: () => import("@/views/my/financeOrders/index")
+	},
+	{
+		path: "/finance-earnings",  //理财订单收益明细列表
+		name: "finance-earnings",
+		component: () => import("@/views/my/financeOrders/finance-earnings")
+	},
+	{
+		path: "/finance-record",  //理财订单交易记录
+		name: "finance-record",
+		component: () => import("@/views/my/financeOrders/finance-record")
+	},
+	{
+		path: "/finance-detail",  //理财订单交易记录
+		name: "finance-detail",
+		component: () => import("@/views/my/financeOrders/finance-detail")
+	},
 ]
 export default my

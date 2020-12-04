@@ -95,7 +95,7 @@
     data() {
       return { 
         coinList:['FILECOIN'],
-        coin:'',
+        coin:'FIL',
         activeIndex:0,
         address:'',
         amount:'',

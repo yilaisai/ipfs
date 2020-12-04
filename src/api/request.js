@@ -261,3 +261,19 @@ export function recharge(data) {
 export function getRechargeList(data) {
 	return $http.postFormData('app/user/getUserRechargeRecds',data)
 }
+//当前上架的理财产品列表
+export function getFinancePros(data){
+	return $http.postFormData('app/user/getFinancePros',data)
+}
+//购买理财产品
+export function buyFinance(data){
+	return $http.postFormData('app/user/buyFinance',data)
+}
+//理财产品-我的统计
+export function myFinance(data) {
+	return $http.postFormData('app/user/myFinance',data)
+}
+//理财产品-理财列表
+export function getFinanceList(data){
+	return $http.postFormData('app/user/getFinanceRecds',data)
+}
