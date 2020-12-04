@@ -15,14 +15,14 @@
           v-if="list.length"
           >
           <ul>
-            <li class="nav">
+            <!-- <li class="nav">
               <span>资金名称</span>
               <span>累计收益</span>
               <span>状态</span>
-            </li>
+            </li> -->
             <li v-for="(item,index) in list" :key="index" @click="$router.push({path:'/finance-detail',query:{data:JSON.stringify(item)}})">
               <span>{{item.name}}</span>
-              <span>{{item.reward}}</span>
+              <span>{{item.isReward == 0?item.amount:bigNumber(item.amount).plus(item.reward)}}</span>
               <span>{{item.isReward == 0?'进行中':'已结束'}}</span>
             </li>
           </ul>
@@ -38,6 +38,7 @@
 <script>
   import axios from 'axios'
   import { getFinanceList } from '@/api/request'
+  import bigNumber from 'bignumber.js'
   export default {
     data() {
       return { 
@@ -89,6 +90,9 @@
         this.finished = false
         this.getList()
       },
+      bigNumber(val){
+        return bigNumber(val)
+      }
     },
   }
 </script>
@@ -112,7 +116,6 @@
       }
       ul {
         position: relative;
-        padding-top:.4rem;
         background: #FFF;
         li {
           padding:.4rem .3rem;

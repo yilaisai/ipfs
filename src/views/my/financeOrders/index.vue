@@ -6,7 +6,7 @@
     </header>
     <div class="total">
       <div class="title">
-        <p>总资产（FIL）</p>
+        <p>理财资产（FIL）</p>
         <h5>{{amount}}</h5>
       </div>
       <div class="sum">
@@ -42,7 +42,7 @@
           <div class="item-top">
             <p>
               <span>{{item.name}}</span>
-              <span>{{item.day}}</span>
+              <span>{{item.day}}天</span>
             </p>
             <img src="../../../../public/img/arrow_right.png" alt="">
           </div>

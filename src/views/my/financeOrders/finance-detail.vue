@@ -27,11 +27,11 @@
         </div>
         <div>
           <span>预计收益</span>
-          <span>{{detail.reward}}</span>
+          <span>{{detail.isReward == 0?detail.reward:bigNumber(detail.reward).plus(detail.amount)}}</span>
         </div>
         <div>
           <span>距离到期</span>
-          <span>{{detail.remainDay}}天</span>
+          <span>{{detail.remainDay == 0?'进行中':detail.remainDay >0?detail.remainDay + '天':'已结束'}}</span>
         </div>
       </div>
       <div class="detail-btm">
