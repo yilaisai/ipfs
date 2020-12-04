@@ -57,7 +57,7 @@
             </p>
             <p class="times">
               <span>距离到期</span>
-              <span>{{item.remainDay}}天</span>
+              <span>{{item.remainDay == 0?'待发放':item.remainDay}}天</span>
             </p>
           </div>
         </div>
@@ -81,7 +81,7 @@
         list:[],
         loading:false,
         finished:false,
-        pageNum:0,
+        pageNum:1,
         pageSize:10,
         total:0,
       }

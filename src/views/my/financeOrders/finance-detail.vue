@@ -6,7 +6,7 @@
         <h5 class="name">{{detail.name}}</h5>
         <div class="text">
           <p>
-            <span>{{detail.rate*100}}%</span>
+            <span>{{bigNumber(detail.rate*1).times(100)}}%</span>
             <span>利率</span>
           </p>
           <p>
@@ -47,6 +47,7 @@
   </div>
 </template>
 <script>
+  import bigNumber from 'bignumber.js'
   export default {
     data() {
       return { 
@@ -61,7 +62,9 @@
       console.log(this.detail)
     },
     methods: {
-      
+      bigNumber(val){
+        return bigNumber(val)
+      }
     },
   }
 </script>
