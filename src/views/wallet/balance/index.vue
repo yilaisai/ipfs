@@ -76,7 +76,7 @@
                       <span>提现</span>
                       <span>{{item.amount}}</span>
                       <span>FIL</span>
-                      <span :class="item.recdStatus == 0?'gray':item.recdStatus ==1 ?'green':item.recdStatus ==2?'green':'red'">{{item.recdStatus | filterWithdraw}}</span>
+                      <span :class="item.recdStatus == 0?'red':item.recdStatus ==1 ?'green':item.recdStatus ==2?'green':'gray'">{{item.recdStatus | filterWithdraw}}</span>
                     </div>
                     <div class="item-bottom">
                       <span>{{item.createTimestamp | fmtDate('full')}}</span>
@@ -169,7 +169,7 @@
             return '待审核'
             break
           case 3:
-            return '审核失败'
+            return '审核成功'
             break
           default:
             break
@@ -187,7 +187,7 @@
             return '待审核'
             break
           case 3:
-            return '审核失败'
+            return '审核成功'
             break
           default:
             break
