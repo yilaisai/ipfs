@@ -16,7 +16,7 @@
           >
           <ul>
             <li class="nav">
-              <span>资金名称{{num == 0?'1':num ==1?'2':'3'}}</span>
+              <span>资金名称</span>
               <span>累计收益</span>
               <span>状态</span>
             </li>

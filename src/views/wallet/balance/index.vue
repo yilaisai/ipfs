@@ -46,7 +46,7 @@
                         <span>充值</span>
                         <span>{{item.amount}}</span>
                         <span>FIL</span>
-                        <span :class="item.optStatus == 0?'gray':item.optStatus ==1 ?'':item.optStatus ==2?'green':'red'">{{item.optStatus | filterRecharge}}</span>
+                        <span :class="item.optStatus == 0?'red':item.optStatus ==1 ?'':item.optStatus ==2?'green':'gray'">{{item.optStatus | filterRecharge}}</span>
                       </div>
                       <div class="item-bottom">
                         <span>{{item.createTimestamp | fmtDate('full')}}</span>
