@@ -1,7 +1,100 @@
 <template>
 	<div class="war-page">
 		<div class="header">商品列表</div>
-		<div class="main scroll-y">
+		<van-tabs 
+			v-model="active" 
+			sticky 
+			color="#2C353F" 
+			@change="changeTable">
+			<van-tab title="合约商品">
+				<ul class="left">
+					<li v-for="(item, index) in list" :key="index">
+						<div class="name">
+							<img src="../../assets/img/icon/goods_logo.png" alt="">
+							<div>
+								<h3><span>{{item.name}}</span> <i>限量发售</i></h3>
+								<a href="javascript:;" @click="$router.push({path: '/goodsDetails', query: {goods: item}})">查看合约详情<img src="../../assets/img/home/right2.png" alt=""></a>
+							</div>
+						</div>
+						<div class="details">
+							<div class="flex-wrap">
+								<div>
+									<label>发售云储力</label>
+									<img src="../../assets/img/icon/fscl_icon.png" alt="">
+								</div>
+								<span>{{item.tAmount}} <sub>T</sub></span>
+							</div>
+							<div class="flex-wrap">
+								<div>
+									<label>托管机房</label>
+									<img src="../../assets/img/icon/tgjf_icon.png" alt="">
+								</div>
+								<p>{{item.address}}</p>
+							</div>
+							<div class="flex-wrap">
+								<div>
+									<label>剩余云储力</label>
+									<img src="../../assets/img/icon/sycl_icon.png" alt="">
+								</div>
+								<span>{{item.remainAmount}} <sub>T</sub></span>
+							</div>
+							<div class="flex-wrap">
+								<div>
+									<label>合约期限</label>
+									<img src="../../assets/img/icon/fscl_icon.png" alt="">
+								</div>
+								<span>{{Math.floor(item.proTime / 30)}} <sub>个月</sub></span>
+							</div>
+							<div class="flex-wrap">
+								<div>
+									<label>质押</label>
+									<img src="../../assets/img/icon/zy_icon.png" alt="">
+								</div>
+								<span>{{Math.floor(item.pledge)}} <sub>FIL/T</sub></span>
+							</div>
+						</div>
+						<div class="buybar">
+							<div class="price">
+								<div class="price-left">
+									<h4>现价 : {{item.price}}RMB/T</h4>
+									<s>原价 : {{item.orgPrice}}RMB/T</s>
+								</div>
+								<div class="price-right">
+									<span>数量</span>
+									<van-stepper v-model="item.buyAmount" integer min="1" :max="item.remainAmount" />
+								</div>
+							</div>
+							<van-button type="primary" size="large" :disabled="item.remainAmount <= 0" @click="$router.push({path: '/confirmOrder', query: {goods: item}})">{{item.remainAmount <= 0 ? '已售罄' : '立即购买'}}</van-button>
+						</div>
+					</li>
+				</ul>
+			</van-tab>
+			<van-tab title="理财产品">
+				<ul class="right">
+					<li v-for="(item,index) in financeList" :key="index">
+						<div class="title">
+							<p>
+								<span>{{item.name}}</span>
+								<span>热销必选</span>
+							</p>
+							<p>查看《产品购买协议》</p>
+						</div>
+						<div class="detail">
+							<p>
+								<span>{{item.rates.split(',')[0]}}%起</span>
+								<span>年化利率</span>
+							</p>
+							<p>
+								<span>{{item.days.split(',')[0]}}天起</span>
+								<span>稳健收益 低风险</span>
+							</p>
+						</div>
+						<van-button type="primary" @click="$router.push({path:'/financeDetails',query: {goods:JSON.stringify(item)}})">立即购买</van-button>
+					</li>
+				</ul>
+			</van-tab>
+		</van-tabs>
+		<!-- <div class="main scroll-y">
 			<ul>
 				<li v-for="(item, index) in list" :key="index">
 					<div class="name">
@@ -63,31 +156,27 @@
 					</div>
 				</li>
 			</ul>
-		</div>
+		</div> -->
 	</div>
 </template>
 
 <script>
 import { mapState } from 'vuex'
-import { getMinePros } from '@/api/request'
+import { getMinePros, getFinancePros } from '@/api/request'
 export default {
 	data() { 
 		return {
+			active:0,
 			value: 1,
-			list: []
+			list: [],
+			financeList:[]
 		}
 	},
 	activated() {
 		this.getData()
+		this.getFinanceList()
 	},
 	methods: {
-		showHelp() {
-			this.$dialog.alert({
-				title: '关于收益提现券',
-				message: `1.每邀请10个有效船员，可获得一张收益提现券。</br></br>2.每张提现券面值为${this.userInfo.withdrawAmount}USDT,每张可提现${this.userInfo.withdrawAmount} USDT。</br></br>3.舰队收益不满${this.userInfo.withdrawAmount}USDT不可进行提现。`,
-			}).then(() => {
-			});
-		},
 		getData() {
 			getMinePros().then(res => {
 				res.result.list.map(val => {
@@ -95,6 +184,21 @@ export default {
 				})
 				this.list = res.result.list
 			})
+		},
+		getFinanceList(){
+			getFinancePros({pageNum:1,pageSize:1000}).then(res => {
+				this.financeList = res.result.list
+			})
+		},
+		buyFinance(item){
+
+		},
+		changeTable(){
+			if(this.active == 0) {
+				this.getData()
+			} else {
+				this.getFinanceList()
+			}
 		}
 	},
 	computed: {
@@ -114,15 +218,28 @@ export default {
 		color: #323232;
 		text-align: center;
 		background:rgba(255,255,255,1);
-		box-shadow:0px 0px 12px 0px rgba(236,236,236,1);
+		// box-shadow:0px 0px 12px 0px rgba(236,236,236,1);
 		line-height: .88rem;
 		font-weight: 600;
 	}
-	.main {
-		flex: 1;
-		position: relative;
-		z-index: 1;
-		ul {
+	/deep/ .van-tabs {
+		flex:1;
+		display: flex;
+		flex-direction: column;
+		overflow-y: hidden;
+		.van-sticky {
+			position: relative;
+			box-shadow: 0 .02rem .12rem #ECECEC;
+		}
+		.van-tabs__wrap {
+			height:.8rem;
+			background: #FFF;
+			box-shadow: 0px 2px 12px #ECECEC;
+		}
+		.van-tabs__content {
+			overflow: auto;
+		}
+		ul.left {
 			li {
 				background-color: #fff;
 				padding: .3rem .4rem;
@@ -253,6 +370,89 @@ export default {
 						background-color: #FA6400;
 						border: 1px solid #FA6400;
 					}
+				}
+			}
+		}
+		ul.right {
+			li {
+				margin-bottom:.2rem;
+				padding:.3rem .4rem .4rem;
+				background: #FFF;
+				.title {
+					display: flex;
+					flex-direction: column;
+					border-bottom:.01rem solid #DCDCDC;
+					p {
+						&:first-of-type {
+							margin-bottom:.1rem;
+							display: flex;
+							align-items: center;
+							span {
+								&:first-of-type {
+									line-height: 1em;
+									margin-right:.1rem;
+									font-size:.34rem;
+									font-weight: 500;
+									color:#000;
+								}
+								&:last-of-type {
+									padding:.07rem .1rem;
+									border:.01rem solid #D9930B;
+									border-radius: .17rem;
+									line-height: 1em;
+									color:#D9930B;
+									font-size:.2rem;
+								}
+							}
+						}
+						&:last-of-type {
+							margin-bottom:.3rem;
+							color:#D9930B;
+							font-size:.24rem;
+						}
+					}
+				}
+				.detail {
+					display: flex;
+					padding:.4rem 0 ;
+					p {
+						flex:1;
+						display: flex;
+						flex-direction: column;
+						span {
+							&:first-of-type {
+								line-height: 1em;
+								font-size:.4rem;
+								margin-bottom:.06rem;
+							}
+							&:last-of-type {
+								color:#969696;
+								font-size:.24rem;
+							}
+						
+						}
+						&:first-of-type {
+							span {
+								&:first-of-type {
+									color:#D9930B;
+								}
+							}
+						}
+						&:last-of-type {
+							span {
+								&:first-of-type {
+									color:#000;
+								}
+							}
+						}
+					}
+				}
+				.van-button {
+					width:100%;
+					height:.88rem;
+					font-size:.32rem;
+					background-color: #FA6400;
+					border: 1px solid #FA6400;
 				}
 			}
 		}

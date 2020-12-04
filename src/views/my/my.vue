@@ -41,11 +41,11 @@
 					<span>合约激活记录</span>
 					<i></i>
 				</li>
-				<!-- <li @click="$router.push('/orderList')">
-					<img src="../../assets/img/icon/order_icon.png" alt="">
-					<span>我的订单</span>
+				<li @click="$router.push('/financeOrders')">
+					<img src="../../assets/img/icon/Frame.svg" alt="">
+					<span>我的理财订单</span>
 					<i></i>
-				</li> -->
+				</li>
 				<!-- <li @click="$router.push('/notice')">
 					<img src="../../../public/img/message_icon.png" alt="">
 					<span :class="{'dot' : totalNotice > totalReadNotice}">消息中心</span>

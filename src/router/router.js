@@ -118,6 +118,11 @@ const router =  new Router({
 			name: "rank",
 			component: () => import("@/views/overView/rank")
 		},
+		{
+			path:"/financeDetails",   //理财购买详情
+			name:'/financeDetails',
+			component: () => import("@/views/war/financeDetails")
+		}
 	]
 });
 
