@@ -3,14 +3,14 @@
     <HeaderBar title="产品详情" color="#000"></HeaderBar>
     <div class="content">
       <div class="detail-top">
-        <h5 class="name">理财产品名称</h5>
+        <h5 class="name">{{detail.name}}</h5>
         <div class="text">
           <p>
-            <span>4.7%</span>
+            <span>{{detail.rate*100}}%</span>
             <span>利率</span>
           </p>
           <p>
-            <span>90天</span>
+            <span>{{detail.day}}天</span>
             <span>产品期限</span>
           </p>
         </div>
@@ -23,20 +23,20 @@
       <div class="detail-mid">
         <div>
           <span>金额</span>
-          <span>10.2932</span>
+          <span>{{detail.amount}}</span>
         </div>
         <div>
           <span>预计收益</span>
-          <span>18.2932</span>
+          <span>{{detail.reward}}</span>
         </div>
         <div>
           <span>距离到期</span>
-          <span>120天</span>
+          <span>{{detail.remainDay}}天</span>
         </div>
       </div>
       <div class="detail-btm">
         <span>购买日期</span>
-        <span>2020-10-26 17:56</span>
+        <span>{{detail.createTimestamp | fmtDate('full')}}</span>
       </div>
       <div class="tips">
         <h5>说明</h5>
@@ -49,9 +49,19 @@
 <script>
   export default {
     data() {
-      return { }
+      return { 
+        detail:''
+      }
+    },
+    mounted(){
+     
+      if(this.$route.query.data) {
+        this.detail = JSON.parse(this.$route.query.data)
+      }
+      console.log(this.detail)
     },
     methods: {
+      
     },
   }
 </script>

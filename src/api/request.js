@@ -277,3 +277,7 @@ export function myFinance(data) {
 export function getFinanceList(data){
 	return $http.postFormData('app/user/getFinanceRecds',data)
 }
+//理财产品-理财列表统计
+export function getFinanceSum(data){
+	return $http.postFormData('app/user/getSumFinanceRecds',data)
+}

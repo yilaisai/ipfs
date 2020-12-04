@@ -6,7 +6,7 @@
         <div>
           <p>累计收益 (FIL)</p>
           <p>
-            <span>2,200.34</span>
+            <span>{{totalAmount}}</span>
             <span>FIL</span>
           </p>
         </div>
@@ -23,7 +23,7 @@
           @load="onLoad"
           v-if="list.length"
         >
-          <div v-for="item in list" :key="item" class="item" @click="$router.push('/finance-detail')">
+          <div v-for="item in list" :key="item" class="item" @click="$router.push({path:'/finance-detail',query:{data:JSON.stringify(item)}})">
             <span>{{item.name}}</span>
             <span>{{item.reward}}</span>
           </div>
@@ -37,10 +37,11 @@
   </div>
 </template>
 <script>
-import { getFinanceList } from '@/api/request'
+import { getFinanceList, getFinanceSum } from '@/api/request'
   export default {
     data() {
       return { 
+        totalAmount:'',
         list:[],
         finished:false,
         loading:false,
@@ -51,6 +52,7 @@ import { getFinanceList } from '@/api/request'
     },
     mounted(){
       this.getList()
+      this.getSum()
     },
     methods: {
       getList(){
@@ -67,6 +69,11 @@ import { getFinanceList } from '@/api/request'
               this.finished = true
             }
           }
+        })
+      },
+      getSum(){
+        getFinanceSum({isReward:1}).then(res => {
+          this.totalAmount = res.result.realReward
         })
       },
       onLoad(){

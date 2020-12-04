@@ -20,7 +20,7 @@
               <span>累计收益</span>
               <span>状态</span>
             </li>
-            <li v-for="(item,index) in list" :key="index">
+            <li v-for="(item,index) in list" :key="index" @click="$router.push({path:'/finance-detail',query:{data:JSON.stringify(item)}})">
               <span>{{item.name}}</span>
               <span>{{item.reward}}</span>
               <span>{{item.isReward == 0?'进行中':'已结束'}}</span>

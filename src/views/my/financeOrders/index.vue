@@ -36,8 +36,9 @@
         :finished="finished"
         finished-text="没有更多了"
         @load="onLoad"
+        v-if="list.length"
       >
-        <div v-for="(item,index) in list" :key="index" class="item">
+        <div v-for="(item,index) in list" :key="index" class="item" @click="$router.push({path:'/finance-detail',query:{data:JSON.stringify(item)}})">
           <div class="item-top">
             <p>
               <span>{{item.name}}</span>
@@ -61,6 +62,10 @@
           </div>
         </div>
       </van-list>
+      <div v-else class="noData">
+          <img src="../../../../public/img/noData.svg" alt="">
+          <span>暂无交易记录哦，快去购买理财产品吧</span>
+      </div>
     </div>
   </div>
 </template>
@@ -83,6 +88,7 @@
     },
     mounted(){
       this.getTotal()
+      this.getList()
     },
     methods: {
       getTotal(){
@@ -328,6 +334,22 @@
               }
             }
           }
+        }
+      }
+      .noData {
+        padding-top:2rem;
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+        align-items: center;
+        img {
+          width:1.6rem;
+          height:1.6rem;
+          margin-bottom:.2rem;
+        }
+        span {
+          color:#C8C8C8;
+          font-size:.28rem;
         }
       }
     }
