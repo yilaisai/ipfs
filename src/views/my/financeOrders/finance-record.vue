@@ -48,7 +48,7 @@
         totalRewards:'',
         loading: false,
         finished: false,
-        pageSize:10,
+        pageSize:20,
         pageNum:1,
         total:0,
         isReward:'',
