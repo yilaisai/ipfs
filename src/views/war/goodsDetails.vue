@@ -51,7 +51,7 @@
 							<van-stepper v-model="goods.buyAmount" integer min="1" :max="goods.remainAmount" />
 						</div>
 					</div>
-					<van-button type="primary" size="large" :disabled="goods.remainAmount <= 0" @click="$router.push({path: '/confirmOrder', query: {goods: goods}})">{{goods.remainAmount <= 0 ? '已售罄' : '立即购买'}}</van-button>
+					<van-button type="primary" size="large" :disabled="goods.remainAmount <= 0" @click="showPop =true">{{goods.remainAmount <= 0 ? '已售罄' : '立即购买'}}</van-button>
 				</div>
 			</div>
 			<div class="text-details">
@@ -70,21 +70,33 @@
 				<p>1 、Filecoin 通证有可能发生价格剧烈波动的情况，且挖矿难度会不定期调整。币价波动或挖矿难度调整都可能导致IPFS·Filecoin 云储力合约的收益变动。无论从数字货币还是法币角度，本合约不作退款承诺。用户须仔细评估自己的风险承受能力，在可接受的风控范围内投资数字货币挖矿。<br />2 、本合约不涉及数字资产交易，若用户自行参与第三方的数字资产交易，应当自行承担责任和风险。<br />3 、用户了解并接受，如因相关国家法律、法规和规范性文件的制定或者修改等客观情况发生变化，导致 Filecoin 挖矿行为被叫停或者禁止的，本协议自动终止，双方不得相互追究责任，由此造成的损失需自行承担。<br />合约发行方对本合约条款保留所有解释权。</p>
 			</div>
 		</div>
+		<PayPop :showDialog="showPop" @toggleShow="toggleShow" @getData="$router.go(-1)" :item="goods" />
 	</div>
 </template>
 
 <script>
+import PayPop from './components/payPop'
 export default {
 	name: 'goodsDetails',
 	data() { 
 		return {
-			goods: {}
+			goods: {},
+			showPop:false,
+
 		}
 	},
 	activated() {
 		if(typeof this.$route.query.goods == 'object') {
 			this.goods = this.$route.query.goods
 		}
+	},
+	methods:{
+		toggleShow(val){
+			this.showPop = val
+		}
+	},
+	components:{
+		PayPop
 	}
 }
 </script>

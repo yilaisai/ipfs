@@ -14,7 +14,8 @@
 					<li v-for="(item,key) in list0" :key="key">
 						<div>
 							<h3 :class="{'red' : item.subOrAdd != 1}">{{item.subOrAdd == 1 ? '+' : '-'}}{{item.tamount}} <sub>T</sub></h3>
-							<span>来自 {{item.fromPhone}}</span>
+							<span v-if="item.type == 1">来自 {{item.fromPhone}}</span>
+							<span v-else>To {{item.phone}}</span>
 						</div>
 						<div>
 							<span>{{item.name}}</span>
@@ -52,7 +53,7 @@
 					<li v-for="(item,key) in list2" :key="key">
 						<div>
 							<h3 :class="{'red' : item.subOrAdd != 1}">{{item.subOrAdd == 1 ? '+' : '-'}}{{item.tamount}} <sub>T</sub></h3>
-							<span>来自 {{item.fromPhone}}</span>
+							<span>To {{item.phone}}</span>
 						</div>
 						<div>
 							<span>{{item.name}}</span>

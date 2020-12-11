@@ -64,7 +64,8 @@
 									<van-stepper v-model="item.buyAmount" integer min="1" :max="item.remainAmount" />
 								</div>
 							</div>
-							<van-button type="primary" size="large" :disabled="item.remainAmount <= 0" @click="$router.push({path: '/confirmOrder', query: {goods: item}})">{{item.remainAmount <= 0 ? '已售罄' : '立即购买'}}</van-button>
+							<van-button type="primary" size="large" :disabled="item.remainAmount <= 0" @click="showPop = true;activeItem = item">{{item.remainAmount <= 0 ? '已售罄' : '立即购买'}}</van-button>
+							<!-- <van-button type="primary" size="large" :disabled="item.remainAmount <= 0" @click="$router.push({path: '/confirmOrder', query: {goods: item}})">{{item.remainAmount <= 0 ? '已售罄' : '立即购买'}}</van-button> -->
 						</div>
 					</li>
 				</ul>
@@ -157,19 +158,23 @@
 				</li>
 			</ul>
 		</div> -->
+		<PayPop :showDialog="showPop" @toggleShow="toggleShow" @getData="getData" :item="activeItem" />
 	</div>
 </template>
 
 <script>
 import { mapState } from 'vuex'
 import { getMinePros, getFinancePros } from '@/api/request'
+import PayPop from './components/payPop'
 export default {
 	data() { 
 		return {
 			active:0,
 			value: 1,
 			list: [],
-			financeList:[]
+			financeList:[],
+			showPop:false,
+			activeItem:''
 		}
 	},
 	activated() {
@@ -199,10 +204,16 @@ export default {
 			} else {
 				this.getFinanceList()
 			}
+		},
+		toggleShow(val) {
+			this.showPop = val
 		}
 	},
 	computed: {
 		...mapState(['userInfo'])
+	},
+	components:{
+		PayPop
 	}
 }
 </script>

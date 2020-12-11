@@ -74,5 +74,16 @@ const my = [
 		name: "finance-detail",
 		component: () => import("@/views/my/financeOrders/finance-detail")
 	},
+	{
+		path:"/my-orders",
+		name:'myOrders',
+		component:() => import("@/views/my/myOrders/index.vue")
+	},
+	{
+		path:"/my-orderDetail",
+		name:'myOrderDetail',
+		component:() => import("@/views/my/myOrders/orderDetail.vue")
+	},
+
 ]
 export default my

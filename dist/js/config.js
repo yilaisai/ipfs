@@ -7,8 +7,8 @@ if(window.location.href.indexOf('ourmcm.com') >= 0 || window.location.href.index
 	window.SERVER_PATH = "https://api.ipfs1606.com"
 	window.INVITE_URL = "https://web.ipfs1606.com"
 }else {
-	window.SERVER_PATH = "https://api.ipfs1606.com"
-	window.INVITE_URL = "https://web.ipfs1606.com"
+	window.SERVER_PATH = "https://api.ourmcm.com"
+	window.INVITE_URL = "https://web.ourmcm.com"
 }
 
 //h5版本号

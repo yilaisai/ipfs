@@ -46,6 +46,11 @@
 					<span>我的理财订单</span>
 					<i></i>
 				</li>
+				<li @click="$router.push('/my-orders')">
+					<img src="../../assets/img/my/myOrder.svg" alt="">
+					<span>我的订单</span>
+					<i></i>
+				</li>
 				<!-- <li @click="$router.push('/notice')">
 					<img src="../../../public/img/message_icon.png" alt="">
 					<span :class="{'dot' : totalNotice > totalReadNotice}">消息中心</span>

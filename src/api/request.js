@@ -281,3 +281,15 @@ export function getFinanceList(data){
 export function getFinanceSum(data){
 	return $http.postFormData('app/user/getSumFinanceRecds',data)
 }
+//我的订单列表
+export function getUserBuyMineAudits(data) {
+	return $http.postFormData('app/user/getUserBuyMineAudits',data)
+}
+//取消订单
+export function optUserBuyMineAudit(data) {
+	return $http.postFormData('app/user/optUserBuyMineAudit',data)
+}
+//购买合约
+export function buyMine(data){
+	return $http.postFormData('app/user/buyMine',data)
+}
