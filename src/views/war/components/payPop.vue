@@ -1,6 +1,6 @@
 <template>
   <div>
-    <van-popup v-model="show" closeable round position="bottom"  class="payPop">
+    <van-popup v-model="show" get-container="body" closeable round position="bottom"  class="payPop">
       <div class="title">
         <span>确认提现</span>
       </div>
