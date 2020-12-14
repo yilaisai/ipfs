@@ -18,8 +18,8 @@
           >
           <ul>
             <li v-for="(item,index) in list" :key="index">
-              <div class="item-content">
-                <div class="item-top" @click="$router.push({path:'/my-orderDetail',query:{id:item.id}})">
+              <div class="item-content" @click="$router.push({path:'/my-orderDetail',query:{id:item.id}})">
+                <div class="item-top">
                   <span>订单号</span>
                   <span>{{item.id}}</span>
                 </div>
