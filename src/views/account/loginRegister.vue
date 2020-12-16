@@ -12,8 +12,14 @@
 			<!-- 登录 -->
 			<div class="login-form" v-show="type == 'login'">
 				<van-cell-group>
-					<van-field v-model.trim="phone" placeholder="请输入手机号" clearable />
-					<van-field type="password" v-model.trim="loginPwd" placeholder="请输入登录密码" clearable />
+					<!-- <van-field v-model.trim="phone" placeholder="请输入手机号"  clearable /> -->
+					
+					<div class="flex-wrap">
+						<span class="prefix" @click="selectPrefix('login')">{{formLogin.prefix}} <i class="icon"></i></span>
+						<input type="tel" v-model.trim="formLogin.phone" placeholder="请输入手机号码">
+					</div>
+					
+					<van-field type="password" v-model.trim="formLogin.loginPwd" placeholder="请输入登录密码" clearable />
 				</van-cell-group>
 				<div class="other">
 					<a href="javascript:;"></a>
@@ -25,7 +31,7 @@
 			<div class="register-form" v-show="type == 'register'">
 				<div class="input-item">
 					<div class="flex-wrap">
-						<span class="prefix" @click="selectPrefix">{{formData.prefix}} <i class="icon"></i></span>
+						<span class="prefix" @click="selectPrefix('register')">{{formData.prefix}} <i class="icon"></i></span>
 						<input type="text" v-model.trim="formData.phone" placeholder="请输入手机号码">
 					</div>
 				</div>
@@ -70,8 +76,14 @@ export default {
 	name: 'login',
 	data() { 
 		return {
-			phone: '',
-			loginPwd: '',
+			formLogin:{
+				"phone":'',
+				"prefix": "+86",
+				"loginPwd":"",
+				"onLoading":true
+			},
+			// phone: '',
+			// loginPwd: '',
 			type: 'login',
 			isShowDownload: false,
 			formData: {
@@ -101,28 +113,33 @@ export default {
 	},
 	methods: {
 		login() {
-			if(this.phone == '') {
+			if(this.formLogin.phone == '') {
 				this.$toast('请输入手机号')
 				return
 			}
-			if(this.loginPwd == '') {
+			if(this.formLogin.loginPwd == '') {
 				this.$toast('请输入密码')
 				return
 			}
 			phoneLogin({
-				areaCode: '+86',
-				phone: this.phone,
-				loginPwd: Md5(this.loginPwd),
-				onLoading:true
+				phone:this.formLogin.phone,
+				areaCode:this.formLogin.prefix,
+				loginPwd:Md5(this.formLogin.loginPwd),
+				onLoading:true,
 			}).then(res => {
 				localStorage.setItem('token', res.result.token)
 				this.$store.dispatch('getUserInfo')
 				this.$router.replace('/home')
 			})
 		},
-		selectPrefix() {
-			sessionStorage.setItem('REGISTER_DATA', JSON.stringify(this.formData))
-			this.$router.push('/location?type=register')
+		selectPrefix(type) {
+			if(type == "login"){
+				sessionStorage.setItem('LOGIN_DATA', JSON.stringify(this.formLogin))
+			} else {
+				sessionStorage.setItem('REGISTER_DATA', JSON.stringify(this.formData))
+			}
+			sessionStorage.setItem('type',this.type)
+			this.$router.push(`/location?type=${type}`)
 		},
 		registerDo() {
 			if(this.formData.nickName.length > 8) {
@@ -182,10 +199,14 @@ export default {
 	},
 	beforeRouteEnter (to, from, next) {
 		next( vm => {
-			if(from.name == 'location' && sessionStorage.getItem('REGISTER_DATA')) {
-				vm.type = 'register'
+			if(from.name == 'location' && sessionStorage.getItem('REGISTER_DATA') && sessionStorage.getItem('type') == "register") {
 				vm.formData = JSON.parse(sessionStorage.getItem('REGISTER_DATA'))
+				console.log(123)
+			} else if (from.name == 'location' && sessionStorage.getItem('LOGIN_DATA') && sessionStorage.getItem('type') == "login"){
+				vm.formLogin = JSON.parse(sessionStorage.getItem('LOGIN_DATA'))
+				console.log(vm.formLogin)
 			}
+			vm.type = sessionStorage.getItem('type')
 			if(from.name == 'registerSuccess') {
 				vm.type = 'login'
 			}
@@ -257,6 +278,44 @@ export default {
 				padding: 0 16px;
 				.van-field__control {
 					height: .88rem;
+				}
+			}
+			.flex-wrap {
+				background-color: #F6F9FC;
+				display: flex;
+				align-items: center;
+				height: .88rem;
+				border-radius:.12rem;
+				overflow: hidden;
+				border: 1px solid #F6F6F6;
+				.prefix {
+					font-size: .3rem;
+					padding: 0 .3rem;
+					border-right: 0.02rem solid #798297;
+					i {
+						display: inline-block;
+						width: .36rem;
+						height: .36rem;
+						background: url(../../../public/img/caret_icon.png) no-repeat center;
+						background-size: 100% 100%;
+						vertical-align: sub;
+					}
+				}
+				input {
+					flex: 1;
+					height: 100%;
+					background-color: transparent;
+					color: #000000;
+					padding: 0 .3rem;
+					font-size: .3rem;
+				}
+				a {
+					color: #6BC40D;
+					border: 1px solid #6BC40D;
+					line-height: .36rem;
+					border-radius: .18rem;
+					padding: 0 .1rem;
+					margin-right: .3rem;
 				}
 			}
 		}

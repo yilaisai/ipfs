@@ -25,13 +25,18 @@ export default {
 				let storageData = JSON.parse(sessionStorage.getItem('REGISTER_DATA'))
 				storageData.prefix = '+' + prefix
 				sessionStorage.setItem('REGISTER_DATA', JSON.stringify(storageData))
-			}else if(this.$route.query.type == 'forgotPwd'){
+			} else if(this.$route.query.type == 'forgotPwd'){
 				let storageData = JSON.parse(sessionStorage.getItem('FORGOTPWD_DATA'))
 				storageData.prefix = '+' + prefix
 				sessionStorage.setItem('FORGOTPWD_DATA', JSON.stringify(storageData))
-			}else {
+			} else if(this.$route.query.type == 'login'){
+				let storageData = JSON.parse(sessionStorage.getItem('LOGIN_DATA'))
+				storageData.prefix = '+' + prefix
+				sessionStorage.setItem('LOGIN_DATA', JSON.stringify(storageData))
+			} else {
 				this.$toast('选择失败')
 			}
+			
 			this.$router.goBack(-1)
 		}
 	}
