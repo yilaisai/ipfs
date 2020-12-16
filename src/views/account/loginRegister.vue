@@ -32,7 +32,7 @@
 				<div class="input-item">
 					<div class="flex-wrap">
 						<span class="prefix" @click="selectPrefix('register')">{{formData.prefix}} <i class="icon"></i></span>
-						<input type="text" v-model.trim="formData.phone" placeholder="请输入手机号码">
+						<input type="tel" v-model.trim="formData.phone" placeholder="请输入手机号码">
 					</div>
 				</div>
 				<div class="input-item suffix">
@@ -201,12 +201,12 @@ export default {
 		next( vm => {
 			if(from.name == 'location' && sessionStorage.getItem('REGISTER_DATA') && sessionStorage.getItem('type') == "register") {
 				vm.formData = JSON.parse(sessionStorage.getItem('REGISTER_DATA'))
-				console.log(123)
+				vm.type = sessionStorage.getItem('register')
 			} else if (from.name == 'location' && sessionStorage.getItem('LOGIN_DATA') && sessionStorage.getItem('type') == "login"){
 				vm.formLogin = JSON.parse(sessionStorage.getItem('LOGIN_DATA'))
-				console.log(vm.formLogin)
+				vm.type = sessionStorage.getItem('type')
 			}
-			vm.type = sessionStorage.getItem('type')
+			
 			if(from.name == 'registerSuccess') {
 				vm.type = 'login'
 			}
