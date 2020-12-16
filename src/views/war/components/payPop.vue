@@ -2,7 +2,7 @@
   <div>
     <van-popup v-model="show" get-container="body" closeable round position="bottom"  class="payPop">
       <div class="title">
-        <span>确认提现</span>
+        <span>确认订单</span>
       </div>
       <div class="content">
         <div class="detailBox">

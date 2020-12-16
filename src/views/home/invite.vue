@@ -26,6 +26,10 @@
 						<span>{{userInfo.bigAmount}} <sub>T</sub></span>
 						<label>最大矿池</label>
 					</div>
+					<div>
+						<span>{{userInfo.monB}} <sub>T</sub></span>
+						<label>上月新增业绩</label>
+					</div>
 				</div>
 				<div class="invitecode" v-clipboard:copy="userInfo.inviteCode" v-clipboard:success="onCopy" v-clipboard:error="onError">
 					<label>我的邀请码</label>
@@ -171,14 +175,17 @@ export default {
 			.data {
 				display: flex;
 				justify-content: space-between;
+				flex-wrap: wrap;
 				margin-top: .3rem;
 				div {
+					width:48%;
 					background-color: #F6F9FC;
-					flex:1;
+					// flex:1;
 					padding: .3rem 0;
-					margin-right:.2rem;
+					margin-right:2%;
+					margin-bottom:.2rem;
 					border-radius: .16rem;
-					&:last-of-type {
+					&:nth-of-type(2n) {
 						margin-right:0;
 					}
 					span {
@@ -210,7 +217,7 @@ export default {
 				align-items: center;
 				background:rgba(246,249,252,1);
 				border-radius:0.12rem;
-				margin-top: .2rem;
+				// margin-top: .2rem;
 				height:0.96rem;
 				font-size:0.32rem;
 				label {

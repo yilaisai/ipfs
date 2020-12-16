@@ -29,7 +29,7 @@
                     <span>x{{item.amount}}</span>
                   </div>
                   <div class="amount">
-                    <span>¥ {{item.price}}T</span>
+                    <span>¥ {{item.price}}</span>
                     <span>实付 ¥<i>{{bigNumber(item.amount).times(item.price) }}</i></span>
                   </div>
                   <img src="../../../../public/img/order-audit.svg" alt="" v-if="item.status == 0">
