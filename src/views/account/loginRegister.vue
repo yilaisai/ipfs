@@ -201,12 +201,11 @@ export default {
 		next( vm => {
 			if(from.name == 'location' && sessionStorage.getItem('REGISTER_DATA') && sessionStorage.getItem('type') == "register") {
 				vm.formData = JSON.parse(sessionStorage.getItem('REGISTER_DATA'))
-				vm.type = sessionStorage.getItem('register')
+				vm.type = sessionStorage.getItem('type')
 			} else if (from.name == 'location' && sessionStorage.getItem('LOGIN_DATA') && sessionStorage.getItem('type') == "login"){
 				vm.formLogin = JSON.parse(sessionStorage.getItem('LOGIN_DATA'))
 				vm.type = sessionStorage.getItem('type')
 			}
-			
 			if(from.name == 'registerSuccess') {
 				vm.type = 'login'
 			}
