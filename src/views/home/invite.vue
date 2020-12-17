@@ -26,10 +26,10 @@
 						<span>{{userInfo.bigAmount}} <sub>T</sub></span>
 						<label>最大矿池</label>
 					</div>
-					<div>
+					<!-- <div>
 						<span>{{userInfo.monB}} <sub>T</sub></span>
 						<label>上月新增业绩</label>
-					</div>
+					</div> -->
 				</div>
 				<div class="invitecode" v-clipboard:copy="userInfo.inviteCode" v-clipboard:success="onCopy" v-clipboard:error="onError">
 					<label>我的邀请码</label>
@@ -180,14 +180,14 @@ export default {
 				div {
 					width:48%;
 					background-color: #F6F9FC;
-					// flex:1;
+					flex:1;
 					padding: .3rem 0;
 					margin-right:2%;
 					margin-bottom:.2rem;
 					border-radius: .16rem;
-					&:nth-of-type(2n) {
-						margin-right:0;
-					}
+					// &:nth-of-type(2n) {
+					// 	margin-right:0;
+					// }
 					span {
 						display: block;
 						color: #000000;
