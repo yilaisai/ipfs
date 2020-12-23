@@ -17,7 +17,7 @@
 					<span>坚定的 IPFS 生态建设者</span> -->
 				</div>
 			</div>
-			<p>星际云是坚定的 IPFS 生态建设者，秉承着专业到极致，真诚到永远的理念！Filecoin 测试网稳步进行，主网上线在即，诚邀您一起参与 Filecoin 头矿红利！共筑 Filecoin 网络！</p>
+			<p>星际云是坚定的 IPFS 生态建设者，秉承着专业到极致，真诚到永远的理念，诚邀您一起参与 Filecoin 头矿红利！共筑 Filecoin 网络！</p>
 			<h2>Filecoin 发行总量 20 亿枚</h2>
 			<img class="chart" src="../../../assets/img/home/img.png" alt="">
 			<div class="bg-title">

@@ -1,6 +1,6 @@
 self.__precacheManifest = (self.__precacheManifest || []).concat([
   {
-    "revision": "36c5e01fa0e68864abaf",
+    "revision": "08db7d3e391a6c2bc759",
     "url": "css/app.41c82177.css"
   },
   {
@@ -68,10 +68,6 @@ self.__precacheManifest = (self.__precacheManifest || []).concat([
     "url": "css/chunk-22d5b1b9.ff797afb.css"
   },
   {
-    "revision": "36da31c0121f793482e9",
-    "url": "css/chunk-23c10572.70e2c0fb.css"
-  },
-  {
     "revision": "d56bc762608ab0cfdbcd",
     "url": "css/chunk-256de416.8c1b91a8.css"
   },
@@ -114,6 +110,10 @@ self.__precacheManifest = (self.__precacheManifest || []).concat([
   {
     "revision": "18d041cd8379b5f4b9e7",
     "url": "css/chunk-43aabd68.f064042b.css"
+  },
+  {
+    "revision": "3cf31b51e10a14730e5f",
+    "url": "css/chunk-49f03572.a3468563.css"
   },
   {
     "revision": "400e06f5f20d4468eb22",
@@ -856,8 +856,8 @@ self.__precacheManifest = (self.__precacheManifest || []).concat([
     "url": "img/ysq.c757cd0d.png"
   },
   {
-    "revision": "36c5e01fa0e68864abaf",
-    "url": "js/app.75241f32.js"
+    "revision": "08db7d3e391a6c2bc759",
+    "url": "js/app.fb5a60d9.js"
   },
   {
     "revision": "cc449eef0f00c99ef010",
@@ -924,10 +924,6 @@ self.__precacheManifest = (self.__precacheManifest || []).concat([
     "url": "js/chunk-22d5b1b9.c9c7b6bc.js"
   },
   {
-    "revision": "36da31c0121f793482e9",
-    "url": "js/chunk-23c10572.608a1f1e.js"
-  },
-  {
     "revision": "d56bc762608ab0cfdbcd",
     "url": "js/chunk-256de416.fa815bc5.js"
   },
@@ -978,6 +974,10 @@ self.__precacheManifest = (self.__precacheManifest || []).concat([
   {
     "revision": "18d041cd8379b5f4b9e7",
     "url": "js/chunk-43aabd68.0b2cb386.js"
+  },
+  {
+    "revision": "3cf31b51e10a14730e5f",
+    "url": "js/chunk-49f03572.73d90ba3.js"
   },
   {
     "revision": "400e06f5f20d4468eb22",
@@ -1116,7 +1116,7 @@ self.__precacheManifest = (self.__precacheManifest || []).concat([
     "url": "js/chunk-vendors.41cb07fb.js"
   },
   {
-    "revision": "ca762fdf8379f9a85abcef1a7a090a4a",
+    "revision": "7ddea545dd895a7814651ad5d4f8d3b2",
     "url": "js/config.js"
   },
   {
