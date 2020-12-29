@@ -24,7 +24,11 @@
 						<span>{{item.tamount}} T</span>
 						<span>已激活</span>
 					</div>
-					<p>时间 : {{$fmtDate( item.activeTimeStamp, 'full')}}</p>
+					<p>
+						<span>时间 : {{$fmtDate( item.activeTimeStamp, 'full')}}</span>
+						<span v-if="item.proTime>0">距离到期{{item.proTime}}天</span>
+						<span v-else>合约已到期</span>
+					</p>
 				</li>
 			</ul>
 			<van-empty v-if="list.length == 0 && finished" description="暂无记录" />
@@ -162,6 +166,11 @@ export default {
 				p {
 					color: #969696;
 					margin-top: .1rem;
+					display: flex;
+					justify-content: space-between;
+					>span {
+						flex:none;
+					}
 				}
 				span {
 					flex: 1;

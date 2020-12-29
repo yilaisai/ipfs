@@ -17,13 +17,13 @@
 							</div>
 						</div>
 						<div class="details">
-							<div class="flex-wrap">
+							<!-- <div class="flex-wrap">
 								<div>
 									<label>发售云储力</label>
 									<img src="../../assets/img/icon/fscl_icon.png" alt="">
 								</div>
 								<span>{{item.tAmount}} <sub>T</sub></span>
-							</div>
+							</div> -->
 							<div class="flex-wrap">
 								<div>
 									<label>托管机房</label>
@@ -31,7 +31,7 @@
 								</div>
 								<p>{{item.address}}</p>
 							</div>
-							<div class="flex-wrap">
+							<div class="flex-wrap" v-if="item.remainAmount <= 20">
 								<div>
 									<label>剩余云储力</label>
 									<img src="../../assets/img/icon/sycl_icon.png" alt="">
