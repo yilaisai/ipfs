@@ -26,7 +26,7 @@
 					</div>
 					<p>
 						<span>时间 : {{$fmtDate( item.activeTimeStamp, 'full')}}</span>
-						<span v-if="item.proTime>0">距离到期{{item.proTime}}天</span>
+						<span v-if="item.remainDay>0">距离到期{{item.remainDay}}天</span>
 						<span v-else>合约已到期</span>
 					</p>
 				</li>
