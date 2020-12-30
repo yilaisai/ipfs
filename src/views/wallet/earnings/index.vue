@@ -65,7 +65,7 @@
 					v-else
 				>
 					<van-cell v-for="(item,index) in list" :key="index">
-						<span>{{item.tamount || '--'}}</span>
+						<span>{{userInfo.activeTAmount}}</span>
 						<span>{{item.optType == '6'?"-"+item.amount:item.amount}}</span>
 						<span>{{item.optType | changeOptType}}</span>
 						<span>{{item.createTimeStamp | fmtDate('full')}}</span>

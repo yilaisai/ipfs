@@ -12,4 +12,4 @@ if(window.location.href.indexOf('ourmcm.com') >= 0 || window.location.href.index
 }
 
 //h5版本号
-window.H5_VERSION = "2.25"  
+window.H5_VERSION = "2.26"  
