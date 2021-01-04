@@ -107,13 +107,15 @@
           justify-content: center;
           span {
             font-size:.44rem;
-            color:#128758;
+            &:first-of-type {
+              color:#128758;
+            }
             &:last-of-type {
               position: relative;
               top:.05rem;
               margin-left:.15rem;
               font-size:.32rem;
-              color:#128758;
+              color:#969696;
             }
           }
         }

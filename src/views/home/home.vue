@@ -35,8 +35,8 @@
 				<li v-for="(item,index) in list" :key="index" :class="{'ysq' : item.remainAmount <= 0}">
 					<h2>{{item.name}}</h2>
 					<p>
-						<span>总云储力：{{$BigNumber(item.remainAmount).plus(item.saleAmount)}}T</span>
-						<span>剩余云储力：{{item.remainAmount}}T</span>
+						<!-- <span>总云储力：{{$BigNumber(item.remainAmount).plus(item.saleAmount)}}T</span> -->
+						<span v-if="item.remainAmount<=20">剩余云储力：{{item.remainAmount}}T</span>
 						<span>合约期限：{{Math.floor(item.proTime / 30)}}个月</span>
 					</p>
 					<s>原价：{{item.orgPrice}} RMB/T</s>
@@ -195,12 +195,16 @@ export default {
 				box-shadow: 4px 12px 30px -12px rgba(220,220,220,0.8);
 				padding: .4rem;
 				p {
+					min-height:1rem;
 					background:rgba(241,244,247,1);
 					border-radius:8px;
 					padding: .2rem;
 					margin: .2rem 0;
 					color: #787878;
 					font-size: .22rem;
+					display: flex;
+					flex-direction: column;
+					justify-content: center;
 					span {
 						display: block;
 					}
