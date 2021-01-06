@@ -61,6 +61,11 @@
 					<span>设置</span>
 					<i></i>
 				</li>
+				<li @click="$router.push('/my-contact')">
+					<img src="../../assets/img/icon/phone.png" alt="">
+					<span>联系我们</span>
+					<i></i>
+				</li>
 			</ul>
 			<!-- <ul>
 				<li @click="$router.push('/helpCenter')">
@@ -239,7 +244,7 @@ export default {
 			display: flex;
 			align-items: center;
 			background:#FFFFFF;
-			padding: .3rem;
+			padding: .26rem .3rem;
 			color: #333333;
 			border-bottom: 1px solid #EEEEEE;
 			&:last-child {

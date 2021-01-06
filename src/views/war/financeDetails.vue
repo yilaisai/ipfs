@@ -6,7 +6,8 @@
         <div class="title">
           <p>
             <span>{{goods.name}}</span>
-            <span>热销必选</span>
+            <!-- <span class="tag">热销必选</span>
+            <span class="tag" v-if="goods.remark">{{goods.remark}}</span> -->
           </p>
           <p>查看《产品购买协议》</p>
         </div>
@@ -25,7 +26,7 @@
         <h5 class="title">商品属性</h5>
         <ul>
           <li v-for="(item,index) in goods.rates.split(',')" :key="index" @click="choose(index)" :class="{'active':activeIndex == index}">
-            <span>{{goods.days.split(',')[index]}}</span>
+            <span>{{goods.days.split(',')[index]}} 天</span>
             <span>年化利率{{goods.rates.split(',')[index]}}%</span>
           </li>
         </ul>
@@ -154,18 +155,19 @@
 							span {
 								&:first-of-type {
 									line-height: 1em;
-									margin-right:.1rem;
 									font-size:.34rem;
 									font-weight: 500;
 									color:#000;
 								}
-								&:last-of-type {
-									padding:.07rem .1rem;
-									border:.01rem solid #D9930B;
+								&.tag {
+                  padding:.07rem .1rem;
+                  margin-left:.1rem;
+									border:.01rem solid #999;
 									border-radius: .17rem;
 									line-height: 1em;
-									color:#D9930B;
-									font-size:.2rem;
+									color:#999;
+                  font-size:.2rem;
+                  box-sizing: border-box;
 								}
 							}
 						}

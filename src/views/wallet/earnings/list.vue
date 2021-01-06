@@ -46,6 +46,9 @@ export default {
 					font-size: .28rem;
 					font-weight: bold;
 					color: #000000;
+					overflow: hidden;
+					white-space: nowrap;
+					text-overflow: ellipsis;
 					img {
 						width: .4rem;
 						height: .4rem;
@@ -57,9 +60,10 @@ export default {
 						vertical-align: middle;
 					}
 					&:last-child {
-						width: 1.4rem;
+						width: 1.8rem;
 						text-align: right;
 						flex: none;
+						
 					}
 					&:nth-child(1) {
 						width: 1.2rem;

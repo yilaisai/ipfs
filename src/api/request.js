@@ -293,3 +293,11 @@ export function optUserBuyMineAudit(data) {
 export function buyMine(data){
 	return $http.postFormData('app/user/buyMine',data)
 }
+//提取利息
+export function catchFinance(data){
+	return $http.postFormData('app/user/catchFinance',data)
+}
+//提取利息列表
+export function getExtractList(data){
+	return $http.postFormData('app/user/getFinanceRecdReward',data)
+}

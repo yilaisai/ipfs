@@ -41,6 +41,7 @@
       <div class="tips">
         <h5>说明</h5>
         <p>1.到期后会将您的本金及利息全部释放到您的账户余额中。</p>
+        <p>2.每月可提取一次利息。<span @click="$router.push({path:'/extract-interest',query:{data:JSON.stringify(detail)}})">立即提取</span></p>
       </div>
       <div class="agreement">查看《产品购买协议》</div>
     </div>
@@ -59,6 +60,7 @@
       if(this.$route.query.data) {
         this.detail = JSON.parse(this.$route.query.data)
       }
+      
       console.log(this.detail)
     },
     methods: {
@@ -186,8 +188,15 @@
           font-size:.24rem;
         }
         p {
+          margin-bottom:.16rem;
           color:#969696;
           font-size:.24rem;
+          span {
+            color:#FA6400;
+          }
+          &:last-of-type {
+            margin-bottom:0;
+          }
         }
       }
       .agreement {

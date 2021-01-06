@@ -75,6 +75,16 @@ const my = [
 		component: () => import("@/views/my/financeOrders/finance-detail")
 	},
 	{
+		path: "/extract-interest",  //利息提取
+		name: "extract-interest",
+		component: () => import("@/views/my/financeOrders/extract-interest")
+	},
+	{
+		path: "/extract-list",  //利息提取记录
+		name: "extract-list",
+		component: () => import("@/views/my/financeOrders/extract-list")
+	},
+	{
 		path:"/my-orders",
 		name:'myOrders',
 		component:() => import("@/views/my/myOrders/index.vue")
@@ -84,6 +94,10 @@ const my = [
 		name:'myOrderDetail',
 		component:() => import("@/views/my/myOrders/orderDetail.vue")
 	},
-
+	{
+		path:"/my-contact",
+		name:'myContact',
+		component:() => import("@/views/my/contact.vue")
+	}
 ]
 export default my

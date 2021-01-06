@@ -76,7 +76,8 @@
 						<div class="title">
 							<p>
 								<span>{{item.name}}</span>
-								<span>热销必选</span>
+								<span class="tag">热销必选</span>
+								<span class="tag" v-if="item.remark">{{item.remark}}</span>
 							</p>
 							<p>查看《产品购买协议》</p>
 						</div>
@@ -401,18 +402,19 @@ export default {
 							span {
 								&:first-of-type {
 									line-height: 1em;
-									margin-right:.1rem;
 									font-size:.34rem;
 									font-weight: 500;
 									color:#000;
 								}
-								&:last-of-type {
+								&.tag {
+									margin-left:.1rem;
 									padding:.07rem .1rem;
-									border:.01rem solid #D9930B;
+									border:.01rem solid #969696;
 									border-radius: .17rem;
 									line-height: 1em;
-									color:#D9930B;
+									color:#969696;
 									font-size:.2rem;
+									box-sizing: border-box;
 								}
 							}
 						}

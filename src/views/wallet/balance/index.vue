@@ -50,7 +50,10 @@
                       </div>
                       <div class="item-bottom">
                         <span>{{item.createTimestamp | fmtDate('full')}}</span>
-                        <img src="../../../assets/img/icon/arrow3.png" alt="">
+                        <div>
+                          <span>余额：{{Math.floor(item.balance * 10000)/10000}}</span>
+                          <img src="../../../assets/img/icon/arrow3.png" alt="">
+                        </div>
                       </div>
                     </li>
                   </ul>
@@ -80,7 +83,10 @@
                     </div>
                     <div class="item-bottom">
                       <span>{{item.createTimestamp | fmtDate('full')}}</span>
-                      <img src="../../../assets/img/icon/arrow3.png" alt="">
+                      <div>
+                        <span>余额：{{Math.floor(item.balance * 10000)/10000}}</span>
+                        <img src="../../../assets/img/icon/arrow3.png" alt="">
+                      </div>
                     </div>
                   </li>
                 </ul>
@@ -359,11 +365,18 @@
               justify-content: space-between;
               span {
                 color:#646464;
+                font-size:.2rem;
               }
-              img {
-                width:.11rem;
-                height:.2rem;
+              >div {
+                display: flex;
+                align-items: center;
+                img {
+                  width:.11rem;
+                  height:.2rem;
+                  margin-left:.1rem;
+                }
               }
+              
             }
           }
         }

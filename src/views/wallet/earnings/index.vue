@@ -49,10 +49,9 @@
 		<div class="table">
 			<ul>
 				<li class="head">
-					<span>挖矿云储力<br/>(T)</span>
-					<span>收益<br/>({{coin}})</span>
+					<span>挖矿云储力(T)</span>
+					<span>收益({{coin}})</span>
 					<span>收益类型</span>
-					<span>余额<br/>({{coin}})</span>
 					<span>时间 </span>
 				</li>
 			</ul>
@@ -69,7 +68,6 @@
 						<span>{{userInfo.activeTAmount}}</span>
 						<span>{{item.optType == '6'?"-"+item.amount:item.amount}}</span>
 						<span>{{item.optType | changeOptType}}</span>
-						<span>{{Math.floor(item.balance*10000)/10000}}</span>
 						<span>{{item.createTimeStamp | fmtDate('full')}}</span>
 					</van-cell>
 				</van-list>
@@ -296,16 +294,16 @@ export default {
 					white-space: normal;
 					text-overflow: ellipsis;
 					&:first-of-type {
-						width:17%;
+						width:25%;
 						flex:none;
-						text-align: center;
+						text-align: left;
 					}
 					&:nth-of-type(2) {
-						width:17%;
+						width:25%;
 						flex:none;
 					}
 					&:nth-of-type(3) {
-						width:20%;
+						width:25%;
 						flex:none;
 					}
 					&:last-of-type {
@@ -314,7 +312,7 @@ export default {
 				}
 				&.head {
 					border-bottom: 1px solid #E6E6E6;
-					height: .7rem;
+					height: .64rem;
 					span {
 						font-size: .2rem;
 						color: #969696;
@@ -339,28 +337,31 @@ export default {
 					align-items: center;
 					span {
 						flex:1;
-						padding:0 .02rem;
+						padding:0 .05rem;
 						text-align: center;
 						font-size:.22rem;
 						color:#000;
 						overflow: hidden;
 						white-space: nowrap;
 						text-overflow: ellipsis;
+						box-sizing: border-box;
 						&:first-of-type {
-							width:17%;
+							width:25%;
 							flex:none;
 							text-align: left;
+							padding-left:0;
 						}
 						&:nth-of-type(2) {
-							width:17%;
+							width:25%;
 							flex:none;
 						}
 						&:nth-of-type(3) {
-							width:20%;
+							width:25%;
 							flex:none;
 						}
 						&:last-of-type {
 							line-height: 1.5em;
+							padding-right:0;
 							text-align: right;
 							white-space: normal;
 						}
