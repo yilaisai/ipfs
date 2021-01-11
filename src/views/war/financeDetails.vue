@@ -9,7 +9,7 @@
             <!-- <span class="tag">热销必选</span>
             <span class="tag" v-if="goods.remark">{{goods.remark}}</span> -->
           </p>
-          <p>查看《产品购买协议》</p>
+          <!-- <p>查看《产品购买协议》</p> -->
         </div>
         <div class="detail">
           <p>
@@ -43,7 +43,7 @@
         <div class="tips">
           <h5>说明</h5>
           <p>1.购买后将冻结您的账户余额；</p>
-          <p>2.到期后会将您的本金及利息全部释放到您的账户余额中。</p>
+          <p>2.到期后您的本金及未提取利息将会释放到您的账户余额中。</p>
         </div>
         <van-button type="primary" @click="buy" :disabled="!amount">立即购买</van-button>
       </div>

@@ -45,6 +45,7 @@
 				</li>
 			</ul>
 			<Products />
+			<PayPop :showDialog="showPop" @toggleShow="toggleShow" @getData="$router.go(-1)" :item="goods" />
 		</div>
 	</div>
 </template>
@@ -54,6 +55,7 @@ import { mapState,mapMutations } from 'vuex'
 import { getBannersAndNotices, getMinePros } from '@/api/request'
 import BannerSwiper from '@/components/common/bannerSwiper'
 import Products from './components/products'
+import PayPop from '../war/components/payPop'
 import { $http } from '@/axios'
 export default {
 	data() { 
@@ -69,7 +71,9 @@ export default {
 			totalReadNotice: 0,
 			totalNotice: 0,
 			bannerList: [],
-			timer:null
+			timer:null,
+			showPop:false,
+			goods:'',
 		}
 	},
 	activated() {
@@ -89,7 +93,9 @@ export default {
 				this.$toast('已售罄')
 				return
 			}
-			this.$router.push({path: '/confirmOrder', query: {goods: item}})
+			this.goods = item
+			this.showPop = true
+			// this.$router.push({path: '/confirmOrder', query: {goods: item}})
 		},
 		pay() {
 			this.$router.push('/confirmOrder')
@@ -102,13 +108,17 @@ export default {
 				this.list = res.result.list
 			})
 		},
+		toggleShow(val){
+			this.showPop = val
+		}
 	},
 	computed: {
 		...mapState(['userInfo','overview','height'])
 	},
 	components: {
 		BannerSwiper,
-		Products
+		Products,
+		PayPop
 	}
 }
 </script>

@@ -6,6 +6,32 @@
 			sticky 
 			color="#2C353F" 
 			@change="changeTable">
+			
+			<van-tab title="理财产品">
+				<ul class="right">
+					<li v-for="(item,index) in financeList" :key="index">
+						<div class="title">
+							<p>
+								<span>{{item.name}}</span>
+								<span class="tag">热销必选</span>
+								<span class="tag" v-if="item.remark">{{item.remark}}</span>
+							</p>
+							<!-- <p>查看《产品购买协议》</p> -->
+						</div>
+						<div class="detail">
+							<p>
+								<span>{{item.rates.split(',')[0]}}%起</span>
+								<span>年化利率</span>
+							</p>
+							<p>
+								<span>{{item.days.split(',')[0]}}天起</span>
+								<span>稳健收益 低风险</span>
+							</p>
+						</div>
+						<van-button type="primary" @click="$router.push({path:'/financeDetails',query: {goods:JSON.stringify(item)}})">立即购买</van-button>
+					</li>
+				</ul>
+			</van-tab>
 			<van-tab title="合约商品">
 				<ul class="left">
 					<li v-for="(item, index) in list" :key="index">
@@ -13,7 +39,7 @@
 							<img src="../../assets/img/icon/goods_logo.png" alt="">
 							<div>
 								<h3><span>{{item.name}}</span> <i>限量发售</i></h3>
-								<a href="javascript:;" @click="$router.push({path: '/goodsDetails', query: {goods: item}})">查看合约详情<img src="../../assets/img/home/right2.png" alt=""></a>
+								<!-- <a href="javascript:;" @click="$router.push({path: '/goodsDetails', query: {goods: item}})">查看合约详情<img src="../../assets/img/home/right2.png" alt=""></a> -->
 							</div>
 						</div>
 						<div class="details">
@@ -67,31 +93,6 @@
 							<van-button type="primary" size="large" :disabled="item.remainAmount <= 0" @click="showPop = true;activeItem = item">{{item.remainAmount <= 0 ? '已售罄' : '立即购买'}}</van-button>
 							<!-- <van-button type="primary" size="large" :disabled="item.remainAmount <= 0" @click="$router.push({path: '/confirmOrder', query: {goods: item}})">{{item.remainAmount <= 0 ? '已售罄' : '立即购买'}}</van-button> -->
 						</div>
-					</li>
-				</ul>
-			</van-tab>
-			<van-tab title="理财产品">
-				<ul class="right">
-					<li v-for="(item,index) in financeList" :key="index">
-						<div class="title">
-							<p>
-								<span>{{item.name}}</span>
-								<span class="tag">热销必选</span>
-								<span class="tag" v-if="item.remark">{{item.remark}}</span>
-							</p>
-							<p>查看《产品购买协议》</p>
-						</div>
-						<div class="detail">
-							<p>
-								<span>{{item.rates.split(',')[0]}}%起</span>
-								<span>年化利率</span>
-							</p>
-							<p>
-								<span>{{item.days.split(',')[0]}}天起</span>
-								<span>稳健收益 低风险</span>
-							</p>
-						</div>
-						<van-button type="primary" @click="$router.push({path:'/financeDetails',query: {goods:JSON.stringify(item)}})">立即购买</van-button>
 					</li>
 				</ul>
 			</van-tab>

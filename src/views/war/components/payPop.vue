@@ -34,7 +34,7 @@
           </div>
           <div>
             <span>手机号码</span>
-            <input type="number" v-model="phone" maxlength="11">
+            <input type="text" v-model="phone" maxlength="11" @input="phoneInput">
           </div>
         </div>
       </div>
@@ -47,11 +47,11 @@
         <van-button type="primary" @click="confirmBuy">立即购买</van-button>
       </div>
     </van-popup>
-    <van-dialog v-model="showTips" class="popTips" title="深圳星际云储存科技有限公司云储力租赁服务协议" :showConfirmButton="false" closeOnClickOverlay>
+    <van-dialog v-model="showTips" class="popTips" get-container="body" title="深圳星际云储存科技有限公司云储力租赁服务协议" :showConfirmButton="false" closeOnClickOverlay>
       <div class="text1">
-        <p>甲方：已确认注册的用户</p>
-        <p>乙方：深圳星际云储存科技有限公司</p>
-        <p>统一社会信用代码:91440300MA5FMKMK8N </p>
+        <p>甲方:已确认注册的用户</p>
+        <p>乙方:深圳星际云储存科技有限公司</p>
+        <p>统一社会信用代码:91440300MA5FMKMK8N</p>
       </div>
       <div class="text2">
         <p>乙方是一家专注于存储服务器研发、生产、销售、托管为一体的高科技企业，长期致力于分布式存储数据中心建设，通过在IPFS网络上提供存储及检索服务以获取IPFS通证奖励。</p>
@@ -105,7 +105,7 @@
         <p>协议当事人在签订协议时不可预见，在协议履行过程中不可避免且不能克服的自然灾害、政府行为和社会性突发事件等不可抗力因素的出现，可能导致您的投资遭受损失。</p>
         <p>注:自然灾害:包括洪涝，干旱灾害.台风等气象灾害，火山、地震灾害，山体崩塌，滑坡、泥石流等地质灾害，风暴潮、海等海洋灾害，森林草原火灾和重大生物灾害等，战争等，可能导致协议不能履行或不能完全履行。</p>
         <p>3、因您的过错导致损失的风险</p>
-        <p>该过错包括但不限于決策失误，操作不当、保管不当、遗忘或泄露密码、密码被他人破解、您使用的计算机系统被第三方侵入、您委托他人代理交易时他人恶意或不当操作等，可能导致您的资金损失。</p>
+        <p>该过错包括但不限于決策失误，操作不当、保管不当、遗忘或泄露密码、密码被他人破解、您使用的计算机系统被第三方侵入、您委托他人代理交易时他人恶意或不当操作等，可能导致您的资金损失</p>
         <p>4、可能存在的其他风险。</p>
         <br/>
         <h5>第二、投资人的禁止行为</h5>
@@ -172,6 +172,14 @@
           this.active = false
           this.$router.push({path:'/my-orderDetail',query:{id:res.result}})
         })
+      },
+      phoneInput(){
+        this.phone = this.phone + ""
+        this.phone = this.phone.replace(/^\.$/g,"")  //清除第一个“.”   
+        this.phone = this.phone.replace(/[^\d]/g,"")  //清除“数字”以外的字符     
+        if(this.phone.indexOf(".") < 0 && this.phone != ""){ //以上已经过滤，此处控制的是如果没有小数点，首位不能为类似于 01、02的金额  
+          this.phone = parseFloat(this.phone)
+        }
       }
     },
   }

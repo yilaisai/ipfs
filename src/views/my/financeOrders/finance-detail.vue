@@ -43,7 +43,7 @@
         <p>1.到期后会将您的本金及利息全部释放到您的账户余额中。</p>
         <p v-if="detail.remainDay >= 0">2.每月可提取一次利息。<span @click="$router.push({path:'/extract-interest',query:{data:JSON.stringify(detail)}})">立即提取</span></p>
       </div>
-      <div class="agreement">查看《产品购买协议》</div>
+      <!-- <div class="agreement">查看《产品购买协议》</div> -->
     </div>
   </div>
 </template>
