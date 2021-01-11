@@ -182,6 +182,7 @@ export default {
 	activated() {
 		this.getData()
 		this.getFinanceList()
+		this.toggleShow(false)
 	},
 	methods: {
 		getData() {

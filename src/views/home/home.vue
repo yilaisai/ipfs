@@ -79,6 +79,7 @@ export default {
 	activated() {
 		this.$store.dispatch('getUserInfo')
 		this.getData()
+		this.toggleShow(false)
 		getBannersAndNotices().then(res => {
 			this.bannerList = res.result.banners
 			if(res.result.noticeInfos.length > 0) {
