@@ -150,7 +150,7 @@ export default {
 .home-products-cpt{
 	position: relative;
 	background-color: #fff;
-	margin: .3rem;
+	margin: .3rem 0;
 	padding: 0 .3rem .3rem;
 	overflow: hidden;
 	.btn {

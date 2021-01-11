@@ -180,13 +180,16 @@ export default {
 		}
 	},
 	activated() {
+		if (this.$route.query.type) {
+			this.active = Number(this.$route.query.type)
+		}
 		this.getData()
 		this.getFinanceList()
 		this.toggleShow(false)
 	},
 	methods: {
 		getData() {
-			getMinePros().then(res => {
+			getMinePros({pageNum:1,pageSize:999}).then(res => {
 				res.result.list.map(val => {
 					val.buyAmount = 1
 				})

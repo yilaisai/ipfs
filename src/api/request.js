@@ -109,9 +109,7 @@ export function userCoinChange(data) {
 	return $http.postFormData('/app/user/userCoinChange', data)
 }
 //云储力产品列表
-export function getMinePros(data = {}) {
-	data.pageNum = 1
-	data.pageSize = 100
+export function getMinePros(data) {
 	return $http.postFormData('/app/user/getMinePros', data)
 }
 // 我的合约 
