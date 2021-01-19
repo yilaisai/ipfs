@@ -166,19 +166,19 @@
       filterRecharge(val) {
         switch(val) {
           case 0:
-            return '审核失败'
-            break
+            return '充值失败'
+            break;
           case 1:
             return '充值成功'
-            break
+            break;
           case 2:
             return '待审核'
-            break
+            break;
           case 3:
-            return '审核成功'
-            break
+            return '审核失败'
+            break;
           default:
-            break
+            break;
         }
       },
       filterWithdraw(val){
