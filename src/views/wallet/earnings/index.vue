@@ -3,12 +3,12 @@
 		<div class="banner">
 			<HeaderBar :title="coin + '收益记录'" color="transparent"></HeaderBar>
 			<div class="content">
-				<!-- <div class="flex-wrap flex-top">
+				<div class="flex-wrap flex-top">
 					<div @click="$router.push('/balance')">
 						<h3>{{coin == 'FIL'?userInfo.amount:0}}</h3>
 						<span>账户余额({{coin}}) <img src="../../../assets/img/icon/arrow3.png" class="icon"></span>
 					</div>
-				</div> -->
+				</div>
 				<div class="flex-wrap">
 					<div>
 						<h3>{{coin == 'FIL'?userInfo.totalAmount:0}}</h3>

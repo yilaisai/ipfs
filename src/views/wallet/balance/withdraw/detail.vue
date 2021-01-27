@@ -19,6 +19,10 @@
           <span>状态</span>
           <span>{{detail.recdStatus | filterStatus}}</span>
         </li>
+        <li v-if="detail.recdStatus == 0">
+          <span>备注</span>
+          <span>{{detail.sysRemark}}</span>
+        </li>
         <li>
           <span>提现地址</span>
           <span class="word">{{detail.targetCoinAddr}}</span>
