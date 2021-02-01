@@ -30,7 +30,7 @@
         <div class="inputBox">
           <div>
             <span>总金额</span>
-            <span>¥ {{bigNumber(item.buyAmount).times(item.price)}}</span>
+            <span>¥ {{bigNumber(item.buyAmount).times(item.price).plus(bigNumber(item.manageFee).times(item.buyAmount))}}</span>
           </div>
           <div>
             <span>联系人</span>

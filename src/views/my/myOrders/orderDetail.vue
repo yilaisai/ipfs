@@ -39,7 +39,7 @@
           <div class="container-btm">
             <div>
               <span>总金额</span>
-              <span class="orange">¥ {{bigNumber(detail.price).times(detail.amount)}}</span>
+              <span class="orange">¥ {{bigNumber(detail.price).times(detail.amount).plus(bigNumber(detail.amount).times(detail.manageFee))}}</span>
             </div>
             <div>
               <span>联系人</span>
