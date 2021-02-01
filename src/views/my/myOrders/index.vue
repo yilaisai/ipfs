@@ -29,7 +29,7 @@
                     <span>x{{item.amount}}</span>
                   </div>
                   <div class="amount">
-                    <span>¥ {{item.price}}</span>
+                    <span>单价：¥ {{item.price}} &nbsp;&nbsp;托管费：¥ {{bigNumber(item.manageFee).times(item.amount)}}</span>
                     <span>实付 ¥<i>{{bigNumber(item.amount).times(item.price) }}</i></span>
                   </div>
                   <img src="../../../../public/img/order-audit.svg" alt="" v-if="item.status == 0">

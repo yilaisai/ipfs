@@ -31,6 +31,10 @@
               <span>购买数量(T)</span>
               <span>{{detail.amount}}</span>
             </div>
+            <div>
+              <span>托管费</span>
+              <span>¥ {{bigNumber(detail.amount).times(detail.manageFee)}}</span>
+            </div>
           </div>
           <div class="container-btm">
             <div>
@@ -104,7 +108,7 @@
         top:-1.3rem;
         left:0;
         width:100%;
-        height:8.76rem;
+        height:9.5rem;
         background: #FFF;
         border-radius: 0 0 .16rem .16rem;
         z-index:2;

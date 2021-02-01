@@ -22,6 +22,10 @@
             <span>购买数量（T）</span>
             <van-stepper v-model="item.buyAmount" integer min="1" :max="item.remainAmount" />
           </div>
+          <div>
+            <span>托管费</span>
+            <span>¥ {{bigNumber(item.manageFee).times(item.buyAmount)}}</span>
+          </div>
         </div>
         <div class="inputBox">
           <div>
