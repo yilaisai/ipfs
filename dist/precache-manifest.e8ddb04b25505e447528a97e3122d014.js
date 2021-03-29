@@ -476,16 +476,16 @@ self.__precacheManifest = (self.__precacheManifest || []).concat([
     "url": "img/download/downloadbg.png"
   },
   {
-    "revision": "14a5308fd742ebf24b5735bc5e287b16",
-    "url": "img/download/use_ios1.jpg"
+    "revision": "6acac00d0278a0ed7cbcd6f1dede385d",
+    "url": "img/download/use_ios1.png"
   },
   {
-    "revision": "31d383f81378f77451a3bcffd8a8823f",
-    "url": "img/download/use_ios2.jpg"
+    "revision": "bdc378c4b27474d32402ea680b97f821",
+    "url": "img/download/use_ios2.png"
   },
   {
-    "revision": "121ac56ac93b8073ddae4296f56cca93",
-    "url": "img/download/use_ios3.jpg"
+    "revision": "5e8cbbac9e964fe8fc8bea3f85e4107c",
+    "url": "img/download/use_ios3.png"
   },
   {
     "revision": "f91909a6c9de82caeb580fe189accc60",
