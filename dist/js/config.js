@@ -11,5 +11,6 @@ if(window.location.href.indexOf('ourmcm.com') >= 0 || window.location.href.index
 	window.INVITE_URL = "https://web.ipfs1606.com"
 }
 
+
 //h5版本号
 window.H5_VERSION = "2.34"  
