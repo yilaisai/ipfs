@@ -13,4 +13,4 @@ if(window.location.href.indexOf('ourmcm.com') >= 0 || window.location.href.index
 
 
 //h5版本号
-window.H5_VERSION = "3.12"  
+window.H5_VERSION = "4.01"  
