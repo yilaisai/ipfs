@@ -35,7 +35,7 @@
       <div class="fee-wrap">
         <label>手续费</label>
         <div>
-          <input type="text" v-model.trim="userInfo.outFee" :disabled="true" >
+          <input type="text" v-model.trim="fee" :disabled="true" >
           <span>{{coin}}</span>
         </div>
       </div>
@@ -91,6 +91,7 @@
   import {getCaptchaPhone, withDraw} from '@/api/request'
   import CountDownBtn from '@/components/common/countDownBtn.vue'
   import Md5 from 'js-md5'
+  import BigNumber from 'bignumber.js'
   export default {
     data() {
       return { 
@@ -100,7 +101,6 @@
         address:'',
         amount:'',
         balance:5000,
-        fee:5,
         show:false,
         btnDisabled:false,
         code:'',
@@ -108,7 +108,10 @@
       }
     },
     computed:{
-      ...mapState(['userInfo'])
+      ...mapState(['userInfo']),
+      fee(){
+        return this.bigNumber(this.amount*1).times(this.userInfo.outFee)
+      }
     },
     mounted(){
     },
@@ -173,6 +176,9 @@
         }).catch(err => {
           this.btnDisabled = false
         })
+      },
+      bigNumber(val){
+        return BigNumber(val)
       }
     },
     components:{
