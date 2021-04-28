@@ -8,6 +8,10 @@
 						<h3>{{coin == 'FIL'?userInfo.amount:0}}</h3>
 						<span>账户余额({{coin}}) <img src="../../../assets/img/icon/arrow3.png" class="icon"></span>
 					</div>
+					<div @click="$router.push('/balance')">
+						<h3>{{coin == 'FIL'?userInfo.gasAmount:0}}</h3>
+						<span>gas费({{coin}})</span>
+					</div>
 				</div>
 				<div class="flex-wrap">
 					<div>
