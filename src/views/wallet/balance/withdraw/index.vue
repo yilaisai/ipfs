@@ -35,7 +35,7 @@
       <div class="fee-wrap">
         <label>手续费</label>
         <div>
-          <input type="text" v-model.trim="fee" :disabled="true" >
+          <input type="text" v-model.trim="userInfo.outFee" :disabled="true" >
           <span>{{coin}}</span>
         </div>
       </div>
